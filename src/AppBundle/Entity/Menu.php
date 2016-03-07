@@ -1,16 +1,15 @@
 <?php
 // src/AppBundle/Entity/User.php
 
-namespace UserBundle\Entity;
+namespace AppBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="menu")
  */
-class User extends BaseUser
+class Menu
 {
     /**
      * @ORM\Id
@@ -20,10 +19,19 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Bip")
+     * @ORM\Column(type="string")
+     */
+    protected $nazwa;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Bip")
      * @ORM\JoinColumn(name="bip", referencedColumnName="id")
      */
     protected $bip;
+
+    /**
+     *
+     */
 
     public function __construct()
     {
