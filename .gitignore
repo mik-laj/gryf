@@ -10,6 +10,9 @@
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 
+# edytor
+/.idea/
+
 # Parameters
 /app/config/parameters.yml
 /app/config/parameters.ini
