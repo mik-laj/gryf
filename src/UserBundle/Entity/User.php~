@@ -30,27 +30,4 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
-
-    /**
-     * Set bip
-     *
-     * @param \AppBundle\Entity\Bip $bip
-     * @return User
-     */
-    public function setBip(\AppBundle\Entity\Bip $bip = null)
-    {
-        $this->bip = $bip;
-
-        return $this;
-    }
-
-    /**
-     * Get bip
-     *
-     * @return \AppBundle\Entity\Bip 
-     */
-    public function getBip()
-    {
-        return $this->bip;
-    }
 }

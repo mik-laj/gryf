@@ -33,4 +33,60 @@ class Submenu
         parent::__construct();
         // your own logic
     }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Submenu
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set bip
+     *
+     * @param \AppBundle\Entity\Bip $bip
+     * @return Submenu
+     */
+    public function setBip(\AppBundle\Entity\Bip $bip = null)
+    {
+        $this->bip = $bip;
+
+        return $this;
+    }
+
+    /**
+     * Get bip
+     *
+     * @return \AppBundle\Entity\Bip 
+     */
+    public function getBip()
+    {
+        return $this->bip;
+    }
 }
