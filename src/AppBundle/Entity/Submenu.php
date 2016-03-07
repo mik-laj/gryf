@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="bips")
+ * @ORM\Table(name="submenus")
  */
-class Bip
+class Submenu
 {
     /**
      * @ORM\Id
@@ -20,17 +20,13 @@ class Bip
     /**
      * @ORM\Column(type="string")
      */
-    protected $url;
-
-    /**
-     * @ORM\Column(type="string")
-     */
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Bip")
+     * @ORM\JoinColumn(name="bip", referencedColumnName="id")
      */
-    protected $logo;
+    protected $bip;
 
     public function __construct()
     {
@@ -49,33 +45,10 @@ class Bip
     }
 
     /**
-     * Set url
-     *
-     * @param string $url
-     * @return Bip
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string 
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
      * Set name
      *
      * @param string $name
-     * @return Bip
+     * @return Submenu
      */
     public function setName($name)
     {
@@ -95,25 +68,25 @@ class Bip
     }
 
     /**
-     * Set logo
+     * Set bip
      *
-     * @param string $logo
-     * @return Bip
+     * @param \AppBundle\Entity\Bip $bip
+     * @return Submenu
      */
-    public function setLogo($logo)
+    public function setBip(\AppBundle\Entity\Bip $bip = null)
     {
-        $this->logo = $logo;
+        $this->bip = $bip;
 
         return $this;
     }
 
     /**
-     * Get logo
+     * Get bip
      *
-     * @return string 
+     * @return \AppBundle\Entity\Bip 
      */
-    public function getLogo()
+    public function getBip()
     {
-        return $this->logo;
+        return $this->bip;
     }
 }
