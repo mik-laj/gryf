@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="bips")
+ * @ORM\Table(name="submenus")
  */
-class Bip
+class Submenu
 {
     /**
      * @ORM\Id
@@ -20,17 +20,13 @@ class Bip
     /**
      * @ORM\Column(type="string")
      */
-    protected $url;
-
-    /**
-     * @ORM\Column(type="string")
-     */
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Bip")
+     * @ORM\JoinColumn(name="bip", referencedColumnName="id")
      */
-    protected $logo;
+    protected $bip;
 
     public function __construct()
     {

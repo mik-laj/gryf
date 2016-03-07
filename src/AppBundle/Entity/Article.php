@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="menu")
+ * @ORM\Table(name="articles")
  */
-class Menu
+class Articles
 {
     /**
      * @ORM\Id
@@ -17,21 +17,21 @@ class Menu
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $title;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $nazwa;
+    protected $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Bip")
-     * @ORM\JoinColumn(name="bip", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Submenu")
+     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
      */
-    protected $bip;
-
-    /**
-     *
-     */
+    protected $menu;
 
     public function __construct()
     {
