@@ -20,7 +20,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Bip")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Bip", cascade={"persist"})
      * @ORM\JoinColumn(name="bip", referencedColumnName="id")
      */
     protected $bip;

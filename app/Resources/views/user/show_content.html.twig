@@ -8,7 +8,8 @@
     {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
     {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
 {#</div>#}
-    <div class="container" style="padding-top: 5px">
+    <div class="container index-container">
+      <div class="index-container">
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-danger">
@@ -39,12 +40,12 @@
             <div class="col-md-9">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                        TYTUŁ
+                        treść
                     </div>
                     <div class="panel-body">
                         treść
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Action <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
@@ -59,5 +60,6 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
 {% endblock %}
