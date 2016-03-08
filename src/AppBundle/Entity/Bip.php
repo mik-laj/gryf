@@ -34,8 +34,6 @@ class Bip
 
     public function __construct()
     {
-        parent::__construct();
-        // your own logic
     }
 
     /**

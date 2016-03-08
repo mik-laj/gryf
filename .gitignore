@@ -11,7 +11,7 @@
 !var/logs/.gitkeep
 
 # edytor
-/.idea/
+/.idea/*
 
 # Parameters
 /app/config/parameters.yml
