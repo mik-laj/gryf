@@ -1,17 +1,23 @@
-{% trans_default_domain 'FOSUserBundle' %}
-{% extends 'base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-{% endblock %}
-{% block body %}
-
-<header id="header" role="banner">
-	<div class="container">
-		<div class="logo">
-			<a href="#" class="pull-left navbar-brand"><img style="max-width=100px;" src="img/bip.png"></a>
-		</div>
-	</div>
-</header>
-
-{% endblock %}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+      	<img style="max-width: 60px; margin-top: -10px;" src="{{ asset('img/bip.png') }}">
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+      	<li><a href="#">EDIT ARTICLES</a></li>
+        <li><a href="#">BIP_EDIT</a></li>
+        <li><a href="#">LOGUT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
