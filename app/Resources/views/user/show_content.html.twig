@@ -1,12 +1,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+{% endblock %}
 {% block body %}
-    {#{% include 'header.html.twig' %}#}
+    {% include "user/header.html.twig" %}
 {#<div class="fos_user_user_show">#}
     {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
     {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
 {#</div>#}
-    <div class="container">
+    <div class="container" style="padding-top: 55px">
         <div class="row">
             <div class="col-md-3">
                 <div class="panel panel-danger">
@@ -14,7 +18,7 @@
                         MENU
                     </div>
                     <div class="panel-body">
-                        <ul class="nav nav-stacked">
+                        <ul class="nav nav-pills nav-stacked">
                             <li><a href="#">jeden</a></li>
                             <li role="presentation" class="dropdown"><a data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">dwa<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -40,10 +44,33 @@
                         TYTUŁ
                     </div>
                     <div class="panel-body">
-                        TREŚĆ
-                    </div>
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input type="file" id="exampleInputFile">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Check me out
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>                    </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 {% endblock %}
