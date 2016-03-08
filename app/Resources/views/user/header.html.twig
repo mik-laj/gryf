@@ -1,23 +1,30 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">
-      	<img style="max-width: 60px; margin-top: -10px;" src="{{ asset('img/bip.png') }}">
-      </a>
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+{% endblock %}
+<header id="header" role="banner">
+    <div class="container">
+        <div id="navbar" class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{path('homepage')}}">
+                	<img style="max-width: 60px; margin-top:-10px" src="{{ asset('img/bip.png') }}"></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="{% if app.request.get('_route') 
+                    starts with 'bezlog' %} active {% endif %}">
+                        <a href="{{ path('bezlog') }}">Dodaj artykuły</a></li>
+                    <li>
+                        <a href="">Edytuj Profil</a></li>
+                    <li>
+                        <a href="#">Wyloguj</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-      	<li><a href="#">EDIT ARTICLES</a></li>
-        <li><a href="#">BIP_EDIT</a></li>
-        <li><a href="#">LOGUT</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+</header>

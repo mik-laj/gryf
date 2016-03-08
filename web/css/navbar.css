@@ -1,0 +1,50 @@
+#navbar {
+  background: white;
+  width: auto;
+  height: 7em;
+}
+#navbar ul {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+#navbar.align-right ul li {
+  float: right;
+}
+
+#navbar ul li {
+  display: inline-block;
+  padding: 0;
+  width: 12em;
+  border-radius: 10px;
+}
+
+#navbar.align-center ul {
+  text-align: center;
+}
+#navbar ul li a {
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding: 10px 10px;
+  font-weight: bold;
+  font-variant:small-caps;
+  font-size: 20px;
+  height: 100%;
+  position: relative;
+  -webkit-transition: color .5s;
+  -moz-transition: color .5s;
+  -ms-transition: color .5s;
+  -o-transition: color .5s;
+  transition: color .5s;
+}
+#navbar ul li a:hover {
+  color: #FF2626;
+}
+
+#navbar ul li.active a {
+  color: white;
+  background-color: #ff2626;
+}
