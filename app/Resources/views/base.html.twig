@@ -8,15 +8,16 @@
             <link href="{{ asset('css/main.css') }}" rel="stylesheet">
             <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         {% endblock %}
+        {% block javascripts %}
+            <script src="{{  asset('js/jquery.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         {% block body %}
 
         {% endblock %}
-        {% block javascripts %}
-            <script src="js/jquery.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-        {% endblock %}
+
     </body>
 </html>
