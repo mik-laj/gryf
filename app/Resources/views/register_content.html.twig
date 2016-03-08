@@ -31,19 +31,15 @@
                         {% endfor %}
                         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
                             <div class='form'>
-                                {{ form_errors(form.email) }}
-                                {{ form_errors(form.username) }}
-                                {{ form_errors(form.plainPassword.first) }}
-                                {{ form_errors(form.plainPassword.second) }}
-                                {{ form_errors(form.bip.name) }}
-                                {{ form_errors(form.bip.url) }}
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6">
                                             {{ form_widget(form.email, { 'attr': {'placeholder': 'email', 'class':'form-control'} }) }}
+                                            {{ form_errors(form.email) }}
                                         </div>
                                         <div class="form-group col-md-6">
                                             {{ form_widget(form.username, { 'attr': {'placeholder': 'username', 'class':'form-control'} }) }}
+                                            {{ form_errors(form.username) }}
                                         </div>
                                     </div>
                                 </div>
@@ -51,9 +47,11 @@
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6">
                                             {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'hasło', 'class':'form-control'} }) }}
+                                            {{ form_errors(form.plainPassword.first) }}
                                         </div>
                                         <div class="form-group col-md-6">
                                             {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'powtórz hasło', 'class':'form-control'} }) }}
+                                            {{ form_errors(form.plainPassword.second) }}
                                         </div>
                                     </div>
                                 </div>
@@ -61,16 +59,18 @@
                                     <div class="form-group col-md-12">
                                         <div class="col-md-3">
                                             {{ form_widget(form.bip.url, { 'attr': { 'placeholder': 'url', 'class':'form-control'} }) }}
+                                            {{ form_errors(form.bip.url) }}
                                         </div>
                                         <div class="col-md-9">
                                             {{ form_widget(form.bip.name, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
+                                            {{ form_errors(form.bip.name) }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-12" style="margin-top:1em">
                                         <div class="form-group col-md-12">
-                                            <input type="submit" class="btn btn-danger btn-lg btn-block" value="{{ 'Rejestracja'|trans }}" />
+                                            <input type="submit" class="btn btn-danger btn-lg btn-block" value="{{ 'registration.submit'|trans }}" />
                                         </div>
                                     </div>
                                 </div>
