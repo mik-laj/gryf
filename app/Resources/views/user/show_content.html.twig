@@ -5,7 +5,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 {% endblock %}
 {% block body %}
+
     {% include "user/header.html.twig" %}
+
 {#<div class="fos_user_user_show">#}
     {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
     {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
@@ -69,8 +71,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 {% endblock %}
