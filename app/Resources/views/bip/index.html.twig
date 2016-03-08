@@ -1,1 +1,60 @@
-KEEKEK
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {% include "bip/header.html.twig" %}
+
+    <div class="container">
+        <div class="panel">
+            <div class="row">
+                <div class="col-md-3" style="border-right:1px red solid">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3><div style="float: left; color: red;">|</div>MENU</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">jeden</a></li>
+                                <li role="presentation" class="dropdown"><a data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">dwa<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>2.1</li>
+                                        <li>2.2</li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        ...
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <div><h3><div style="float: left; color: red;">|</div>treść</h3></div>
+                        </div>
+                        <div class="panel-body">
+                            treść
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

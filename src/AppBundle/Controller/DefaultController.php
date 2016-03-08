@@ -24,8 +24,17 @@ class DefaultController extends Controller
     /**
      * @Route("/bezlog/", name="bezlog")
      */
-    public function bezlogAction(){
+    public function bezlogAction()
+    {
         return $this->render('user/show_content.html.twig');
+    }
+
+    /**
+     * @Route("/bip/", name="bip")
+     */
+    public function  bipAction()
+    {
+        return $this->render('bip/index.html.twig');
     }
 
     /**

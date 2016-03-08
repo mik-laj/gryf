@@ -1,8 +1,79 @@
-{% trans_default_domain 'FOSUserBundle' %}
+{#{% trans_default_domain 'FOSUserBundle' %}#}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+{#{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}#}
+    {#{{ form_widget(form.email, { 'attr': {'placeholder': 'email'} }) }}#}
+    {#{{ form_widget(form.username, { 'attr': {'placeholder': 'username'} }) }}#}
+    {#{{ form_widget(form) }}#}
+    {#<div>#}
+        {#<input type="submit" value="{{ 'registration.submit'|trans }}" />#}
+    {#</div>#}
+{#{{ form_end(form) }}#}
+{#{% trans_default_domain 'FOSUserBundle' %}#}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container" style="padding-top:78px">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3><div style="float: left; color: red;">|</div> Rejestracja</h3>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        {% for m in app.session.flashbag.get('notice') %}
+                            <div class="alert alert-success">{{ m }}</div>
+                        {% endfor %}
+                        {% for type, messages in app.session.flashbag.all() %}
+                            {% for message in messages %}
+                                <div class="flash-{{ type }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+                            <div class='form'>
+                                {{ form_errors(form.email) }}
+                                {{ form_errors(form.username) }}
+                                {{ form_errors(form.plainPassword.first) }}
+                                {{ form_errors(form.plainPassword.second) }}
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div class="form-group col-md-6">
+                                            {{ form_widget(form.email, { 'attr': {'placeholder': 'email'} }) }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            {{ form_widget(form.username, { 'attr': {'placeholder': 'username'} }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-6">
+                                            {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'hasło'} }) }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'powtórz hasło'} }) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div class="col-md-12">
+                                            {{ form_widget(form.bip.name, { 'attr': {'placeholder': 'nazwa BIP'} } ) }}
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="submit" class="btn btn-primary btn-lg btn-block" value="{{ 'Rejestracja'|trans }}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-{{ form_end(form) }}
+    {{form_end(form)}}
+
+{% endblock %}
