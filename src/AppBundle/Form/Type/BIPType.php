@@ -8,6 +8,7 @@ class BIPType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name');
+        $builder->add('url');
     }
 
     public function getDefaultOptions(array $options)
