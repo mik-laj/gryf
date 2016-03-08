@@ -1,10 +1,33 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
 
+{% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
+{% block body %}
+    <div class="container" style="margin-top: 5em;">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 style="margin-top: 0px; margin-bottom:0px;">Zarejestrowano</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h3 style="margin-top:0px;">Brawo {{ user.username }}</h3>
+                        <h4>Twoje konto zostało zarejestrowane</h4>
+                        <h5>Możesz je teraz usunąć, hehe</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="btn btn-lg btn-block btn-danger">TWÓJ BIP</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a class="btn btn-lg btn-block btn-danger">Logowanie</a>
+                            </div>
+                        </div>
+                        {% if targetUrl %}
+                            <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-{% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
-{% endblock fos_user_content %}

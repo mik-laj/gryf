@@ -1,15 +1,20 @@
+{% trans_default_domain 'FOSUserBundle' %}
 {% extends 'base.html.twig' %}
 {% block body %}
 
-    {% include "bip/header.html.twig" %}
+    {% include "user/header.html.twig" %}
 
-    <div class="container">
-        <div class="panel">
+    {#<div class="fos_user_user_show">#}
+    {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
+    {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
+    {#</div>#}
+    <div class="container index-container">
+        <div class="index-container">
             <div class="row">
-                <div class="col-md-3" style="border-right:1px red solid">
-                    <div class="panel">
+                <div class="col-md-3">
+                    <div class="panel panel-danger">
                         <div class="panel-heading">
-                            <h3><div style="float: left; color: red;">|</div>MENU</h3>
+                            MENU
                         </div>
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked">
@@ -33,9 +38,9 @@
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="panel">
+                    <div class="panel panel-danger">
                         <div class="panel-heading">
-                            <div><h3><div style="float: left; color: red;">|</div>treść</h3></div>
+                            treść
                         </div>
                         <div class="panel-body">
                             treść
