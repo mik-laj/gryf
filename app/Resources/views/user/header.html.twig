@@ -1,17 +1,8 @@
-{% trans_default_domain 'FOSUserBundle' %}
-{% extends 'base.html.twig' %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-{% endblock %}
-{% block body %}
-
 <header id="header" role="banner">
 	<div class="container">
 		<div class="logo">
-			<a href="#" class="pull-left navbar-brand"><img style="max-width=100px;" src="img/bip.png"></a>
+			<a href="#" class="pull-left navbar-brand">
+				<img style="max-width: 100px;" src="{{ asset('img/bip.png') }}"></a>
 		</div>
 	</div>
 </header>
-
-{% endblock %}
