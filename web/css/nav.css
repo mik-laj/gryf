@@ -5,7 +5,11 @@ a {
   -o-transition: 300ms;
   transition: 300ms;
 }
-
+.logo{
+  display: inline;
+  margin:0px;
+  padding:0px;
+}
 a:hover,
 a:focus {
   color: #FF2626;

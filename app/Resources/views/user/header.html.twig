@@ -11,8 +11,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{path('homepage')}}">
-                	<img style="max-width: 60px; margin-top:-10px" src="{{ asset('img/bip.png') }}"></a>
+                <div class="navbar-brand">
+                	<a class="pull-left brand" href="{{path('homepage')}}">
+						<img style="max-width: 60px; margin-top:-10px; display: inline;"
+                		src="{{ asset('img/bip.png') }}">
+                	</a>
+                	<span class="navbar-text pull-right">Biuletyn Informacji Publicznej</span>
+                </div>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
