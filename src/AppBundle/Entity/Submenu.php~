@@ -117,4 +117,27 @@ class Submenu
     {
         return $this->order;
     }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Submenu
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
 }
