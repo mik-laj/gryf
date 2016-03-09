@@ -2,9 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Bip;
+use AppBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\User;
 
 class BIPController extends Controller
 {
@@ -34,7 +37,7 @@ class BIPController extends Controller
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
         $menu = $em->getRepository('AppBundle:SubMenu')->findBybip($bip);
 
-        return $this->render('bip/admin/menu.html.twig', array(
+        return $this->render('user/show_content.html.twig', array(
             'menu'=>$menu,
         ));
     }
