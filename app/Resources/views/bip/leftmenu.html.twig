@@ -4,34 +4,31 @@
     </div>
     <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
-
             {% for pos in submenu %}
-                {% if pos.articles|length > 0 %} {# sprawdzasz, czy jest więcej niż 0 artykułóœ dla danego submenu #}
-                    {% for art in pos.articles %} {# przepętlowujesz se artykuły #}
-                        {{ art.title }}
+                {% if pos.articles|length == 0 %} {# sprawdzasz, czy jest więcej niż 0 artykułóœ dla danego submenu #}
+                    <li role="presentation" class="disabled"><a href="#">{{pos.name}}</li>
 
+                {% elseif pos.articles|length == 1 %}
+                    <li role="presentation"><a href="#">{{pos.name}}</a>
+
+                {% elseif pos.articles|length > 1 %}
+                    {% for art in pos.articles %} {# przepętlowujesz se artykuły #}
+                        {# {{ art.title }} #}
+                        <li role="presentation" class="dropdown"><a data-toggle="dropdown" href="#" 
+                        role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
+                        {{pos.name}}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">{{art.title}}</a></li>
+                                <li><a href="#">{{art.title}}</a></li>
+                            </ul>
+                        </li>
                     {% endfor %}
                 {% endif %}
-
-                <li>
+                {# <li>
                     <a href="{{pos.id}}">{{pos.name}}</a>
-                </li>
+                </li> #}
+
             {% endfor %}
-            {# <li><a href="#">Artykuł</a></li>
-            <li role="presentation" class="dropdown"><a data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Rozwijane submenu<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Jeden</a></li>
-                    <li><a href="#">Cwaj</li>
-                </ul>
-            </li>
-            <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    Drugie rozwijane submenu <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">DAAAAMN</a></li>
-                </ul>
-            </li> #}
         </ul>
     </div>
 </div>
