@@ -8,6 +8,7 @@ use AppBundle\Entity\Submenu;
 use AppBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
 
@@ -42,7 +43,9 @@ class BIPController extends Controller
         $submenu = new Submenu();
         $submenu->setBip($bip);
         $form = $this->createFormBuilder($submenu)
-                    ->add('name')->getForm();
+                    ->add('name')
+                    ->add('save', SubmitType::class)
+                    ->getForm();
 
         if($form->isValid()){
             $em->persist($submenu);
