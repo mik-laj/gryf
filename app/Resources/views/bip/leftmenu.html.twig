@@ -12,8 +12,7 @@
                     {% endfor %}
                 {% endif %}
 
-                <li class="{% if app.request.get('_route') 
-                    starts with '{{pos.id}}' %} active {% endif %}">
+                <li>
                     <a href="{{pos.id}}">{{pos.name}}</a>
                 </li>
             {% endfor %}
