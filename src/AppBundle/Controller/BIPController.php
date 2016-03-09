@@ -37,7 +37,7 @@ class BIPController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
-        $menu = $em->getRepository('AppBundle:SubMenu')->findBybip($bip);
+        $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
 
         $submenu = new Submenu();
         $submenu->setBip($bip);
