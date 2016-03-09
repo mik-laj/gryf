@@ -42,7 +42,18 @@ class BIPController extends Controller
     public function menuAction($bip){
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+
         $submenus = $em->getRepository('AppBundle:Submenu')->findByBip($bip);
+
+        foreach($submenus as $k=>$v){
+            $articles = $em->getRepository('AppBundle:Article')->findByMenu($v);
+            $submenus[$k]->setArticles($articles);
+            $articles = $submenus[$k]->getArticles();
+            foreach($articles as $j=>$w){
+                print $articles[$j]->getId();
+            }
+//            print $submenus[$k]->getId();
+        }
 
         return $this->render('bip/leftmenu.html.twig', array(
             'submenu'=>$submenus,

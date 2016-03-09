@@ -33,12 +33,23 @@ class Submenu
      */
     protected $position;
 
+    protected $articles;
+
     public function __construct()
     {
 
         // your own logic
     }
 
+
+    public function getArticles(){
+        return $this->articles;
+    }
+
+    public function setArticles($articles){
+        $this->articles = $articles;
+        return $this;
+    }
     /**
      * Get id
      *
