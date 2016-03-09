@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {% include "bip/header.html.twig" %}
+
+    {#<div class="fos_user_user_show">#}
+    {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
+    {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
+    {#</div>#}
+    <div class="container index-container">
+        <div class="index-container">
+            <div class="row">
+                <div class="col-md-3">
+                    {% render(controller('AppBundle:BIP:menu', {'bip':bip.id})) %}
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            Artykuły
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover table-condensed table-stripped">
+                                <tr>
+                                    <th>Tytuł</th>
+                                    <th>Menu</th>
+                                    <th>Edytuj</th>
+                                    <th>Usuń</th>
+                                </tr>
+                                {% for art in articles %}
+                                    <tr>
+                                        <td>{{ art.title }}</td>
+                                        <td>{{ art.menu.name }}</td>
+                                        <td>link</td>
+                                        <td>link</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -82,4 +82,24 @@ class BIPAdminController extends Controller
             'bip' => $bip,
         ));
     }
+
+    /**
+     * @Route("/admin/{bip}/view/art/", name="admin_view_art")
+     */
+    public function adminViewArtAction($bip)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $articles = $em->getRepository("AppBundle:Article");
+        $qb = $articles->createQueryBuilder('a');
+        $articles = $qb
+                    ->innerJoin('a.menu', 'm')
+                    ->innerJoin('m.bip', 'b')
+                    ->where('b.id='.$bip->getId())->getQuery()->getResult();
+
+        return $this->render('user/view_articles.html.twig', array(
+            'bip' => $bip,
+            'articles' => $articles,
+        ));
+    }
 }
