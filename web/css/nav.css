@@ -1,5 +1,5 @@
 a {
-  color: #FF2626;
+  color: #331A1A;
   -webkit-transition: 200ms;
   -moz-transition: 200ms;
   -o-transition: 200ms;
@@ -18,7 +18,7 @@ a {
 }
 a:hover,
 a:focus {
-  color: #FF2626;
+  color: #331A1A;
   text-decoration: none;
   outline: none;
 }
@@ -58,7 +58,7 @@ a:focus {
   padding: 30px 25px;
   font-size: 17px;
   line-height: 18px;
-  color: #FF2626;
+  color: #E0B2B2;
 }
 .navbar-default .navbar-nav > li > a > i {
   display: inline-block;
@@ -67,7 +67,7 @@ a:focus {
 .navbar-default .navbar-nav > li:focus > a,
 .navbar-default .navbar-nav > li:hover > a:focus,
 .navbar-default .navbar-nav > li:focus > a:focus {
-  background-color: #FF2626;
+  background-color: #E0B2B2;
   color: #fff;
 }
 .navbar-default .navbar-nav > li.active:focus > a:focus,
@@ -77,7 +77,7 @@ a:focus {
 .navbar-default .navbar-nav > li.active:focus > a,
 .navbar-default .navbar-nav > li.active:hover > a{
   font-weight: bold;
-  background-color: #FF2626;
+  background-color: #E0B2B2;
   color: #fff;
   font-size: 18px;
 }
