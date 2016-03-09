@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class BIPAdminController extends Controller
 {
     /**
-     * @Route("/admin/{bip}/menu/", name="menu")
+     * @Route("/admin/{bip}/menu/", name="admin_menu")
      */
     public function  BIPMenuAction(Request $request, $bip)
     {
