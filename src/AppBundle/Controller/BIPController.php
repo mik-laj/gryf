@@ -45,6 +45,7 @@ class BIPController extends Controller
                     ->add('name')->getForm();
 
         return $this->render('user/menu.html.twig', array(
+            'bip'=>$bip,
             'menu'=>$menu,
             'form'=>$form->createView(),
         ));
