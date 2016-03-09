@@ -94,4 +94,27 @@ class Submenu
     {
         return $this->bip;
     }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     * @return Submenu
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
 }
