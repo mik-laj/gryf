@@ -24,7 +24,7 @@ class BIPController extends Controller
     }
 
     /**
-     * @Route("/{bip}/", name="bip")
+     * @Route("/bip/{bip}/", name="bip")
      */
     public function  bipAction($bip)
     {
