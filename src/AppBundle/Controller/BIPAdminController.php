@@ -16,7 +16,6 @@ class BIPAdminController extends Controller
      */
     public function  BIPMenuAction(Request $request, $bip)
     {
-        
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
 
