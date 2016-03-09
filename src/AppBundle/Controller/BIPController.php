@@ -67,4 +67,19 @@ class BIPController extends Controller
     {
         return $this->render('user/add_article.html.twig');
     }
+
+
+    /**
+     * @Route("/bip/{bip}/art/{art}/", name="art_view")
+     */
+    public function viewArtAction($bip, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+
+        return $this->render('bip/article.html.twig', array(
+            'bip'=>$bip,
+        ));
+    }
 }
