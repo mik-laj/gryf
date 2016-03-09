@@ -175,7 +175,7 @@ li a.active{
 
 /*about area*/
 .about h2{
-	font-size: 90px;
+	font-size: 65px;
 	color: #941414;
 	margin-top: 50px;
 }
@@ -269,7 +269,7 @@ li a.active{
 	margin-top: 40px;
 }
 .service h2{
-	font-size: 90px;
+	font-size: 65px;
 	color: #fff;
 	margin-top: 70px;
 	margin-bottom: 0;
@@ -372,7 +372,7 @@ li a.active{
 	padding-bottom: 60px;
 }
 .team h2{
-	font-size: 90px;
+	font-size: 65px;
 	color: #941414;
 	margin-top: 50px;
 	margin-bottom: 0;
@@ -461,7 +461,7 @@ li a.active{
 }
 .contact-heading h2{
 	color: #fff;
-	font-size: 90px;
+	font-size: 75px;
 }
 .contact-info{
 	padding-left: 40px;
@@ -875,4 +875,23 @@ responsive area
 	.footer p {
   		font-size: 10px;
   	}
+}
+
+#buttonek{
+	width: 240px;
+	height: 60px;
+	background: #941414;
+	color: #fff;
+	font-size: 25px;
+	text-transform: uppercase;
+	border:0;
+	font-family: 'Open Sans', sans-serif;
+	transition:all .5s ease 0s;
+	-webkit-transition:all .5s ease 0s;
+	-moz-transition:all .5s ease 0s;
+	-o-transition:all .5s ease 0s;
+	-ms-transition:all .5s ease 0s;
+}
+#buttonek:hover{
+background: #cc0000;
 }
