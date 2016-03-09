@@ -18,10 +18,11 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+        $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
 
         $submenu = new Submenu();
         $submenu->setBip($bip);
-        $submenu->setPosition(1);
+        $submenu->setPosition(count($menu)+1);
         $form = $this->createFormBuilder($submenu)
             ->add('name')
             ->add('save', SubmitType::class)
@@ -33,9 +34,10 @@ class BIPAdminController extends Controller
             $em->persist($submenu);
             $em->flush();
             $this->addFlash('success', 'Pomyślnie dodano pozycję do menu.');
+            $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
         }
 
-        $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
+
         return $this->render('user/menu.html.twig', array(
             'bip'=>$bip,
             'menu'=>$menu,
