@@ -43,26 +43,36 @@
                             treść
                         </div>
                         <div class="panel-body">
+                            {% for m in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success">{{ m }}</div>
+                            {% endfor %}
                             <table class="table table-hover table-stripped table-condensed">
                                 <tr>
                                     <th>Pozycja</th>
                                     <th>Nazwa</th>
                                 </tr>
+                                {% for sub in menu %}
                                 <tr>
-                                    <td></td>
+                                    <td>{{ sub.name }}</td>
                                     <td></td>
                                 </tr>
+                                {% endfor %}
                             </table>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <h4>Nowe menu {{ bip.name }}</h4>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ form_widget(form.name, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
-                                </div>
-                                <div class="col-md-4">
-                                    {{ form_widget(form) }}
-                                </div>
+                                    {{ form_start(form) }}
+                                    <div class="col-md-2">
+                                        <h4>Nowe menu</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.name, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form_widget(form) }}
+                                        {{ form_widget(form.save, { 'attr': {'class':'btn btn-danger btn-block'} }) }}
+                                        <input type="hidden" id="form__token" name="_token" value="b9tvB5lZe7lRhBObVmbUo93MU6lwIb4IzeDT9eg2rPo" />
+                                    </div>
+                                    {{ form_end(form) }}
+
                             </div>
                         </div>
                     </div>

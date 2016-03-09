@@ -31,7 +31,7 @@ class Submenu
     /**
      * @ORM\Column(type="integer")
      */
-    protected $order;
+    protected $position;
 
     public function __construct()
     {
@@ -93,5 +93,51 @@ class Submenu
     public function getBip()
     {
         return $this->bip;
+    }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     * @return Submenu
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Submenu
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }
