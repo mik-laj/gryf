@@ -44,6 +44,12 @@ class BIPController extends Controller
         $form = $this->createFormBuilder($submenu)
                     ->add('name')->getForm();
 
+        if($form->isValid()){
+            $em->persist($submenu);
+            $em->flush();
+            $this->addFlash('success', 'Pomyślnie dodano pozycję do menu.');
+        }
+
         return $this->render('user/menu.html.twig', array(
             'bip'=>$bip,
             'menu'=>$menu,
