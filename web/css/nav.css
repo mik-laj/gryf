@@ -1,14 +1,20 @@
 a {
   color: #FF2626;
-  -webkit-transition: 300ms;
-  -moz-transition: 300ms;
-  -o-transition: 300ms;
-  transition: 300ms;
+  -webkit-transition: 200ms;
+  -moz-transition: 200ms;
+  -o-transition: 200ms;
+  transition: 200ms;
 }
-.logo{
-  display: inline;
-  margin:0px;
-  padding:0px;
+.navbar-brand-name > {
+  display: inline-block;
+  float: left;
+  margin:0;
+  padding:0;
+}
+.navbar-brand-name > img {
+  display: inline-block;
+  float: left;
+  margin-right: 1.2em
 }
 a:hover,
 a:focus {
