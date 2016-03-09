@@ -16,11 +16,25 @@
                 <div class="col-md-9">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            {{ article.title }}
+                            Artykuły
                         </div>
                         <div class="panel-body">
-                            {{ article.content }}
-
+                            <table class="table table-hover table-condensed table-stripped">
+                                <tr>
+                                    <th>Tytuł</th>
+                                    <th>Menu</th>
+                                    <th>Edytuj</th>
+                                    <th>Usuń</th>
+                                </tr>
+                                {% for art in articles %}
+                                    <tr>
+                                        <td>{{ art.title }}</td>
+                                        <td>{{ art.menu.name }}</td>
+                                        <td>link</td>
+                                        <td>link</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
                         </div>
                     </div>
                 </div>

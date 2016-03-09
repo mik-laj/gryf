@@ -74,8 +74,10 @@ class BIPController extends Controller
         $bip = $em->getRepository("AppBundle:Bip")->find($bip);
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
+
         return $this->render('bip/article.html.twig', array(
             'bip'=>$bip,
+            'article'=>$article,
         ));
     }
 }

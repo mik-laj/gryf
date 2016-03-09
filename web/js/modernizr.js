@@ -308,13 +308,13 @@ window.Modernizr = (function( window, document, undefined ) {
 
 
     tests['rgba'] = function() {
-        setCss('background-color:rgba(150,255,150,.5)');
+        setCss('background-color:rgba(198,67,67,.5)');
 
         return contains(mStyle.backgroundColor, 'rgba');
     };
 
     tests['hsla'] = function() {
-            setCss('background-color:hsla(120,40%,100%,.5)');
+            setCss('background-color:hsla(198,67,67,.5)');
 
         return contains(mStyle.backgroundColor, 'rgba') || contains(mStyle.backgroundColor, 'hsla');
     };

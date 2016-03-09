@@ -70,7 +70,7 @@ ul.nav{
 }
 .navbar-default .navbar-nav>li>a {
  	font-size: 24px;
-	color: red;
+	color: #C64343;
 	text-transform: uppercase;
 	transition: all .7s ease 0s;
 	-webkit-transition: all .7s ease 0s;
@@ -87,7 +87,7 @@ ul.nav{
   background-color: #000;
 }
 li a.active{
-	color: #990000 !important;
+	color: #941414 !important;
 }
 .navbar-default .navbar-toggle {
   border-color: #fff;
@@ -120,7 +120,7 @@ li a.active{
 .carousel-caption button{
 	width: 240px;
 	height: 60px;
-	background: red;
+	background: #941414;
 	color: #fff;
 	font-size: 30px;
 	text-transform: uppercase;
@@ -138,10 +138,10 @@ li a.active{
 	width: 5%;
 }
 .carousel-inner{
-	background: -webkit-linear-gradient(left, #000 , blue); /* For Safari 5.1 to 6.0 */
-	background: -o-linear-gradient(left, #000, blue); /* For Opera 11.1 to 12.0 */
-	background: -moz-linear-gradient(left, #000, blue); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to left, #000 , blue); /* Standard syntax */
+	background: -webkit-linear-gradient(left, #000 , #941414); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(left, #000, #941414); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(left, #000, #941414); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to left, #000 , #941414); /* Standard syntax */
 }
 .item{
 	position: relative;
@@ -176,7 +176,7 @@ li a.active{
 /*about area*/
 .about h2{
 	font-size: 90px;
-	color: #cc0000;
+	color: #941414;
 	margin-top: 50px;
 }
 .about h4{
@@ -373,7 +373,7 @@ li a.active{
 }
 .team h2{
 	font-size: 90px;
-	color: #cc0000;
+	color: #941414;
 	margin-top: 50px;
 	margin-bottom: 0;
 }
@@ -457,7 +457,7 @@ li a.active{
 
 /*contact section*/
 .contact-caption{
-	background: #cc0000;
+	background: #941414;
 }
 .contact-heading h2{
 	color: #fff;

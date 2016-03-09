@@ -2,7 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class BIPAdminController extends Controller
 {
     /**
-     * @Route("/admin/{bip}/menu/", name="admin_menu")
+     * @Route("/admin/{bip}/add/menu/", name="admin_add_menu")
      */
     public function  BIPMenuAction(Request $request, $bip)
     {
@@ -42,6 +45,61 @@ class BIPAdminController extends Controller
             'bip'=>$bip,
             'menu'=>$menu,
             'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/{bip}/add/art/", name="admin_add_art")
+     */
+    public function adminAddArtAction(Request $request, $bip)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+
+        $article = new Article();
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('menu', EntityType::class, array(
+                'class' => 'AppBundle:Submenu',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) use ($bip){
+                    return $er->createQueryBuilder('s')
+                        ->where("s.bip= ".$bip->getId());
+                },
+            ))
+            ->add('content')
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($article);
+            $em->flush();
+            $this->addFlash('success', 'Pomyślnie dodano artykuł do menu.');
+        }
+
+        return $this->render('user/add_article.html.twig', array(
+            'form'=>$form->createView(),
+            'bip' => $bip,
+        ));
+    }
+
+    /**
+     * @Route("/admin/{bip}/view/art/", name="admin_view_art")
+     */
+    public function adminViewArtAction($bip)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $articles = $em->getRepository("AppBundle:Article");
+        $qb = $articles->createQueryBuilder('a');
+        $articles = $qb
+                    ->innerJoin('a.menu', 'm')
+                    ->innerJoin('m.bip', 'b')
+                    ->where('b.id='.$bip->getId())->getQuery()->getResult();
+
+        return $this->render('user/view_articles.html.twig', array(
+            'bip' => $bip,
+            'articles' => $articles,
         ));
     }
 }
