@@ -60,6 +60,7 @@
                             </table>
                             <div class="row">
                                 <form class="form" method="POST">
+                                    {{ form_start(form) }}
                                     <div class="col-md-2">
                                         <h4>Nowe menu {{ bip.name }}</h4>
                                     </div>
@@ -68,8 +69,10 @@
                                     </div>
                                     <div class="col-md-4">
                                         {{ form_widget(form) }}
-                                        <input type="submit" class="btn btn-danger btn-block" value="Submit" name="Submit"/>
+                                        {{ form_widget(form.save, { 'attr': {'class':'btn btn-danger btn-block'} }) }}
+
                                     </div>
+                                    {{ form_end(form) }}
                                 </form>
                             </div>
                         </div>
