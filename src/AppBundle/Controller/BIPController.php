@@ -42,7 +42,9 @@ class BIPController extends Controller
         $submenu = new Submenu();
         $submenu->setBip($bip);
         $form = $this->createFormBuilder($submenu)
-                    ->add('name')->getForm();
+                    ->add('name')
+                    ->add('save', SubmitType::class)
+                    ->getForm();
 
         if($form->isValid()){
             $em->persist($submenu);
