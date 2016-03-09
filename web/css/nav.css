@@ -3,13 +3,13 @@ a {
   -webkit-transition: 200ms;
   -moz-transition: 200ms;
   -o-transition: 200ms;
-  transition: 200ms;
+  transition: 200ms;  
 }
 .navbar-brand-name > {
   display: inline-block;
   float: left;
   margin:0;
-  padding:0;
+  padding:30px 25px;
 }
 .navbar-brand-name > img {
   display: inline-block;
@@ -36,7 +36,7 @@ a:focus {
   background: #fff;
   border-radius: 0 0 5px 5px;
   border: 0;
-  padding: 0;
+  padding: 0; 
   -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
