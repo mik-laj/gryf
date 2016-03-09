@@ -4,8 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Bip;
 use AppBundle\Entity\Submenu;
-=======
->>>>>>> a64d267ef45d513c4ff20271d3f875e0d498a5ca
+
 use AppBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -38,7 +37,7 @@ class BIPController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
-        $menu = $em->getRepository('AppBundle:SubMenu')->findBybip($bip);
+        $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
 
         $submenu = new Submenu();
         $submenu->setBip($bip);
