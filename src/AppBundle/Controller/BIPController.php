@@ -49,10 +49,6 @@ class BIPController extends Controller
             $articles = $em->getRepository('AppBundle:Article')->findByMenu($v);
             $submenus[$k]->setArticles($articles);
             $articles = $submenus[$k]->getArticles();
-            foreach($articles as $j=>$w){
-                print $articles[$j]->getId();
-            }
-//            print $submenus[$k]->getId();
         }
 
         return $this->render('bip/leftmenu.html.twig', array(
