@@ -59,18 +59,20 @@
                                 {% endfor %}
                             </table>
                             <div class="row">
-                                <form class="form" method="POST">
+                                    {{ form_start(form) }}
                                     <div class="col-md-2">
-                                        <h4>Nowe menu {{ bip.name }}</h4>
+                                        <h4>Nowe menu</h4>
                                     </div>
                                     <div class="col-md-6">
                                         {{ form_widget(form.name, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
                                     </div>
                                     <div class="col-md-4">
                                         {{ form_widget(form) }}
-                                        <input type="submit" class="btn btn-danger btn-block" value="Submit" name="Submit"/>
+                                        {{ form_widget(form.save, { 'attr': {'class':'btn btn-danger btn-block'} }) }}
+                                        <input type="hidden" id="form__token" name="_token" value="b9tvB5lZe7lRhBObVmbUo93MU6lwIb4IzeDT9eg2rPo" />
                                     </div>
-                                </form>
+                                    {{ form_end(form) }}
+
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,7 @@ use AppBundle\Entity\Submenu;
 use AppBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
 
@@ -23,12 +24,18 @@ class BIPController extends Controller
     }
 
     /**
-     * @Route("/bip/", name="bip")
+     * @Route("/{bip}/", name="bip")
      */
-    public function  bipAction()
+    public function  bipAction($bip)
     {
-        return $this->render('bip/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+
+        return $this->render('bip/index.html.twig', array(
+            'bip'=>$bip,
+        ));
     }
+
 
     /**
      * @Route("/admin/{bip}/menu/", name="menu")
@@ -41,10 +48,13 @@ class BIPController extends Controller
 
         $submenu = new Submenu();
         $submenu->setBip($bip);
+        $submenu->setPosition(1);
         $form = $this->createFormBuilder($submenu)
                     ->add('name')
                     ->add('save', SubmitType::class)
                     ->getForm();
+
+        $form->handleRequest($request);
 
         if($form->isValid()){
             $em->persist($submenu);
