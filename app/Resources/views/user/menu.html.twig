@@ -43,26 +43,34 @@
                             treść
                         </div>
                         <div class="panel-body">
+                            {% for m in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success">{{ m }}</div>
+                            {% endfor %}
                             <table class="table table-hover table-stripped table-condensed">
                                 <tr>
                                     <th>Pozycja</th>
                                     <th>Nazwa</th>
                                 </tr>
+                                {% for sub in menu %}
                                 <tr>
-                                    <td></td>
+                                    <td>{{ sub.name }}</td>
                                     <td></td>
                                 </tr>
+                                {% endfor %}
                             </table>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <h4>Nowe menu {{ bip.name }}</h4>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ form_widget(form.name, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
-                                </div>
-                                <div class="col-md-4">
-                                    {{ form_widget(form) }}
-                                </div>
+                                <form class="form" method="POST">
+                                    <div class="col-md-2">
+                                        <h4>Nowe menu {{ bip.name }}</h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_widget(form.name, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form_widget(form) }}
+                                        <input type="submit" class="btn btn-danger btn-block" value="Submit" name="Submit"/>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
