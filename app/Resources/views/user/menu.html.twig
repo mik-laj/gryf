@@ -54,7 +54,7 @@
                                 {% for sub in menu %}
                                 <tr>
                                     <td>{{ sub.name }}</td>
-                                    <td></td>
+                                    <td>{{ sub.position }}</td>
                                 </tr>
                                 {% endfor %}
                             </table>
@@ -67,9 +67,9 @@
                                         {{ form_widget(form.name, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
                                     </div>
                                     <div class="col-md-4">
-                                        {{ form_widget(form) }}
+                                        {#{{ form_widget(form) }}#}
                                         {{ form_widget(form.save, { 'attr': {'class':'btn btn-danger btn-block'} }) }}
-                                        <input type="hidden" id="form__token" name="_token" value="b9tvB5lZe7lRhBObVmbUo93MU6lwIb4IzeDT9eg2rPo" />
+                                        {{ form_widget(form._token) }}
                                     </div>
                                     {{ form_end(form) }}
 
