@@ -12,13 +12,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class BIPAdminController extends Controller
 {
     /**
-     * @Route("/admin/{bip}/menu/", name="menu")
+     * @Route("/admin/{bip}/menu/", name="admin_menu")
      */
     public function  BIPMenuAction(Request $request, $bip)
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
-        $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
 
         $submenu = new Submenu();
         $submenu->setBip($bip);
@@ -36,6 +35,7 @@ class BIPAdminController extends Controller
             $this->addFlash('success', 'Pomyślnie dodano pozycję do menu.');
         }
 
+        $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
         return $this->render('user/menu.html.twig', array(
             'bip'=>$bip,
             'menu'=>$menu,
