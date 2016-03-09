@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Bip;
 use AppBundle\Entity\Submenu;
+=======
+>>>>>>> a64d267ef45d513c4ff20271d3f875e0d498a5ca
 use AppBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -42,15 +44,10 @@ class BIPController extends Controller
         $submenu->setBip($bip);
         $form = $this->createFormBuilder($submenu)
                     ->add('name')->getForm();
-        $form->handleRequest($request);
-        if($form->isValid()){
-            $em->persist($submenu);
-            $em->flush();
-        }
 
         return $this->render('user/menu.html.twig', array(
             'menu'=>$menu,
-            'form'=>$form,
+            'form'=>$form->createView(),
         ));
     }
 }
