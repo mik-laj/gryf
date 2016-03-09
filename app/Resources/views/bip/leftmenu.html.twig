@@ -4,7 +4,15 @@
     </div>
     <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
+
             {% for pos in submenu %}
+                {% if pos.articles|length > 0 %} {# sprawdzasz, czy jest więcej niż 0 artykułóœ dla danego submenu #}
+                    {% for art in pos.articles %} {# przepętlowujesz se artykuły #}
+                        {{ art.title }}
+                        
+                    {% endfor %}
+                {% endif %}
+
                 <li>
                     <a href="{{pos.id}}">{{pos.name}}</a>
                 </li>
