@@ -48,4 +48,12 @@ class BIPController extends Controller
             'submenu'=>$submenus,
         ));
     }
+
+    /**
+     * @Route("/art/add/", name="add_art")
+     */
+    public function addArtAction()
+    {
+        return $this->render('user/add_article.html.twig');
+    }
 }

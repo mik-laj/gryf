@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {% include "user/header.html.twig" %}
+
+    {#<div class="fos_user_user_show">#}
+    {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
+    {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
+    {#</div>#}
+    <div class="container index-container">
+        <div class="index-container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            MENU
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">jeden</a></li>
+                                <li role="presentation" class="dropdown"><a data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">dwa<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>2.1</li>
+                                        <li>2.2</li>
+                                    </ul>
+                                </li>
+                                <li role="presentation" class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        ...
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            Nowy artykuł
+                        </div>
+                        <div class="panel-body">
+                            {% for m in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success">{{ m }}</div>
+                            {% endfor %}
+                            <div class="row">
+                                {#{{ form_start(form) }}#}
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <h4>Tytuł</h4>
+                                        </div>
+                                        <div class="col-md-10">
+                                            tutaj pole
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <h4>Menu</h4>
+                                        </div>
+                                        <div class="col-md-10">
+                                            tutaj wybór
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        Tutaj treść
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-danger btn-block">ADD</button>
+                                    </div>
+                                </div>
+                                {#{{ form_end(form) }}#}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
