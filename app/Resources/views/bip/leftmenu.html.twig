@@ -4,14 +4,10 @@
     </div>
     <div class="panel-body">
         <ul class="nav nav-pills nav-stacked">
-            {% for pos in lista %}
-                {% if %}
-
-                {% elseif %}
+            {% for pos in submenu %}
                 <li>
                     <a href="{{pos.id}}">{{pos.name}}</a>
                 </li>
-                {% endif %}
             {% endfor %}
             {# <li><a href="#">Artykuł</a></li>
             <li role="presentation" class="dropdown"><a data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Rozwijane submenu<span class="caret"></span></a>

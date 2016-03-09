@@ -37,14 +37,14 @@ class BIPController extends Controller
     }
 
     /**
-     * @Route("/{bip}/menu", name="menu")
+     * @Route("/bip/{bip}/menu", name="menu")
      */
     public function menuAction($bip){
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
-        $submenus = $em->getRepository('AppBundle:Submenu')->findByBIP($bip);
+        $submenus = $em->getRepository('AppBundle:Submenu')->findByBip($bip);
 
-        return $this->render('bip/menu.html.twig', array(
+        return $this->render('bip/leftmenu.html.twig', array(
             'submenu'=>$submenus,
         ));
     }
