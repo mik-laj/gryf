@@ -28,9 +28,14 @@ class Submenu
      */
     protected $bip;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $order;
+
     public function __construct()
     {
-        parent::__construct();
+
         // your own logic
     }
 

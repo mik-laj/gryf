@@ -2,9 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Bip;
+use AppBundle\Entity\Submenu;
+
+use AppBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use UserBundle\Entity\User;
 
 class BIPController extends Controller
 {
@@ -32,35 +37,22 @@ class BIPController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository('AppBundle:Bip')->find($bip);
-        $menu = $em->getRepository('AppBundle:SubMenu')->findBybip($bip);
+        $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
 
-        return $this->render('bip/admin/menu.html.twig', array(
-            'menu'=>$menu,
-        ));
-    }
-
-    /**
-     * @Route("/test/", name="test")
-     */
-    public function TestAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $bip = new Bip();
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-
-        $form->handleRequest($request);
+        $submenu = new Submenu();
+        $submenu->setBip($bip);
+        $form = $this->createFormBuilder($submenu)
+                    ->add('name')->getForm();
 
         if($form->isValid()){
-//            $bip->setUrl('asdf');
-//            $bip->setLogo('hearh');
-            $em->persist($bip);
+            $em->persist($submenu);
             $em->flush();
-            print "Pomyślnie dodano !";
+            $this->addFlash('success', 'Pomyślnie dodano pozycję do menu.');
         }
 
-        return $this->render('form.html.twig', array(
+        return $this->render('user/menu.html.twig', array(
+            'bip'=>$bip,
+            'menu'=>$menu,
             'form'=>$form->createView(),
         ));
     }
