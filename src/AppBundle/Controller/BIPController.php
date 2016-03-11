@@ -95,7 +95,7 @@ class BIPController extends Controller
         $bip = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            50
+            10
         );
 
         return $this->render('bip/bip_list.html.twig', array(

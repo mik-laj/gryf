@@ -12,8 +12,8 @@
                     <div class="panel-body">
                         <table class="table table-stripped table-condensed table-hover">
                             <tr>
-                                <th>{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
-                                <th>{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
+                                <th {% if bips.isSorted('bip.name') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
+                                <th {% if bips.isSorted('bip.url') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
                                 <th>Podgląd</th>
                             </tr>
                             {% for bip in bips %}
@@ -24,6 +24,9 @@
                             </tr>
                             {% endfor %}
                         </table>
+                        <div class="navigation">
+                            {{ knp_pagination_render(bips) }}
+                        </div>
                     </div>
                 </div>
             </div>
