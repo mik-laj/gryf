@@ -105,7 +105,7 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("admin/{bip}/", name="admin_view")
+     * @Route("/admin/{bip}/", name="admin_view")
      */
     public function adminViewAction($bip)
     {
@@ -114,6 +114,40 @@ class BIPAdminController extends Controller
 
         return $this->render('user/show_content.html.twig', array(
             'bip'=>$bip,
+        ));
+    }
+
+    /**
+     * @Route("/admin/{bip}/edit/{art}/", name="admin_edit_art")
+     */
+    public function adminEditArtAction(Request $request, $bip, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('menu', EntityType::class, array(
+                'class' => 'AppBundle:Submenu',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) use ($bip){
+                    return $er->createQueryBuilder('s')
+                        ->where("s.bip= ".$bip->getId());
+                },
+            ))
+            ->add('content', TextareaType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
+            $em->flush();
+        }
+
+        return $this->render('user/edit_art.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
         ));
     }
 

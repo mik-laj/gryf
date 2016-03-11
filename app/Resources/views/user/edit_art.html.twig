@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block javascripts %}
-{{ parent() }}
+    {{ parent() }}
     <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 
 
@@ -8,7 +8,6 @@
 {% block body %}
 
     {% include "user/header.html.twig" %}
-
 
     <div class="container index-container">
         <div class="index-container">
@@ -47,7 +46,6 @@
                                     CKEDITOR.replace( 'form_content' );
                                 </script>
                                 {{ form_end(form) }}
-
                             </div>
                         </div>
                     </div>
