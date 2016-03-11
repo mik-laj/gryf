@@ -12,7 +12,7 @@
                     <div class="panel-body">
                         <table class="table table-stripped table-condensed table-hover">
                             <tr>
-                                <th>Nazwa</th>
+                                {{ knp_pagination_sortable(umowy, 'Nazwa', 'bip.name') }}
                                 <th>URL</th>
                                 <th>Podgląd</th>
                             </tr>
