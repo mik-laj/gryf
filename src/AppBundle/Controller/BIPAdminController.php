@@ -102,4 +102,5 @@ class BIPAdminController extends Controller
             'articles' => $articles,
         ));
     }
+
 }
