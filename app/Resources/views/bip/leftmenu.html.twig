@@ -14,15 +14,6 @@
                     {% endfor %}
 
                 {% elseif pos.articles|length > 1 %}
-                        {# <li role="presentation" class="dropdown"><a data-toggle="dropdown" href="#" 
-                        role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                        {{pos.name}}<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                {% for art in pos.articles %}
-                                    <li><a href="{{ path('art_view', {"art":art.id, "bip":pos.bip.id}) }}">{{art.title}}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li><!-- Pillsy --> #}
                         <li class="panel-group nav">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -33,17 +24,15 @@
                                 <div id="colla" class="panel-collapse collapse nav">
                                     <ul class="list-group nav nav-stacked nav-pills">
                                     {% for art in pos.articles %}
-                                        <li class="list-group-item"><a href="{{ path('art_view', {"art":art.id, "bip":pos.bip.id}) }}">{{art.title}}</a></li>
+                                        <li class="list-group-item">
+                                            <a href="{{ path('art_view', {"art":art.id, "bip":pos.bip.id}) }}">{{art.title}}</a>
+                                        </li>
                                     {% endfor %}
                                     </ul>
                                 </div>
                             </div>
                         </li> <!-- item groups -->
                 {% endif %}
-                {# <li>
-                    <a href="{{pos.id}}">{{pos.name}}</a>
-                </li> #}
-
             {% endfor %}
         </ul>
     </div>
