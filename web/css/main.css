@@ -13,3 +13,11 @@ body, .index-container {
 	border: 0px;
 	background-color: none;
 }
+
+/*.list-group > .list-group-item > a:hover{
+	background-color: #E0B2B2;
+	color: white;
+	-webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    transition: 300ms;
+}*/

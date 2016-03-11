@@ -25,7 +25,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="{% if app.request.get('_route') 
                     starts with 'admin_view' %} active {% endif %}">
-                        <a href="{{ path('admin_view', {'bip':bip.id}) }}">Mój profil</a>
+                        <a href="{{ path('admin_view', {'bip':bip.id}) }}">{{bip.name}}</a>
                     </li>
                     <li class="{% if app.request.get('_route') 
                     starts with 'admin_add_art' %} active {% endif %}">
