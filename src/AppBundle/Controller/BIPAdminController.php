@@ -108,8 +108,12 @@ class BIPAdminController extends Controller
      */
     public function adminViewAction($bip)
     {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
 
-        return $this->render('user/show_content.html.twig');
+        return $this->render('user/show_content.html.twig', array(
+            'bip'=>$bip,
+        ));
     }
 
 }
