@@ -29,12 +29,10 @@
                     </li>
                     <li class="{% if app.request.get('_route') 
                     starts with 'admin_add_art' %} active {% endif %}">
-                        <a href="{{ path('admin_add_art', {'bip':bip.id}) }}">Dodaj artykuły</a></li>
+                        <a href="{{ path('admin_add_art', {'bip':bip.id}) }}">Artykuły</a></li>
                     <li class="{% if app.request.get('_route') 
                     starts with 'admin_add_menu' %} active {% endif %}">
-                        <a href="{{ path('admin_add_menu', {'bip':bip.id}) }}">Dodaj menu</a></li>
-                    <li>
-                        <a href="">Edytuj Profil</a></li>
+                        <a href="{{ path('admin_add_menu', {'bip':bip.id}) }}">Menu</a></li>
                     <li>
                         <a href="">Wyloguj</a></li>
                 </ul>
