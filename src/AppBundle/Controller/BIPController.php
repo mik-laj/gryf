@@ -88,11 +88,12 @@ class BIPController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository("AppBundle:Bip");
-//        $query = $bip->Query();
+        $qb = $bip->createQueryBuilder('bip');
+        $query = $qb->getQuery();
 
         $paginator = $this->get('knp_paginator');
         $bip = $paginator->paginate(
-//            $query,
+            $query,
             $request->query->getInt('page', 1),
             50
         );

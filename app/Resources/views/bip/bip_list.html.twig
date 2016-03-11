@@ -7,13 +7,13 @@
             <div class="col-md-12">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                        Lista bipów
+                        Lista bipów (<b>{{ bips.getTotalItemCount }}</b>)
                     </div>
                     <div class="panel-body">
                         <table class="table table-stripped table-condensed table-hover">
                             <tr>
-                                {{ knp_pagination_sortable(umowy, 'Nazwa', 'bip.name') }}
-                                <th>URL</th>
+                                <th>{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
+                                <th>{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
                                 <th>Podgląd</th>
                             </tr>
                             {% for bip in bips %}
