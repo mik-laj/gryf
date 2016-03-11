@@ -1,4 +1,10 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
+{{ parent() }}
+    <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+
+
+{% endblock %}
 {% block body %}
 
     {% include "user/header.html.twig" %}
@@ -38,6 +44,11 @@
                                         {{ form_widget(form.save, { 'attr': {'class':'btn btn-danger btn-block'} }) }}
                                     </div>
                                 </div>
+                                <script>
+                                    // Replace the <textarea id="editor1"> with a CKEditor
+                                    // instance, using default configuration.
+                                    CKEDITOR.replace( 'form_content' );
+                                </script>
                                 {{ form_end(form) }}
 
                             </div>
@@ -47,4 +58,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}

@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -67,7 +68,7 @@ class BIPAdminController extends Controller
                         ->where("s.bip= ".$bip->getId());
                 },
             ))
-            ->add('content')
+            ->add('content', TextareaType::class)
             ->add('save', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
