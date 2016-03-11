@@ -84,14 +84,15 @@ class BIPController extends Controller
     /**
      * @Route("/all/", name="bips_view")
      */
-    public function viewBipListAction()
+    public function viewBipListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository("AppBundle:Bip")->findAll();
 
         $paginator = $this->get('knp_paginator');
         $bip = $paginator->paginate(
-
+            $request->query->getInt('page', 1),
+            50
         );
 
         return $this->render('bip/bip_list.html.twig', array(
