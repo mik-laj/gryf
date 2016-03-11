@@ -103,4 +103,13 @@ class BIPAdminController extends Controller
         ));
     }
 
+    /**
+     * @Route("admin/{bip}/", name="admin_view")
+     */
+    public function adminViewAction($bip)
+    {
+
+        return $this->render('user/show_content.html.twig');
+    }
+
 }
