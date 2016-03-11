@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand" style="margin-top:-1em">
-                		<a class="navbar-brand" href="{{ path('admin', {'bip':bip.id}) }}">
+                		<a class="navbar-brand" href="{{ path('bip', {'bip':bip.id}) }}">
                 			<div class="navbar-brand-name">
 								<img style="max-width: 60px;margin-top:-0.4em;"
                 				src="{{ asset('img/bip.png') }}"/>	
@@ -24,8 +24,12 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="{% if app.request.get('_route') 
+                    starts with 'admin_view' %} active {% endif %}">
+                        <a href="{{ path('admin_view', {'bip':bip.id}) }}">Mój profil</a>
+                    </li>
+                    <li class="{% if app.request.get('_route') 
                     starts with 'admin_add_art' %} active {% endif %}">
-                        <a href="{# {{ path('admin_add_art') }} #}">Dodaj artykuły</a></li>
+                        <a href="{{ path('admin_add_art', {'bip':bip.id}) }}">Dodaj artykuły</a></li>
                     <li>
                         <a href="">Edytuj Profil</a></li>
                     <li>
