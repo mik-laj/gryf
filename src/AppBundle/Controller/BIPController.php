@@ -87,12 +87,15 @@ class BIPController extends Controller
     public function viewBipListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->findAll();
+        $bip = $em->getRepository("AppBundle:Bip");
+        $qb = $bip->createQueryBuilder('bip');
+        $query = $qb->getQuery();
 
         $paginator = $this->get('knp_paginator');
         $bip = $paginator->paginate(
+            $query,
             $request->query->getInt('page', 1),
-            50
+            10
         );
 
         return $this->render('bip/bip_list.html.twig', array(
