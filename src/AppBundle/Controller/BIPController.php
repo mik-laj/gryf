@@ -80,4 +80,17 @@ class BIPController extends Controller
             'article'=>$article,
         ));
     }
+
+    /**
+     * @Route("/all/", name="bips_view")
+     */
+    public function viewBipListAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->findAll();
+
+        return $this->render('bip/bip_list.html.twig', array(
+            'bips'=>$bip,
+        ));
+    }
 }

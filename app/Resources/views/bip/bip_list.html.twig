@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="container index-container">
+    <div class="index-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        Lista bipów
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-stripped table-condensed table-hover">
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>URL</th>
+                                <th>Podgląd</th>
+                            </tr>
+                            {% for bip in bips %}
+                            <tr>
+                                <td>{{ bip.name }}</td>
+                                <td>{{ bip.url }}</td>
+                                <td><a href="{{ path('bip', {'bip':bip.id}) }}">KLIK</a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
