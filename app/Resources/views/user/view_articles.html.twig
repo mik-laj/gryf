@@ -23,6 +23,7 @@
                                 <tr>
                                     <th>Tytuł</th>
                                     <th>Menu</th>
+                                    <th>Podgląd</th>
                                     <th>Edytuj</th>
                                     <th>Usuń</th>
                                 </tr>
@@ -30,6 +31,7 @@
                                     <tr>
                                         <td>{{ art.title }}</td>
                                         <td>{{ art.menu.name }}</td>
+                                        <td><a href="{{ path('art_view', {'bip':bip.id, 'art':art.id}) }}">czytaj</a></td>
                                         <td>link</td>
                                         <td>link</td>
                                     </tr>

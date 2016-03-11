@@ -89,6 +89,11 @@ class BIPController extends Controller
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository("AppBundle:Bip")->findAll();
 
+        $paginator = $this->get('knp_paginator');
+        $bip = $paginator->paginate(
+
+        );
+
         return $this->render('bip/bip_list.html.twig', array(
             'bips'=>$bip,
         ));
