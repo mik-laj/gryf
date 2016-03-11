@@ -461,14 +461,14 @@ li a.active{
 }
 .contact-heading h2{
 	color: #fff;
-	font-size: 75px;
+	font-size: 55px;
 }
 .contact-info{
 	padding-left: 40px;
 }
 .contact-info h3{
 	padding-left: 0;
-	font-size: 30px;
+	font-size: 25px;
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -478,7 +478,7 @@ li a.active{
 }
 .contact-form h3{
 	padding-left: 0;
-	font-size: 30px;
+	font-size: 25px;
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: bold;
