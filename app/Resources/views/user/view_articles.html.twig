@@ -33,7 +33,7 @@
                                         <td>{{ art.menu.name }}</td>
                                         <td><a href="{{ path('art_view', {'bip':bip.id, 'art':art.id}) }}">czytaj</a></td>
                                         <td><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':art.id }) }}">Edit</a></td>
-                                        <td>link</td>
+                                        <td><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':art.id}) }}">Remove</a></td>
                                     </tr>
                                 {% endfor %}
                             </table>

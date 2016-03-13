@@ -74,8 +74,9 @@ class BIPAdminController extends Controller
         $form->handleRequest($request);
         if($form->isValid()){
             $em->persist($article);
-            $em->flush();
             $this->addFlash('success', 'Pomyślnie dodano artykuł do menu.');
+            $em->flush();
+
         }
 
         return $this->render('user/add_article.html.twig', array(
@@ -148,6 +149,22 @@ class BIPAdminController extends Controller
         return $this->render('user/edit_art.html.twig', array(
             'bip'=>$bip,
             'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/{bip}/remove/{art}/", name="admin_remove_art")
+     */
+    public function adminRemoveArtAction(Request $request, $bip, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+        $em->remove($article);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_view_art', array(
+            'bip'=>$bip,
         ));
     }
 
