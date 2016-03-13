@@ -28,8 +28,8 @@
                         <a href="{{ path('admin_view', {'bip':bip.id}) }}">{{bip.name}}</a>
                     </li>
                     <li class="{% if app.request.get('_route') 
-                    starts with 'admin_add_art' %} active {% endif %}">
-                        <a href="{{ path('admin_add_art', {'bip':bip.id}) }}">Artykuły</a></li>
+                    starts with 'admin_view_art' %} active {% endif %}">
+                        <a href="{{ path('admin_view_art', {'bip':bip.id}) }}">Artykuły</a></li>
                     <li class="{% if app.request.get('_route') 
                     starts with 'admin_add_menu' %} active {% endif %}">
                         <a href="{{ path('admin_add_menu', {'bip':bip.id}) }}">Menu</a></li>

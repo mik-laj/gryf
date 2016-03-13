@@ -29,11 +29,15 @@
                                 <tr>
                                     <th>Pozycja</th>
                                     <th>Nazwa</th>
+                                    <th>Edytuj</th>
+                                    <th>Usuń</th>
                                 </tr>
                                 {% for sub in menu %}
                                 <tr>
                                     <td>{{ sub.position }}</td>
                                     <td>{{ sub.name }}</td>
+                                    <td>EDIT</td>
+                                    <td>REMOVE</td>
                                 </tr>
                                 {% endfor %}
                             </table>
