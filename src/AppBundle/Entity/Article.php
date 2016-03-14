@@ -17,6 +17,7 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
     /**
      * @ORM\Column(type="string")
      */
@@ -29,9 +30,15 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="Submenu")
-     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+     * @ORM\JoinColumn(name="menu", referencedColumnName="id", nullable=true)
      */
     protected $menu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\JoinColumn(name="section", referencedColumnName="id", nullable=true)
+     */
+    protected $section;
 
     public function __construct()
     {
@@ -116,5 +123,28 @@ class Article
     public function getMenu()
     {
         return $this->menu;
+    }
+
+    /**
+     * Set section
+     *
+     * @param \AppBundle\Entity\Article $section
+     * @return Article
+     */
+    public function setSection(\AppBundle\Entity\Article $section = null)
+    {
+        $this->section = $section;
+
+        return $this;
+    }
+
+    /**
+     * Get section
+     *
+     * @return \AppBundle\Entity\Article 
+     */
+    public function getSection()
+    {
+        return $this->section;
     }
 }
