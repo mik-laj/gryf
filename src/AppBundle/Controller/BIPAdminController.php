@@ -76,6 +76,22 @@ class BIPAdminController extends Controller
     }
 
     /**
+     * @Route("/admin/{bip}/remove/{menu}/", name="admin_remove_menu")
+     */
+    public function adminRemoveMenuAction(Request $request, $bip, $menu)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $menu = $em->getRepository('AppBundle:Submenu')->find($menu);
+        $em->remove($menu);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_add_menu', array(
+            'bip'=>$bip->getId(),
+        ));
+    }
+
+    /**
      * @Route("/admin/{bip}/add/art/", name="admin_add_art")
      */
     public function adminAddArtAction(Request $request, $bip)

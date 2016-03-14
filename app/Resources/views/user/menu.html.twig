@@ -4,10 +4,6 @@
 
     {% include "user/header.html.twig" %}
 
-    {#<div class="fos_user_user_show">#}
-    {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
-    {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
-    {#</div>#}
     <div class="container index-container">
         <div class="index-container">
             <div class="row">
@@ -19,7 +15,7 @@
                 <div class="col-md-9">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            treść
+                            Zarządzanie menu
                         </div>
                         <div class="panel-body">
                             {% for m in app.session.flashbag.get('notice') %}
@@ -29,15 +25,15 @@
                                 <tr>
                                     <th>Pozycja</th>
                                     <th>Nazwa</th>
-                                    <th>Edytuj</th>
-                                    <th>Usuń</th>
+                                    <th class="text-center">Edytuj</th>
+                                    <th class="text-center">Usuń</th>
                                 </tr>
                                 {% for sub in menu %}
                                 <tr>
                                     <td>{{ sub.position }}</td>
                                     <td>{{ sub.name }}</td>
-                                    <td><a href="{{ path('admin_edit_menu', {'bip':bip.id, 'menu':sub.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></td>
-                                    <td>REMOVE</td>
+                                    <td class="text-center"><a href="{{ path('admin_edit_menu', {'bip':bip.id, 'menu':sub.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></td>
+                                    <td class="text-center"><a href="{{ path('admin_remove_menu', {'bip':bip.id, 'menu':sub.id}) }}"> <i class="fa fa-trash-o fa-lg"></i></a></td>
                                 </tr>
                                 {% endfor %}
                             </table>
