@@ -164,7 +164,7 @@ class BIPAdminController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('admin_view_art', array(
-            'bip'=>$bip,
+            'bip'=>$bip->getId(),
         ));
     }
 

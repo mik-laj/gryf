@@ -34,7 +34,7 @@
                     starts with 'admin_add_menu' %} active {% endif %}">
                         <a href="{{ path('admin_add_menu', {'bip':bip.id}) }}">Menu</a></li>
                     <li>
-                        <a href="">Wyloguj</a></li>
+                        <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a></li>
                 </ul>
             </div>
         </div>
