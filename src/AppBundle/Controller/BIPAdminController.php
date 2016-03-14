@@ -226,4 +226,34 @@ class BIPAdminController extends Controller
             'article'=>$article,
         ));
     }
+
+    /**
+     * @Route("/admin/{bip}/sec/{art}/", name="admin_add_section")
+     */
+    public function adminAddSectionAction(Request $request, $bip, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $art = $em->getRepository("AppBundle:Article")->find($art);
+        $article = new Article();
+        $article->setSection($art);
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('content', TextareaType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($article);
+            $this->addFlash('success', 'Pomyślnie dodano artykuł do sekcji.');
+            $em->flush();
+
+        }
+
+        return $this->render('user/add_section.html.twig', array(
+            'form'=>$form->createView(),
+            'bip' => $bip,
+        ));
+    }
 }

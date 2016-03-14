@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block javascripts %}
-{{ parent() }}
+    {{ parent() }}
     <script src="//cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 
 
@@ -32,21 +32,17 @@
                                         {{ form_widget(form.title, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        {{ form_widget(form.menu, { 'attr': {'class':'form-control'} }) }}
-                                    </div>
-                                    <div class="col-md-12 form-group">
                                         {{ form_widget(form.content, { 'attr': {'placeholder':'treść', 'class':'form-control'} }) }}
                                     </div>
                                     <div class="col-md-12">
                                         {{ form_widget(form.save, { 'attr': {'class':'btn btn-danger btn-block'} }) }}
                                     </div>
                                 </div>
-                                <script>
-                                    CKEDITOR.replace( 'form_content' );
-                                </script>
                                 {{ form_end(form) }}
-
                             </div>
+                            <script>
+                                CKEDITOR.replace( 'form_content' );
+                            </script>
                         </div>
                     </div>
                 </div>
