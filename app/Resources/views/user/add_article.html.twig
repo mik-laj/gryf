@@ -32,6 +32,10 @@
                                         {{ form_widget(form.title, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
                                     </div>
                                     <div class="col-md-12 form-group">
+                                        {#{{ form_widget(form.title, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}#}
+                                        {{ form_widget(form.section) }}
+                                    </div>
+                                    <div class="col-md-12 form-group">
                                         {{ form_widget(form.menu, { 'attr': {'class':'form-control'} }) }}
                                     </div>
                                     <div class="col-md-12 form-group">
