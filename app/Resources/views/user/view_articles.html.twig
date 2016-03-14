@@ -23,17 +23,15 @@
                                 <tr>
                                     <th>Tytuł</th>
                                     <th>Menu</th>
-                                    <th>Podgląd</th>
-                                    <th>Edytuj</th>
-                                    <th>Usuń</th>
+                                    <th class="text-center">Edytuj</th>
+                                    <th class="text-center">Usuń</th>
                                 </tr>
                                 {% for art in articles %}
                                     <tr>
                                         <td>{{ art.title }}</td>
-                                        <td>{{ art.menu.name }}</td>
-                                        <td><a href="{{ path('art_view', {'bip':bip.id, 'art':art.id}) }}">czytaj</a></td>
-                                        <td><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':art.id }) }}">Edit</a></td>
-                                        <td><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':art.id}) }}">Remove</a></td>
+                                        <td><a href="{{ path('art_view', {'bip':bip.id, 'art':art.id}) }}">{{ art.menu.name }}</a></td>
+                                        <td class="text-center"><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':art.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></td>
+                                        <td class="text-center"><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':art.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></td>
                                     </tr>
                                 {% endfor %}
                             </table>
