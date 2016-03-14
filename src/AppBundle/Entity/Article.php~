@@ -40,6 +40,8 @@ class Article
      */
     protected $section;
 
+    protected $articles;
+
     public function __construct()
     {
 //        parent::__construct();
@@ -123,5 +125,28 @@ class Article
     public function getMenu()
     {
         return $this->menu;
+    }
+
+    /**
+     * Set section
+     *
+     * @param \AppBundle\Entity\Article $section
+     * @return Article
+     */
+    public function setSection(\AppBundle\Entity\Article $section = null)
+    {
+        $this->section = $section;
+
+        return $this;
+    }
+
+    /**
+     * Get section
+     *
+     * @return \AppBundle\Entity\Article 
+     */
+    public function getSection()
+    {
+        return $this->section;
     }
 }

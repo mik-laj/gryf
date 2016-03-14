@@ -137,14 +137,24 @@ class BIPAdminController extends Controller
         $bip = $em->getRepository("AppBundle:Bip")->find($bip);
         $articles = $em->getRepository("AppBundle:Article");
         $qb = $articles->createQueryBuilder('a');
-        $articles = $qb
+        $articles1 = $qb
                     ->innerJoin('a.menu', 'm')
                     ->innerJoin('m.bip', 'b')
+//                    ->innerJoin('a.section', 's')
+//                    ->innerJoin('s.menu','z')
+//                    ->innerJoin('z.bip', 'y')
                     ->where('b.id='.$bip->getId())->getQuery()->getResult();
+        $qb2 = $articles->createQueryBuilder('s');
+        $sections = $qb2
+                    ->innerJoin('s.section', 'x')
+                    ->innerJoin('x.menu', 'y')
+                    ->innerJoin('y.bip', 'p')
+                    ->where('p.id='.$bip->getId())->getQuery()->getResult();
 
         return $this->render('user/view_articles.html.twig', array(
             'bip' => $bip,
-            'articles' => $articles,
+            'articles' => $articles1,
+            'sections' => $sections,
         ));
     }
 
