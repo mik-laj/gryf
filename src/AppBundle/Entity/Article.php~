@@ -17,6 +17,7 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
     /**
      * @ORM\Column(type="string")
      */
@@ -29,13 +30,98 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="Submenu")
-     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+     * @ORM\JoinColumn(name="menu", referencedColumnName="id", nullable=true)
      */
     protected $menu;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Article")
+     * @ORM\JoinColumn(name="section", referencedColumnName="id", nullable=true)
+     */
+    protected $section;
+
     public function __construct()
     {
-        parent::__construct();
+//        parent::__construct();
         // your own logic
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Article
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     * @return Article
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set menu
+     *
+     * @param \AppBundle\Entity\Submenu $menu
+     * @return Article
+     */
+    public function setMenu(\AppBundle\Entity\Submenu $menu = null)
+    {
+        $this->menu = $menu;
+
+        return $this;
+    }
+
+    /**
+     * Get menu
+     *
+     * @return \AppBundle\Entity\Submenu 
+     */
+    public function getMenu()
+    {
+        return $this->menu;
     }
 }
