@@ -229,11 +229,17 @@ class BIPAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository("AppBundle:Bip")->find($bip);
         $article = $em->getRepository("AppBundle:Article")->find($art);
+        $sec = $em->getRepository("AppBundle:Article");
+        $qb = $sec->createQueryBuilder('a');
+        $sections = $qb
+                    ->innerJoin('a.section', 's')
+                    ->where('s.id='.$art)->getQuery()->getResult();
 
 
         return $this->render('user/view_art.html.twig', array(
             'bip'=>$bip,
             'article'=>$article,
+            'sections'=>$sections,
         ));
     }
 
