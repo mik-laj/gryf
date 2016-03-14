@@ -18,18 +18,23 @@ class BIPController extends Controller
     /**
      * @Route("/bezlog/", name="bezlog")
      */
-    public function bezlogAction()
+    public function bezlogAction(Request $request)
     {
-        return $this->render('user/show_content.html.twig');
+        $siteManager = $this->get('bip_manager');
+        print $siteManager->getCurrentBIP()->getName();
+
+//        return $this->render('user/show_content.html.twig');
     }
 
     /**
-     * @Route("/bip/{bip}/", name="bip")
+     * @Route("/home", name="bip")
      */
-    public function  bipAction($bip)
+    public function  bipAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+//        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
 
         return $this->render('bip/index.html.twig', array(
             'bip'=>$bip,
@@ -37,11 +42,13 @@ class BIPController extends Controller
     }
 
     /**
-     * @Route("/bip/{bip}/menu", name="menu")
+     * @Route("/menu", name="menu")
      */
     public function menuAction($bip){
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+//        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
 
         $submenus = $em->getRepository('AppBundle:Submenu')->findByBip($bip);
 
@@ -66,12 +73,13 @@ class BIPController extends Controller
 
 
     /**
-     * @Route("/bip/{bip}/art/{art}/", name="art_view")
+     * @Route("/art/{art}/", name="art_view")
      */
-    public function viewArtAction($bip, $art)
+    public function viewArtAction($art)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
 

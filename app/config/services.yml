@@ -11,3 +11,18 @@ services:
         class: AppBundle\Form\Type\UserType
         tags:
             - { name: form.type, alias: app_user_registration }
+
+    bip_manager:
+         class: AppBundle\Manager\BIPManager
+
+    current_site_listener:
+        class: AppBundle\EventListener\CurrentBIPListener
+        arguments:
+            - "@bip_manager"
+            - "@doctrine.orm.entity_manager"
+            - "%base_host%"
+        tags:
+            -
+                name: kernel.event_listener
+                method: onKernelRequest
+                event: kernel.request

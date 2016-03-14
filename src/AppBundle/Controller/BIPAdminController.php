@@ -16,12 +16,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class BIPAdminController extends Controller
 {
     /**
-     * @Route("/admin/{bip}/add/menu/", name="admin_add_menu")
+     * @Route("/admin/add/menu/", name="admin_add_menu")
      */
-    public function  BIPMenuAction(Request $request, $bip)
+    public function  BIPMenuAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
 
         $submenu = new Submenu();
@@ -50,12 +51,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/menu/{menu}/", name="admin_edit_menu")
+     * @Route("/admin/menu/{menu}/", name="admin_edit_menu")
      */
-    public function adminEditMenuAction(Request $request, $bip, $menu)
+    public function adminEditMenuAction(Request $request, $menu)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $menu = $em->getRepository('AppBundle:Submenu')->find($menu);
 
         $form = $this->createFormBuilder($menu)
@@ -76,12 +78,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/remove/{menu}/", name="admin_remove_menu")
+     * @Route("/admin/remove/{menu}/", name="admin_remove_menu")
      */
-    public function adminRemoveMenuAction(Request $request, $bip, $menu)
+    public function adminRemoveMenuAction(Request $request, $menu)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $menu = $em->getRepository('AppBundle:Submenu')->find($menu);
         $em->remove($menu);
         $em->flush();
@@ -92,12 +95,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/add/art/", name="admin_add_art")
+     * @Route("/admin/add/art/", name="admin_add_art")
      */
-    public function adminAddArtAction(Request $request, $bip)
+    public function adminAddArtAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
 
         $article = new Article();
         $form = $this->createFormBuilder($article)
@@ -129,12 +133,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/view/art/", name="admin_view_art")
+     * @Route("/admin/view/art/", name="admin_view_art")
      */
-    public function adminViewArtAction($bip)
+    public function adminViewArtAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $articles = $em->getRepository("AppBundle:Article");
         $qb = $articles->createQueryBuilder('a');
         $articles = $qb
@@ -149,12 +154,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/", name="admin_view")
+     * @Route("/admin/", name="admin_view")
      */
-    public function adminViewAction($bip)
+    public function adminViewAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
 
         return $this->render('user/show_content.html.twig', array(
             'bip'=>$bip,
@@ -162,12 +168,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/edit/{art}/", name="admin_edit_art")
+     * @Route("/admin/edit/{art}/", name="admin_edit_art")
      */
-    public function adminEditArtAction(Request $request, $bip, $art)
+    public function adminEditArtAction(Request $request, $art)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
         $form = $this->createFormBuilder($article)
@@ -196,12 +203,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/remove/{art}/", name="admin_remove_art")
+     * @Route("/admin/remove/{art}/", name="admin_remove_art")
      */
     public function adminRemoveArtAction(Request $request, $bip, $art)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $article = $em->getRepository("AppBundle:Article")->find($art);
         $em->remove($article);
         $em->flush();
@@ -212,12 +220,13 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/art/{art}/", name="admin_view_article")
+     * @Route("/admin/art/{art}/", name="admin_view_article")
      */
     public function adminArtViewAction($bip, $art)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
 
