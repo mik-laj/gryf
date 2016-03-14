@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {% include "user/header.html.twig" %}
+
+    <div class="container index-container">
+        <div class="index-container">
+            <div class="row">
+                <div class="col-md-3">
+                    {% render(controller('AppBundle:BIP:menu', {'bip':bip.id})) %}
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            {{ article.title }}
+                        </div>
+                        <div class="panel-body">
+                            {{ article.content|raw }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

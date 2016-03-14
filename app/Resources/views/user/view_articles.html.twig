@@ -28,8 +28,8 @@
                                 </tr>
                                 {% for art in articles %}
                                     <tr>
-                                        <td>{{ art.title }}</td>
-                                        <td><a href="{{ path('art_view', {'bip':bip.id, 'art':art.id}) }}">{{ art.menu.name }}</a></td>
+                                        <td><a href="{{ path('admin_view_article', {'bip':bip.id, 'art':art.id}) }}">{{ art.title }}</a></td>
+                                        <td>{{ art.menu.name }}</td>
                                         <td class="text-center"><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':art.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></td>
                                         <td class="text-center"><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':art.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></td>
                                     </tr>

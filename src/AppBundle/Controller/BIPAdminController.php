@@ -50,6 +50,32 @@ class BIPAdminController extends Controller
     }
 
     /**
+     * @Route("/admin/{bip}/menu/{menu}/", name="admin_edit_menu")
+     */
+    public function adminEditMenuAction(Request $request, $bip, $menu)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $menu = $em->getRepository('AppBundle:Submenu')->find($menu);
+
+        $form = $this->createFormBuilder($menu)
+            ->add('name')
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($menu);
+            $em->flush();
+            $this->addFlash('success', 'Pomyślnie dodano pozycję do menu.');
+        }
+        return $this->render('user/edit_menu.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
      * @Route("/admin/{bip}/add/art/", name="admin_add_art")
      */
     public function adminAddArtAction(Request $request, $bip)
@@ -71,6 +97,7 @@ class BIPAdminController extends Controller
             ->add('content', TextareaType::class)
             ->add('save', SubmitType::class)
             ->getForm();
+
         $form->handleRequest($request);
         if($form->isValid()){
             $em->persist($article);
@@ -168,4 +195,19 @@ class BIPAdminController extends Controller
         ));
     }
 
+    /**
+     * @Route("/admin/{bip}/art/{art}/", name="admin_view_article")
+     */
+    public function adminArtViewAction($bip, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+
+
+        return $this->render('user/view_art.html.twig', array(
+            'bip'=>$bip,
+            'article'=>$article,
+        ));
+    }
 }
