@@ -142,14 +142,24 @@ class BIPAdminController extends Controller
         $bip = $BIPManager->getCurrentBIP();
         $articles = $em->getRepository("AppBundle:Article");
         $qb = $articles->createQueryBuilder('a');
-        $articles = $qb
+        $articles1 = $qb
                     ->innerJoin('a.menu', 'm')
                     ->innerJoin('m.bip', 'b')
+//                    ->innerJoin('a.section', 's')
+//                    ->innerJoin('s.menu','z')
+//                    ->innerJoin('z.bip', 'y')
                     ->where('b.id='.$bip->getId())->getQuery()->getResult();
+        $qb2 = $articles->createQueryBuilder('s');
+        $sections = $qb2
+                    ->innerJoin('s.section', 'x')
+                    ->innerJoin('x.menu', 'y')
+                    ->innerJoin('y.bip', 'p')
+                    ->where('p.id='.$bip->getId())->getQuery()->getResult();
 
         return $this->render('user/view_articles.html.twig', array(
             'bip' => $bip,
-            'articles' => $articles,
+            'articles' => $articles1,
+            'sections' => $sections,
         ));
     }
 
@@ -228,11 +238,47 @@ class BIPAdminController extends Controller
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
         $article = $em->getRepository("AppBundle:Article")->find($art);
+        $sec = $em->getRepository("AppBundle:Article");
+        $qb = $sec->createQueryBuilder('a');
+        $sections = $qb
+                    ->innerJoin('a.section', 's')
+                    ->where('s.id='.$art)->getQuery()->getResult();
 
 
         return $this->render('user/view_art.html.twig', array(
             'bip'=>$bip,
             'article'=>$article,
+            'sections'=>$sections,
+        ));
+    }
+
+    /**
+     * @Route("/admin/{bip}/sec/{art}/", name="admin_add_section")
+     */
+    public function adminAddSectionAction(Request $request, $bip, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $art = $em->getRepository("AppBundle:Article")->find($art);
+        $article = new Article();
+        $article->setSection($art);
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('content', TextareaType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($article);
+            $this->addFlash('success', 'Pomyślnie dodano artykuł do sekcji.');
+            $em->flush();
+
+        }
+
+        return $this->render('user/add_section.html.twig', array(
+            'form'=>$form->createView(),
+            'bip' => $bip,
         ));
     }
 }

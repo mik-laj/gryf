@@ -40,6 +40,8 @@ class Article
      */
     protected $section;
 
+    protected $articles;
+
     public function __construct()
     {
 //        parent::__construct();

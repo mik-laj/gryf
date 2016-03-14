@@ -19,23 +19,44 @@
                             Artykuły
                         </div>
                         <div class="panel-body">
-                            <table class="table table-hover table-condensed table-stripped">
-                                <tr>
-                                    <th>Tytuł</th>
-                                    <th>Menu</th>
-                                    <th class="text-center">Edytuj</th>
-                                    <th class="text-center">Usuń</th>
-                                </tr>
-                                {% for art in articles %}
-                                    <tr>
-                                        <td><a href="{{ path('admin_view_article', {'bip':bip.id, 'art':art.id}) }}">{{ art.title }}</a></td>
-                                        <td>{{ art.menu.name }}</td>
-                                        <td class="text-center"><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':art.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></td>
-                                        <td class="text-center"><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':art.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></td>
-                                    </tr>
+                            <div class="row nav">
+                                <div class="col-md-4 nazwa">Tytuł</div>
+                                <div class="col-md-4 nazwa">Menu</div>
+                                <div class="col-md-2 nazwa text-center">Edytuj</div>
+                                <div class="col-md-2 nazwa text-center">Usuń</div>
+                            </div>
+                            {% for art in articles %}
+                                <div class="row">
+                                    <div class="col-md-3 lista"><a href="{{ path('admin_view_article', {'bip':bip.id, 'art':art.id}) }}">{{ art.title }}</a></div>
+                                    <div class="col-md-5 lista"><a data-toggle="collapse" href="#{{art.title}}">{{ art.menu.name }} <i class="fa fa-level-down"></i></a></div>
+                                    <div class="col-md-2 lista text-center"><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':art.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></div>
+                                    <div class="col-md-2 lista text-center"><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':art.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></div>
+                                </div>
+                            <div class="row">
+                                <div id="{{art.title}}" class="panel-collapse collapse nav">
+                                    <ul class="list-group nav nav-stacked nav-pills">
+                                    {% for sec in sections %}
+                                        {% if sec.section.id == art.id %}
+                                            <li class="list-item-group lista">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-5"><i class=""></i><a href="{{ path('admin_view_article', {'bip':bip.id, 'art':sec.id}) }}">{{sec.title}}</a></div>
+                                                <div class="col-md-2 lista text-center"><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':sec.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></div>
+                                                <div class="col-md-2 lista text-center"><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':sec.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></div>
+                                                </li>
+
+                                        {% endif %}
+                                    {% endfor %}
+                                    <li class="list-item-group lista">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-5"><a href="{{ path('admin_add_section', {'bip':bip.id, 'art':art.id}) }}"><i class="fa fa-plus"></i>Dodaj nową sekcję</a></div>
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-2"></div>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
                                 {% endfor %}
-                            </table>
-                            <a class="btn btn-danger btn-block" href="{{ path('admin_add_art', {'bip':bip.id}) }}">NOWY</a>
+                            <a style="margin-top:1em" class="btn btn-danger btn-block" href="{{ path('admin_add_art', {'bip':bip.id}) }}">NOWY</a>
                         </div>
                     </div>
                 </div>

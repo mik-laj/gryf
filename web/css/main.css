@@ -21,3 +21,13 @@ body, .index-container {
     -moz-transition: 300ms;
     transition: 300ms;
 }*/
+
+.nazwa{
+	margin-bottom: 0.6em;
+	font-weight: 400;
+	font-size: 1.3em;
+}
+
+.lista{
+	margin-top: 1em;
+}
