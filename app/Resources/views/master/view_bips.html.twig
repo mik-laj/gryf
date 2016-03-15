@@ -8,12 +8,15 @@
                 Lista BIPów
             </div>
             <div class="panel-body">
+                {% for m in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">{{ m }}</div>
+                {% endfor %}
                 <table class="table table-hover table-stripepd table-condensed">
                     <tr>
                         <th width="50%">{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
                         <th width="30%">{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
-                        <th class="text-center" width="10%">EDIT</th>
-                        <th class="text-center" width="10%">RM</th>
+                        <th class="text-center" width="10%">Edytuj</th>
+                        <th class="text-center" width="10%">Usuń</th>
                     </tr>
                     {% for bip in bips %}
                         <tr>
