@@ -5,10 +5,14 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Bip;
 use AppBundle\Entity\Submenu;
 
+use AppBundle\Exception\BIPNotFoundException;
+use AppBundle\Exception\BIPNotFoundExceptionInterface;
 use AppBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use UserBundle\Entity\User;
 
@@ -33,7 +37,11 @@ class BIPController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
 //        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
 
         return $this->render('bip/index.html.twig', array(
@@ -47,7 +55,11 @@ class BIPController extends Controller
     public function menuAction($bip){
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
 //        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
 
         $submenus = $em->getRepository('AppBundle:Submenu')->findByBip($bip);
