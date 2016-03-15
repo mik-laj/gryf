@@ -52,8 +52,9 @@ class HeadAdminController extends Controller
 
         $form->handleRequest($request);
         if($form->isValid()){
-           $this->addFlash('notice', "Pomyślnie zaktualizowano dane BIPu.");
+            $this->addFlash('notice', "Pomyślnie zaktualizowano dane BIPu.");
             $em->flush();
+            return $this->redirectToRoute('master_bip_list');
         }
 
         return $this->render('master/edit_bip.html.twig', array(
@@ -69,13 +70,12 @@ class HeadAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $bip_name = $bip->getName();
         $em->remove($bip);
         $em->flush();
-        $notice=$this->addFlash('notice', "Pomyślnie zaktualizowano dane BIPu.");
+        $this->addFlash('notice', "Pomyślnie usunięto BIP: ".$bip_name.".");
 
-        return $this->redirectToRoute('master_bip_list', array(
-            'notice'
-        ));
+        return $this->redirectToRoute('master_bip_list');
     }
 }
 ?>
