@@ -31,3 +31,8 @@ body, .index-container {
 .lista{
 	margin-top: 1em;
 }
+
+.linia{
+	height: 100px;
+	border: 110x red solid;
+}

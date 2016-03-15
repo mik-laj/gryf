@@ -37,13 +37,12 @@
                                     <ul class="list-group nav nav-stacked nav-pills">
                                     {% for sec in sections %}
                                         {% if sec.section.id == art.id %}
-                                            <li class="list-item-group lista">
+                                            <li class="list-item-group lista" style="height: 4em;">
                                                 <div class="col-md-3"></div>
                                                 <div class="col-md-5"><i class=""></i><a href="{{ path('admin_view_article', {'bip':bip.id, 'art':sec.id}) }}">{{sec.title}}</a></div>
-                                                <div class="col-md-2 lista text-center"><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':sec.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></div>
-                                                <div class="col-md-2 lista text-center"><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':sec.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></div>
+                                                <div class="col-md-2 lista text-center"><a href="{{ path('admin_edit_art', {'bip':bip.id, 'art':sec.id }) }}"><i class="fa fa-pencil"></i></a></div>
+                                                <div class="col-md-2 lista text-center"><a href="{{ path('admin_remove_art', {'bip':bip.id, 'art':sec.id}) }}"> <i class="fa fa-trash-o"></i> </a></div>
                                                 </li>
-
                                         {% endif %}
                                     {% endfor %}
                                     <li class="list-item-group lista">
