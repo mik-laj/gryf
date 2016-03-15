@@ -164,7 +164,7 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/", name="admin_view")
+     * @Route("/admin/", name="admin_view_profile")
      */
     public function adminViewAction()
     {

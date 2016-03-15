@@ -1,4 +1,5 @@
 <?php
+umask(0000);
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,7 +19,7 @@ $loader->unregister();
 $apcLoader->register(true);
 */
 
-$kernel = new AppKernel('prod', false);
+$kernel = new AppKernel('dev', false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 
