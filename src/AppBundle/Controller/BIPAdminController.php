@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -322,6 +323,22 @@ class BIPAdminController extends Controller
 
         return $this->render("user/index_admin.html.twig", array(
            'bip'=>$bip,
+        ));
+    }
+
+    /**
+     * @Route("/admin/users/", name="admin_users_list")
+     */
+    public function adminUsersListAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+//        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
+        $users = $em->getRepository("UserBundle:User")->findByBip($bip);
+        return $this->render('user/view_users.html.twig', array(
+            'bip'=>$bip,
+            'users'=>$users,
         ));
     }
 }
