@@ -1,0 +1,39 @@
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+{% endblock %}
+<header id="header" role="banner">
+    <div class="container">
+        <div id="navbar" class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" style="margin-top:-1em">
+                		<a class="navbar-brand" href="{{ path('master_bip_list') }}">
+                			<div class="navbar-brand-name">
+								<img style="max-width: 60px;margin-top:-0.4em;"
+                				src="{{ asset('img/bip.png') }}"/>	
+                				Biuletyn Informacji Publicznej
+                			</div>
+                		</a>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ path('master_bip_list') }}">BIPy</a>
+                    </li>
+                    <li>
+                        <a href="#">Użytkownicy</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
