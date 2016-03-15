@@ -23,9 +23,11 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="{% if app.request.get('_route') 
-                    starts with 'admin_view_profile' %} active {% endif %}">
+                    <li class=" active ">
                         <a href="{{ path('admin_view_profile', {'bip':bip.id}) }}">{{bip.name}}</a>
+                    </li>
+                    <li class="{% if app.request.get('_route') starts with 'admin_edit_dane' %} active {% endif %}">
+                        <a href="{{ path('admin_edit_dane', {'bip':bip.id}) }}">Edytuj Dane</a>
                     </li>
                     <li class="{% if app.request.get('_route') 
                     starts with 'admin_view_art' %} active {% endif %}">

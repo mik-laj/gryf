@@ -19,7 +19,7 @@
                                 <div class="alert alert-success">{{ m }}</div>
                             {% endfor %}
                             <div class="row">
-                                {{ form_start(form) }}
+                                {{ form_start(form, { 'attr': {'novalidate': 'novalidate'}}) }}
                                 <div class="col-md-9">
                                     {{ form_widget(form.name, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
                                     {% if form_errors(form.name) %}
