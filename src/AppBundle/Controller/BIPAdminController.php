@@ -431,7 +431,45 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
 
+        $user = new User();
+        $user->setBip($bip);
+        $form = $this->createFormBuilder($user)
+            ->add('username')
+            ->add('email')
+            ->add('plainPassword')
+            ->getForm();
+
         return $this->render('user/add_user.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/bip_menu/", name="bip_lewe_menu")
+     */
+    public function menuAdminAction($bip){
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $articles1 = $em->getRepoitory("AppBundle:Article")->findByBip($bip);
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+//        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+
+        $submenus = $em->getRepository('AppBundle:Submenu')->findByBip($bip);
+
+        foreach($submenus as $k=>$v){
+            $articles = $em->getRepository('AppBundle:Article')->findByMenu($v);
+            $submenus[$k]->setArticles($articles);
+            $articles = $submenus[$k]->getArticles();
+        }
+
+        return $this->render('bip/leftmenu.html.twig', array(
+            'submenu'=>$submenus,
+            'articles1'=>$articles1,
             'bip'=>$bip,
         ));
     }
