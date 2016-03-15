@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 
-class BIPAdminController extends Controller
+class BIPAdminController extends Controller implements AuthenticatedController
 {
     /**
      * @Route("/admin/add/menu/", name="admin_add_menu")
@@ -22,7 +22,12 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $menu = $em->getRepository('AppBundle:Submenu')->findBybip($bip);
 
         $submenu = new Submenu();
@@ -57,7 +62,12 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $menu = $em->getRepository('AppBundle:Submenu')->find($menu);
 
         $form = $this->createFormBuilder($menu)
@@ -84,7 +94,12 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $menu = $em->getRepository('AppBundle:Submenu')->find($menu);
         $em->remove($menu);
         $em->flush();
@@ -101,7 +116,12 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
 
         $article = new Article();
         $form = $this->createFormBuilder($article)
@@ -139,7 +159,12 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $articles = $em->getRepository("AppBundle:Article");
         $qb = $articles->createQueryBuilder('a');
         $articles1 = $qb
@@ -170,7 +195,12 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
 
         return $this->render('user/show_content.html.twig', array(
             'bip'=>$bip,
@@ -184,7 +214,11 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
         $form = $this->createFormBuilder($article)
@@ -219,7 +253,11 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $article = $em->getRepository("AppBundle:Article")->find($art);
         $em->remove($article);
         $em->flush();
@@ -236,7 +274,11 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $article = $em->getRepository("AppBundle:Article")->find($art);
         $sec = $em->getRepository("AppBundle:Article");
         $qb = $sec->createQueryBuilder('a');
@@ -260,7 +302,11 @@ class BIPAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
 //        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $art = $em->getRepository("AppBundle:Article")->find($art);
         $article = new Article();
         $article->setSection($art);
@@ -291,7 +337,12 @@ class BIPAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
         $form = $this->createFormBuilder($bip_dane)
             ->add('name')

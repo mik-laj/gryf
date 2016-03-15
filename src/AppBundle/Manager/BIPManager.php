@@ -1,8 +1,10 @@
 <?php
 namespace AppBundle\Manager;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use AppBundle\Exception\BIPNotFoundException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class BIPManager
 {
@@ -12,10 +14,13 @@ class BIPManager
 
     private $homepage;
 
-    public function __construct($router)
+    private $em;
+
+    public function __construct($router, EntityManager $entityManager)
     {
         $this->router = $router;
         $this->homepage = 'homepage';
+        $this->em = $entityManager;
     }
 
     public function getCurrentBIP(){
@@ -25,10 +30,26 @@ class BIPManager
 
             $exception = new BIPNotFoundException();
             $exception->redirectResponse = $redirect;
-            $exception->test = "HEHE";
             throw $exception;
         }
         return $this->currentBIP;
+    }
+
+    public function checkAdmin($bip, $user_trying){
+        $em = $this->em;
+        if(!$this->isAdmin($bip, $user_trying)) {
+            throw new AccessDeniedException();
+        }
+    }
+
+    public function isAdmin($bip, $user_trying){
+        $em = $this->em;
+        $bip_admins = $em->getRepository('UserBundle:User')->findByBip($bip);
+
+        if(!in_array($user_trying, $bip_admins)) {
+            return false;
+        }
+        return true;
     }
 
     public function setCurrentBIP($currentBIP){

@@ -16,6 +16,7 @@ services:
          class: AppBundle\Manager\BIPManager
          arguments:
             - "@router"
+            - "@doctrine.orm.entity_manager"
 
     current_site_listener:
         class: AppBundle\EventListener\CurrentBIPListener

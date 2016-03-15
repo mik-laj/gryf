@@ -52,7 +52,7 @@ class BIPController extends Controller
     /**
      * @Route("/menu", name="menu")
      */
-    public function menuAction($bip){
+    public function menuAction(){
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
         try {
@@ -91,7 +91,11 @@ class BIPController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
-        $bip = $BIPManager->getCurrentBIP();
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
 
