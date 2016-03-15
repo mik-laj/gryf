@@ -32,7 +32,7 @@ body, .index-container {
 	margin-top: 1em;
 }
 
-.linia{
+.lista > .linia{
 	height: 100px;
-	border: 110x red solid;
+	border: 1px solid red;
 }
