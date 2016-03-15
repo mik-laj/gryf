@@ -99,7 +99,8 @@ class HeadAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository("UserBundle:User")->find($user);
         $username = $user->getUsername();
-
+        $em->remove($user);
+        $em->flush();
         $this->addFlash('notice', "Pomyślnie usunięto użytkownika: ".$username.".");
 
         return $this->redirectToRoute('master_user_list');

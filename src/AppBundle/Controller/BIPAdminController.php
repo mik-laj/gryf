@@ -324,4 +324,19 @@ class BIPAdminController extends Controller
            'bip'=>$bip,
         ));
     }
+
+    /**
+     * @Route("/admin/users/", name="admin_users_list")
+     */
+    public function adminUsersListAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
+
+        return $this->render('user/view_users.html.twig', array(
+            'bip'=>$bip,
+        ));
+    }
 }
