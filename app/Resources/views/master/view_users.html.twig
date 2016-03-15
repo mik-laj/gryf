@@ -19,15 +19,15 @@
                         <th class="text-center" width="10%">Edytuj</th>
                         <th class="text-center" width="10%">Usuń</th>
                     </tr>
-                    {#{% for bip in bips %}#}
+                    {% for user in users %}
                         <tr>
-                            <td width="40%">bip</td>
-                            <td width="20%">mail</td>
-                            <td width="20%">login</td>
+                            <td width="40%">{{ user.bip.name }}</td>
+                            <td width="20%">{{ user.email }}</td>
+                            <td width="20%">{{ user.username }}</td>
                             <td class="text-center" width="10%"><a href="#"><i class="fa fa-pencil"></i></a></td>
-                            <td class="text-center" width="10%"><a href="#"><i class="fa fa-remove"></i></a></td>
+                            <td class="text-center" width="10%"><a href="{{ path('master_remove_user', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
                         </tr>
-                    {#{% endfor %}#}
+                    {% endfor %}
                 </table>
                 {#<div class="navigation">#}
                     {#{{ knp_pagination_render(bips) }}#}
