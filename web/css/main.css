@@ -54,20 +54,23 @@ body, .index-container {
 	vertical-align: middle;
 }
 
-ul{
-	list-style-image: none;
-}
-
 .fa{
 	padding-right: 1em;
 	padding-left: 1em;
 }
 
-tr{
-	margin:0;
-	padding:0;
-}
-
 .ho:hover{
 	background-color: #fff2f2;
+}
+
+.panel-body .panel .panel-heading{
+	background-color: white;
+}
+
+.panel-body .nav .po:hover a{
+	background-color: #e2e2e2;
+}
+
+.panel-body .panel .panel-heading:hover {
+	background-color: #e2e2e2;
 }
