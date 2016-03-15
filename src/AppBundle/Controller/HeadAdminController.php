@@ -77,5 +77,14 @@ class HeadAdminController extends Controller
 
         return $this->redirectToRoute('master_bip_list');
     }
+
+    /**
+     * @Route("/master/view/user/", name="master_user_list")
+     */
+    public function masterUserListAction(Request $request)
+    {
+
+        return $this->render("master/view_users.html.twig");
+    }
 }
 ?>

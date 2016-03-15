@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'master/header.html.twig' %}
+    <div class="container">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                Lista użytkowników
+            </div>
+            <div class="panel-body">
+                {% for m in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">{{ m }}</div>
+                {% endfor %}
+                <table class="table table-hover table-stripepd table-condensed">
+                    <tr>
+                        <th width="50%">BIP</th>
+                        <th width="30%">Email</th>
+                        <th class="text-center" width="10%">Edytuj</th>
+                        <th class="text-center" width="10%">Usuń</th>
+                    </tr>
+                    {#{% for bip in bips %}#}
+                        <tr>
+                            <td width="50%">bip</td>
+                            <td width="30%">mail</td>
+                            <td class="text-center" width="10%"><a href="#"><i class="fa fa-pencil"></i></a></td>
+                            <td class="text-center" width="10%"><a href="#"><i class="fa fa-remove"></i></a></td>
+                        </tr>
+                    {#{% endfor %}#}
+                </table>
+                {#<div class="navigation">#}
+                    {#{{ knp_pagination_render(bips) }}#}
+                {#</div>#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
