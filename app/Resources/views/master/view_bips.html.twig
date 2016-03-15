@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include 'master/header.html.twig' %}
+    <div class="container">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                Lista BIPów
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-stripepd table-condensed">
+                    <tr>
+                        <th width="50%">{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
+                        <th width="30%">{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
+                        <th class="text-center" width="10%">EDIT</th>
+                        <th class="text-center" width="10%">RM</th>
+                    </tr>
+                    {% for bip in bips %}
+                        <tr>
+                            <td width="50%">{{ bip.name }}</td>
+                            <td width="30%">{{ bip.url }}</td>
+                            <td class="text-center" width="10%"><a href="{{ path('master_edit_bip', {'bip':bip.id}) }}"><i class="fa fa-pencil"></i></a></td>
+                            <td class="text-center" width="10%"><a href="{{ path('master_remove_bip', {'bip':bip.id}) }}"><i class="fa fa-remove"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <div class="navigation">
+                    {{ knp_pagination_render(bips) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
