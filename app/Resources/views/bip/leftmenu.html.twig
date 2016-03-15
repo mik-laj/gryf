@@ -9,7 +9,7 @@
                     <li role="presentation" class="disabled"><a>{{pos.name}}</a></li>
                 {% elseif pos.articles|length == 1 %}
                     {% for art in pos.articles %}
-                    <li role="presentation"><a href="{{ path('art_view', {"art":art.id, "bip":pos.bip.id}) }}">{{pos.name}}</a>     
+                    <li role="presentation" class="po"><a href="{{ path('art_view', {"art":art.id, "bip":pos.bip.id}) }}">{{pos.name}}</a>     
                     {% endfor %}
 
                 {% elseif pos.articles|length > 1 %}
