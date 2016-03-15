@@ -85,8 +85,24 @@ class HeadAdminController extends Controller
     public function masterUserListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository("UserBundle:User");
-        return $this->render("master/view_users.html.twig");
+        $users = $em->getRepository("UserBundle:User")->findAll();
+        return $this->render("master/view_users.html.twig", array(
+            'users'=>$users,
+        ));
+    }
+
+    /**
+     * @Route("/master/remove/user/{user}/", name="master_remove_user")
+     */
+    public function masterRemoveUserAction(Request $request, $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("UserBundle:User")->find($user);
+        $username = $user->getUsername();
+
+        $this->addFlash('notice', "Pomyślnie usunięto użytkownika: ".$username.".");
+
+        return $this->redirectToRoute('master_user_list');
     }
 }
 ?>
