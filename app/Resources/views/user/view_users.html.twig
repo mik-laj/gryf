@@ -1,13 +1,24 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-    {% include 'master/header.html.twig' %}
-    <div class="container">
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                Lista użytkowników
-            </div>
-            <div class="panel-body">
+
+    {% include "user/header.html.twig" %}
+
+    {#<div class="fos_user_user_show">#}
+    {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
+    {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
+    {#</div>#}
+    <div class="container index-container">
+        <div class="index-container">
+            <div class="row">
+                <div class="col-md-3">
+                    {% render(controller('AppBundle:BIP:menu', {'bip':bip.id})) %}
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            Spis użytkowników
+                        </div>
+                        <div class="panel-body">
                 {% for m in app.session.flashbag.get('notice') %}
                     <div class="alert alert-success">{{ m }}</div>
                 {% endfor %}
@@ -30,6 +41,9 @@
                 {#<div class="navigation">#}
                     {#{{ knp_pagination_render(bips) }}#}
                 {#</div>#}
+            </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
