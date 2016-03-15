@@ -14,6 +14,8 @@ services:
 
     bip_manager:
          class: AppBundle\Manager\BIPManager
+         arguments:
+            - "@router"
 
     current_site_listener:
         class: AppBundle\EventListener\CurrentBIPListener
@@ -21,6 +23,7 @@ services:
             - "@bip_manager"
             - "@doctrine.orm.entity_manager"
             - "%base_host%"
+            - "@router"
         tags:
             -
                 name: kernel.event_listener
