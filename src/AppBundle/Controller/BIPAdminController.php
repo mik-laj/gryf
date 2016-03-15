@@ -215,7 +215,7 @@ class BIPAdminController extends Controller
     /**
      * @Route("/admin/remove/{art}/", name="admin_remove_art")
      */
-    public function adminRemoveArtAction(Request $request, $bip, $art)
+    public function adminRemoveArtAction(Request $request, $art)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
@@ -232,7 +232,7 @@ class BIPAdminController extends Controller
     /**
      * @Route("/admin/art/{art}/", name="admin_view_article")
      */
-    public function adminArtViewAction($bip, $art)
+    public function adminArtViewAction($art)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
@@ -253,12 +253,14 @@ class BIPAdminController extends Controller
     }
 
     /**
-     * @Route("/admin/{bip}/sec/{art}/", name="admin_add_section")
+     * @Route("/admin/sec/{art}/", name="admin_add_section")
      */
-    public function adminAddSectionAction(Request $request, $bip, $art)
+    public function adminAddSectionAction(Request $request, $art)
     {
         $em = $this->getDoctrine()->getManager();
-        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+//        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
         $art = $em->getRepository("AppBundle:Article")->find($art);
         $article = new Article();
         $article->setSection($art);
@@ -279,6 +281,32 @@ class BIPAdminController extends Controller
         return $this->render('user/add_section.html.twig', array(
             'form'=>$form->createView(),
             'bip' => $bip,
+        ));
+    }
+
+    /**
+     * @Route("/admin/dane/edit/", name="admin_edit_dane")
+     */
+    public function adminEditDaneAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
+        $form = $this->createFormBuilder($bip_dane)
+            ->add('name')
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano dane.");
+            $em->flush();
+        }
+
+        return $this->render('user/edit_dane.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
         ));
     }
 }
