@@ -341,4 +341,26 @@ class BIPAdminController extends Controller
             'users'=>$users,
         ));
     }
+
+    /**
+     * @Route("/admin/user/edit/{user}/", name="admin_user_edit")
+     */
+    public function adminUserEditAction(Request $request, $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $user = $em->getRepository("UserBundle:User")->find($user);
+
+        $form = $this->createFormBuilder($user)
+            ->add('username')
+            ->add('email')
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        return $this->render('user/edit_user.html.twig', array(
+           'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
 }
