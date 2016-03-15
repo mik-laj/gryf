@@ -287,12 +287,26 @@ class BIPAdminController extends Controller
     /**
      * @Route("/admin/dane/edit/", name="admin_edit_dane")
      */
-    public function adminEditDaneAction()
+    public function adminEditDaneAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
-//        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
-        return $this->render('user/edit_dane.html.twig');
+        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
+        $form = $this->createFormBuilder($bip_dane)
+            ->add('name')
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano dane.");
+            $em->flush();
+        }
+
+        return $this->render('user/edit_dane.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
     }
 }
