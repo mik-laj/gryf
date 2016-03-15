@@ -12,18 +12,21 @@
                 <div class="col-md-9">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            Edycja danych BIPu
+                            Edycja danych użytkownika
                         </div>
                         <div class="panel-body">
-                            {% for m in app.session.flashbag.get('notice') %}
-                                <div class="alert alert-success">{{ m }}</div>
-                            {% endfor %}
                             <div class="row">
-                                {{ form_start(form, { 'attr': {'novalidate': 'novalidate'}}) }}
-                                <div class="col-md-9">
-                                    {{ form_widget(form.name, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
-                                    {% if form_errors(form.name) %}
-                                        <div class="alert alert-danger">{{ form_errors(form.name) }}</div>
+                                {{ form_start(form) }}
+                                <div class="col-md-4">
+                                    {{ form_widget(form.username, { 'attr': {'placeholder': 'username', 'class':'form-control'} } ) }}
+                                    {% if form_errors(form.username) %}
+                                        <div class="alert alert-danger">{{ form_errors(form.username) }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-4">
+                                    {{ form_widget(form.email, { 'attr': {'placeholder': 'email', 'class':'form-control'} } ) }}
+                                    {% if form_errors(form.email) %}
+                                        <div class="alert alert-danger">{{ form_errors(form.email) }}</div>
                                     {% endif %}
                                 </div>
                                 <div class="col-md-3">

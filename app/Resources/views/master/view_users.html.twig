@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'master/header.html.twig' %}
+    <div class="container">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                Lista użytkowników
+            </div>
+            <div class="panel-body">
+                {% for m in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">{{ m }}</div>
+                {% endfor %}
+                <table class="table table-hover table-stripepd table-condensed">
+                    <tr>
+                        <th width="40%">BIP</th>
+                        <th width="20%">Email</th>
+                        <th width="20%">LOGIN</th>
+                        <th class="text-center" width="10%">Edytuj</th>
+                        <th class="text-center" width="10%">Usuń</th>
+                    </tr>
+                    {% for user in users %}
+                        <tr>
+                            <td width="40%">{{ user.bip.name }}</td>
+                            <td width="20%">{{ user.email }}</td>
+                            <td width="20%">{{ user.username }}</td>
+                            <td class="text-center" width="10%"><a href="#"><i class="fa fa-pencil"></i></a></td>
+                            <td class="text-center" width="10%"><a href="{{ path('master_remove_user', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {#<div class="navigation">#}
+                    {#{{ knp_pagination_render(bips) }}#}
+                {#</div>#}
+            </div>
+        </div>
+    </div>
+{% endblock %}

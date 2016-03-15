@@ -33,6 +33,10 @@
                     </li> <!-- item groups -->
                 {% endif %}
             {% endfor %}
+            <li class="po {% if app.request.get('_route') starts with 'admin_add_menu' %} 
+            active {% endif %}" role="presentation">
+                <a href="{{ path('admin_add_menu', {'bip':bip.id}) }}"><i class="fa fa-magic"></i>Zarządzaj menu</a>
+            </li><!-- TUTAJ ROZPOCZĄĆ -->
         </ul>
     </div>
 </div>

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -358,6 +359,80 @@ class BIPAdminController extends Controller implements AuthenticatedController
         return $this->render('user/edit_dane.html.twig', array(
             'bip'=>$bip,
             'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/", name="admin_index")
+     */
+    public function adminIndexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+
+        return $this->render("user/index_admin.html.twig", array(
+           'bip'=>$bip,
+        ));
+    }
+
+    /**
+     * @Route("/admin/users/", name="admin_users_list")
+     */
+    public function adminUsersListAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+//        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
+        $users = $em->getRepository("UserBundle:User")->findByBip($bip);
+        return $this->render('user/view_users.html.twig', array(
+            'bip'=>$bip,
+            'users'=>$users,
+        ));
+    }
+
+    /**
+     * @Route("/admin/user/edit/{user}/", name="admin_user_edit")
+     */
+    public function adminUserEditAction(Request $request, $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $user = $em->getRepository("UserBundle:User")->find($user);
+
+        $form = $this->createFormBuilder($user)
+            ->add('username')
+            ->add('email')
+            ->add('save', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano użytkownika.");
+            $em->flush();
+            return $this->redirectToRoute('admin_users_list');
+        }
+
+        return $this->render('user/edit_user.html.twig', array(
+           'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/user/add/", name="admin_user_add")
+     */
+    public function adminUserAddAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+
+        return $this->render('user/add_user.html.twig', array(
+            'bip'=>$bip,
         ));
     }
 }

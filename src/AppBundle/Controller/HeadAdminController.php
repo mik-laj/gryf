@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -52,8 +53,9 @@ class HeadAdminController extends Controller
 
         $form->handleRequest($request);
         if($form->isValid()){
-           $this->addFlash('notice', "Pomyślnie zaktualizowano dane BIPu.");
+            $this->addFlash('notice', "Pomyślnie zaktualizowano dane BIPu.");
             $em->flush();
+            return $this->redirectToRoute('master_bip_list');
         }
 
         return $this->render('master/edit_bip.html.twig', array(
@@ -69,13 +71,39 @@ class HeadAdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $bip_name = $bip->getName();
         $em->remove($bip);
         $em->flush();
-        $notice=$this->addFlash('notice', "Pomyślnie zaktualizowano dane BIPu.");
+        $this->addFlash('notice', "Pomyślnie usunięto BIP: ".$bip_name.".");
 
-        return $this->redirectToRoute('master_bip_list', array(
-            'notice'
+        return $this->redirectToRoute('master_bip_list');
+    }
+
+    /**
+     * @Route("/master/view/user/", name="master_user_list")
+     */
+    public function masterUserListAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository("UserBundle:User")->findAll();
+        return $this->render("master/view_users.html.twig", array(
+            'users'=>$users,
         ));
+    }
+
+    /**
+     * @Route("/master/remove/user/{user}/", name="master_remove_user")
+     */
+    public function masterRemoveUserAction(Request $request, $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("UserBundle:User")->find($user);
+        $username = $user->getUsername();
+        $em->remove($user);
+        $em->flush();
+        $this->addFlash('notice', "Pomyślnie usunięto użytkownika: ".$username.".");
+
+        return $this->redirectToRoute('master_user_list');
     }
 }
 ?>

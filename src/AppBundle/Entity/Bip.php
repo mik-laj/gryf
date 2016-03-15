@@ -4,6 +4,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -24,6 +25,12 @@ class Bip
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *      min = "3",
+     *      max = "25",
+     *      minMessage = "Nazwa BIPu musi mieć conajmniej 3 znaki.",
+     *      maxMessage = "Nazwa BIPu może mieć conajwyżej 25 znaki."
+     *)
      */
     protected $name;
 
