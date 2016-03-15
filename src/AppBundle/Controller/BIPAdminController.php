@@ -309,4 +309,19 @@ class BIPAdminController extends Controller
             'form'=>$form->createView(),
         ));
     }
+
+    /**
+     * @Route("/admin/", name="admin_index")
+     */
+    public function adminIndexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+
+        return $this->render("user/index_admin.html.twig", array(
+           'bip'=>$bip,
+        ));
+    }
 }

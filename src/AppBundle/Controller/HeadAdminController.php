@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -83,7 +84,8 @@ class HeadAdminController extends Controller
      */
     public function masterUserListAction(Request $request)
     {
-
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository("UserBundle:User");
         return $this->render("master/view_users.html.twig");
     }
 }
