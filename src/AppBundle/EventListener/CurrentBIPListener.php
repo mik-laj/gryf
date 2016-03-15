@@ -41,12 +41,10 @@ class CurrentBIPListener
                 ->getRepository('AppBundle:Bip')
                 ->findOneBy(array('url' => $sub));
             if (!$BIP) {
-                throw new NotFoundHttpException(sprintf(
-                    'Nie znaleziono BIPa z ustawionym adresem URL "%s"',
-                    $sub
-                ));
+                $this->BIPManager->setCurrentBIP(null);
+            }else {
+                $this->BIPManager->setCurrentBIP($BIP);
             }
-            $this->BIPManager->setCurrentBIP($BIP);
         }
     }
 }
