@@ -28,11 +28,46 @@ body, .index-container {
 	font-size: 1.3em;
 }
 
-.lista{
-	margin-top: 1em;
+.skis1{
+	height: 3em;
+	border-bottom: 1px solid #e2e2e2;
+	vertical-align: middle;
 }
 
-.lista > .linia{
-	height: 100px;
-	border: 1px solid red;
+.skis1:hover{
+	border-bottom: 3px solid #E0B2B2;
+}
+
+.skis1:hover div .fa-eye{
+	font-size: 1.5em;
+}
+
+.skis1:hover div .fa-plus{
+	font-size: 1.5em;
+}
+
+.skis1 div{
+	line-height: 2.5em;
+}
+
+.skis1 div a{
+	vertical-align: middle;
+}
+
+ul{
+	list-style-image: none;
+}
+
+.fa{
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+tr{
+	margin:0;
+	padding:0;
+}
+
+.ho:hover{
+	background-color: #fff2f2;
 }
