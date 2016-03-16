@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -142,7 +144,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $form->handleRequest($request);
         if($form->isValid()){
             $em->persist($article);
-            $this->addFlash('success', 'Pomyślnie dodano artykuł do menu.');
+            $this->addFlash('notice', 'Pomyślnie dodano artykuł do menu.');
             $em->flush();
 
         }
@@ -436,8 +438,20 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $form = $this->createFormBuilder($user)
             ->add('username')
             ->add('email')
-            ->add('plainPassword')
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('save', SubmitType::class)
             ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('notice', "Pomyślnie dodano użytkownika.");
+            return $this->redirectToRoute('admin_users_list');
+        }
 
         return $this->render('user/add_user.html.twig', array(
             'bip'=>$bip,
