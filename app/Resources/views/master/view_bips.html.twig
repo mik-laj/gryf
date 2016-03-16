@@ -5,7 +5,7 @@
     <div class="container">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                Lista BIPów
+                Lista BIPów (<b>{{ bips.getTotalItemCount }}</b>)
             </div>
             <div class="panel-body">
                 {% for m in app.session.flashbag.get('notice') %}
