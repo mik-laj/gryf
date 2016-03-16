@@ -18,16 +18,16 @@
                             <div class="row">
                                 {{ form_start(form) }}
                                 <div class="col-md-4">
-                                    {{ form_widget(form.username, { 'attr': {'placeholder': 'username', 'class':'form-control'} } ) }}
-                                    {% if form_errors(form.username) %}
-                                        <div class="alert alert-danger">{{ form_errors(form.username) }}</div>
-                                    {% endif %}
+                                    <div class="{% if(form_errors(form.username)) %} has-error {% endif %}">
+                                        {{ form_widget(form.username, { 'attr': {'placeholder': 'username', 'class':'form-control'} }) }}
+                                        {{ form_errors(form.username) }}
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
-                                    {{ form_widget(form.email, { 'attr': {'placeholder': 'email', 'class':'form-control'} } ) }}
-                                    {% if form_errors(form.email) %}
-                                        <div class="alert alert-danger">{{ form_errors(form.email) }}</div>
-                                    {% endif %}
+                                     <div class="{% if(form_errors(form.email)) %} has-error {% endif %}">
+                                        {{ form_widget(form.email, { 'attr': {'placeholder': 'email', 'class':'form-control'} }) }}
+                                        {{ form_errors(form.email) }}
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}

@@ -14,16 +14,16 @@
                 <div class="row">
                     {{ form_start(form) }}
                     <div class="col-md-8">
-                        {{ form_widget(form.name, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
-                        {% if form_errors(form.name) %}
-                            <div class="alert alert-danger">{{ form_errors(form.name) }}</div>
-                        {% endif %}
+                        <div class="{% if(form_errors(form.name)) %} has-error {% endif %}">
+                            {{ form_widget(form.name, { 'attr': {'placeholder': 'nazwa BiPu', 'class':'form-control'} }) }}
+                            {{ form_errors(form.name) }}
+                        </div>
                     </div>
                     <div class="col-md-2">
-                        {{ form_widget(form.url, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
-                        {% if form_errors(form.url) %}
-                            <div class="alert alert-danger">{{ form_errors(form.url) }}</div>
-                        {% endif %}
+                          <div class="{% if(form_errors(form.url)) %} has-error {% endif %}">
+                            {{ form_widget(form.url, { 'attr': {'placeholder': 'url', 'class':'form-control'} }) }}
+                            {{ form_errors(form.url) }}
+                        </div>
                     </div>
                     <div class="col-md-2">
                         {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}

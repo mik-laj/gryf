@@ -34,48 +34,48 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6">
-                                            {{ form_widget(form.email, { 'attr': {'placeholder': 'email', 'class':'form-control'} }) }}
-                                            {% if form_errors(form.email) %}
-                                                <div class="alert alert-danger">{{ form_errors(form.email) }}</div>
-                                            {% endif %}
+                                            <div class="{% if(form_errors(form.email)) %} has-error {% endif %}">
+                                                {{ form_widget(form.email, { 'attr': {'placeholder': 'e-mail', 'class':'form-control'} }) }}
+                                                {{ form_errors(form.email) }}
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            {{ form_widget(form.username, { 'attr': {'placeholder': 'usernaddme', 'class':'form-control'} }) }}
-                                            {% if form_errors(form.username) %}
-                                                <div class="alert alert-danger">{{ form_errors(form.username) }}</div>
-                                            {% endif %}
+                                            <div class="{% if(form_errors(form.username)) %} has-error {% endif %}">
+                                                {{ form_widget(form.username, { 'attr': {'placeholder': 'nazwa użytkownika', 'class':'form-control'} }) }}
+                                                {{ form_errors(form.username) }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6">
-                                            {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'hasło', 'class':'form-control'} }) }}
-                                            {% if form_errors(form.plainPassword.first) %}
-                                                <div class="alert alert-danger">{{ form_errors(form.plainPassword.first) }}</div>
-                                            {% endif %}
+                                               <div class="{% if(form_errors(form.plainPassword.first)) %} has-error {% endif %}">
+                                                 {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'hasło', 'class':'form-control'} }) }}
+                                                 {{ form_errors(form.plainPassword.first) }}
+                                                </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'powtórz hasło', 'class':'form-control'} }) }}
-                                            {% if form_errors(form.plainPassword.second) %}
-                                                <div class="alert alert-danger">{{ form_errors(form.plainPassword.second) }}</div>
-                                            {% endif %}
+                                            <div class="{% if(form_errors(form.plainPassword.second)) %} has-error {% endif %}">
+                                                 {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'powtórz hasło', 'class':'form-control'} }) }}
+                                                 {{ form_errors(form.plainPassword.second) }}
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <div class="col-md-3">
-                                            {{ form_widget(form.bip.url, { 'attr': { 'placeholder': 'url', 'class':'form-control'} }) }}
-                                            {% if form_errors(form.bip.url) %}
-                                                <div class="alert alert-danger">{{ form_errors(form.bip.url) }}</div>
-                                            {% endif %}
+                                            <div class="{% if(form_errors(form.bip.url)) %} has-error {% endif %}">
+                                                 {{ form_widget(form.bip.url, { 'attr': {'placeholder': 'url', 'class':'form-control'} }) }}
+                                                 {{ form_errors(form.bip.url) }}
+                                                </div>
                                         </div>
                                         <div class="col-md-9">
-                                            {{ form_widget(form.bip.name, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
-                                            {% if form_errors(form.bip.name) %}
-                                                <div class="alert alert-danger">{{ form_errors(form.bip.name) }}</div>
-                                            {% endif %}
+                                             <div class="{% if(form_errors(form.bip.name)) %} has-error {% endif %}">
+                                                 {{ form_widget(form.bip.name, { 'attr': {'placeholder': 'nazwa bipu', 'class':'form-control'} }) }}
+                                                 {{ form_errors(form.bip.name) }}
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
