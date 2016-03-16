@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'master/header.html.twig' %}
+    <div class="container">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                Edycja użytkownika
+            </div>
+            <div class="panel-body">
+                {% for m in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success">{{ m }}</div>
+                {% endfor %}
+                <div class="row">
+                    {{ form_start(form) }}
+                    <div class="col-md-5">
+                        {{ form_widget(form.username, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
+                        {% if form_errors(form.username) %}
+                            <div class="alert alert-danger">{{ form_errors(form.username) }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-5">
+                        {{ form_widget(form.email, { 'attr': {'placeholder': 'nazwa BIP', 'class':'form-control'} } ) }}
+                        {% if form_errors(form.email) %}
+                            <div class="alert alert-danger">{{ form_errors(form.email) }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}
+                        {{ form_widget(form._token) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
