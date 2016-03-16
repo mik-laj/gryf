@@ -34,7 +34,7 @@
                             <td width="30%">{{ user.email }}</td>
                             <td width="30%">{{ user.username }}</td>
                             <td class="text-center" width="20%"><a href="{{ path('admin_user_edit', {'user':user.id}) }}"><i class="fa fa-pencil"></i></a></td>
-                            <td class="text-center" width="20%"><a href="#"><i class="fa fa-remove"></i></a></td>
+                            <td class="text-center" width="20%"><a href="{{ path('admin_user_remove', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
                         </tr>
                     {% endfor %}
                 </table>

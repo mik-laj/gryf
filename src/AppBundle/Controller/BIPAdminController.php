@@ -15,7 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-
 class BIPAdminController extends Controller implements AuthenticatedController
 {
     /**
@@ -433,8 +432,12 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
 
+//        $roles[] = 'ROLE_USER';
+
         $user = new User();
         $user->setBip($bip);
+
+
         $form = $this->createFormBuilder($user)
             ->add('username')
             ->add('email')
@@ -447,6 +450,8 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->getForm();
         $form->handleRequest($request);
         if($form->isValid()){
+            $user->addRole('ROLE_USER');
+            $user->setEnabled(TRUE);
             $em->persist($user);
             $em->flush();
             $this->addFlash('notice', "Pomyślnie dodano użytkownika.");
@@ -486,5 +491,20 @@ class BIPAdminController extends Controller implements AuthenticatedController
             'articles1'=>$articles1,
             'bip'=>$bip,
         ));
+    }
+
+    /**
+     * @Route("/admin/user/remove/{user}/", name="admin_user_remove")
+     */
+    public function masterRemoveUserAction(Request $request, $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("UserBundle:User")->find($user);
+        $username = $user->getUsername();
+        $em->remove($user);
+        $em->flush();
+        $this->addFlash('notice', "Pomyślnie usunięto użytkownika: ".$username.".");
+
+        return $this->redirectToRoute('admin_users_list');
     }
 }
