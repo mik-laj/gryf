@@ -5,7 +5,7 @@
     <div class="container">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                Edycja BIPu
+                Edycja użytkownika
             </div>
             <div class="panel-body">
                 {% for m in app.session.flashbag.get('notice') %}
@@ -13,17 +13,17 @@
                 {% endfor %}
                 <div class="row">
                     {{ form_start(form) }}
-                    <div class="col-md-8">
-                        <div class="{% if(form_errors(form.name)) %} has-error {% endif %}">
-                            {{ form_widget(form.name, { 'attr': {'placeholder': 'nazwa BiPu', 'class':'form-control'} }) }}
-                            {{ form_errors(form.name) }}
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                          <div class="{% if(form_errors(form.url)) %} has-error {% endif %}">
-                            {{ form_widget(form.url, { 'attr': {'placeholder': 'url', 'class':'form-control'} }) }}
-                            {{ form_errors(form.url) }}
-                        </div>
+                    <div class="col-md-5">
+                            <div class="{% if(form_errors(form.username)) %} has-error {% endif %}">
+                                {{ form_widget(form.username, { 'attr': {'placeholder': 'nazwa BiPu', 'class':'form-control'} }) }}
+                                {{ form_errors(form.username) }}
+                            </div>
+                    </div>  
+                    <div class="col-md-5" >
+                            <div class="{% if(form_errors(form.email)) %} has-error {% endif %}">
+                                {{ form_widget(form.email, { 'attr': {'placeholder': 'email', 'class':'form-control'} }) }}
+                                {{ form_errors(form.email) }}
+                            </div>
                     </div>
                     <div class="col-md-2">
                         {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}

@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -12,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 
 class BIPAdminController extends Controller implements AuthenticatedController
 {
@@ -142,7 +143,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $form->handleRequest($request);
         if($form->isValid()){
             $em->persist($article);
-            $this->addFlash('success', 'Pomyślnie dodano artykuł do menu.');
+            $this->addFlash('notice', 'Pomyślnie dodano artykuł do menu.');
             $em->flush();
 
         }
@@ -380,13 +381,23 @@ class BIPAdminController extends Controller implements AuthenticatedController
     /**
      * @Route("/admin/users/", name="admin_users_list")
      */
-    public function adminUsersListAction()
+    public function adminUsersListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
 //        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
-        $users = $em->getRepository("UserBundle:User")->findByBip($bip);
+        $users = $em->getRepository("UserBundle:User");
+        $qb = $users->createQueryBuilder('u');
+        $qb->where('u.bip=:bip')->setParameter('bip', $bip);
+        $query = $qb->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('user/view_users.html.twig', array(
             'bip'=>$bip,
             'users'=>$users,
@@ -431,13 +442,31 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
 
+//        $roles[] = 'ROLE_USER';
+
         $user = new User();
         $user->setBip($bip);
+
+
         $form = $this->createFormBuilder($user)
             ->add('username')
             ->add('email')
-            ->add('plainPassword')
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('save', SubmitType::class)
             ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $user->addRole('ROLE_USER');
+            $user->setEnabled(TRUE);
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('notice', "Pomyślnie dodano użytkownika.");
+            return $this->redirectToRoute('admin_users_list');
+        }
 
         return $this->render('user/add_user.html.twig', array(
             'bip'=>$bip,
@@ -472,5 +501,20 @@ class BIPAdminController extends Controller implements AuthenticatedController
             'articles1'=>$articles1,
             'bip'=>$bip,
         ));
+    }
+
+    /**
+     * @Route("/admin/user/remove/{user}/", name="admin_user_remove")
+     */
+    public function masterRemoveUserAction(Request $request, $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("UserBundle:User")->find($user);
+        $username = $user->getUsername();
+        $em->remove($user);
+        $em->flush();
+        $this->addFlash('notice', "Pomyślnie usunięto użytkownika: ".$username.".");
+
+        return $this->redirectToRoute('admin_users_list');
     }
 }

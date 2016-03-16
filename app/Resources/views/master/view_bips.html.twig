@@ -5,7 +5,7 @@
     <div class="container">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                Lista BIPów
+                Lista BIPów (<b>{{ bips.getTotalItemCount }}</b>)
             </div>
             <div class="panel-body">
                 {% for m in app.session.flashbag.get('notice') %}
@@ -13,8 +13,8 @@
                 {% endfor %}
                 <table class="table table-hover table-stripepd table-condensed">
                     <tr>
-                        <th width="50%">{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
-                        <th width="30%">{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
+                        <th width="50%" {% if bips.isSorted('bip.name') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
+                        <th width="30%" {% if bips.isSorted('bip.url') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
                         <th class="text-center" width="10%">Edytuj</th>
                         <th class="text-center" width="10%">Usuń</th>
                     </tr>

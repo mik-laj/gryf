@@ -30,7 +30,7 @@ class HeadAdminController extends Controller
         $bips = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            5
+            10
         );
         return $this->render('master/view_bips.html.twig', array(
             'bips'=>$bips,
@@ -85,9 +85,45 @@ class HeadAdminController extends Controller
     public function masterUserListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository("UserBundle:User")->findAll();
+        $users = $em->getRepository("UserBundle:User");
+        $qb = $users->createQueryBuilder('user');
+        $query = $qb->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render("master/view_users.html.twig", array(
             'users'=>$users,
+        ));
+    }
+
+    /**
+     * @Route("/master/edit/user/{user}/", name="master_edit_user")
+     */
+    public function masterUserEditAction(Request $request, $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("UserBundle:User")->find($user);
+
+        $form = $this->createFormBuilder($user)
+            ->add('username')
+            ->add('email')
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano dane użytkownika.");
+            $em->flush();
+            return $this->redirectToRoute('master_user_list');
+        }
+
+        return $this->render('master/edit_user.html.twig', array(
+            'user'=>$user,
+            'form'=>$form->createView(),
         ));
     }
 
