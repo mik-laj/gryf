@@ -381,13 +381,23 @@ class BIPAdminController extends Controller implements AuthenticatedController
     /**
      * @Route("/admin/users/", name="admin_users_list")
      */
-    public function adminUsersListAction()
+    public function adminUsersListAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
 //        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
-        $users = $em->getRepository("UserBundle:User")->findByBip($bip);
+        $users = $em->getRepository("UserBundle:User");
+        $qb = $users->createQueryBuilder('u');
+        $qb->where('u.bip=:bip')->setParameter('bip', $bip);
+        $query = $qb->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            2
+        );
         return $this->render('user/view_users.html.twig', array(
             'bip'=>$bip,
             'users'=>$users,
