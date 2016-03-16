@@ -8,7 +8,7 @@
     {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
     {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
 {#</div>#}
-    <div class="container index-container">
+    <div class="container index-container" style="z-index: 1;">
       <div class="index-container">
         <div class="row">
             <div class="col-md-3">
@@ -17,7 +17,7 @@
             <div class="col-md-9">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                        Twoje dane
+                        
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -25,7 +25,7 @@
 
                             </div>
                             <div class="col-md-5">
-                                <a class="btn btn-danger btn-block" href="{{ path('admin_edit_dane', {'bip':bip.id}) }}">Edycja danych</a>
+
                             </div>
                         </div>
                     </div>
