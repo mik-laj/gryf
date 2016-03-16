@@ -1,9 +1,9 @@
 a {
   color: #331A1A;
-  -webkit-transition: 200ms;
-  -moz-transition: 200ms;
-  -o-transition: 200ms;
-  transition: 200ms;  
+  -webkit-transition: 100ms;
+  -moz-transition: 100ms;
+  -o-transition: 100ms;
+  transition: 100ms;  
 }
 .navbar-brand-name > {
   display: inline-block;
@@ -45,7 +45,7 @@ a:focus {
   -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
-  overflow: hidden;
+  overflow: visible;
 }
 .navbar-default .first a {
   border-radius: 0 0 0 5px;
@@ -57,13 +57,19 @@ a:focus {
   height: 78px;
 }
 .dropdown{
-  z-index: 99999999999999999999999999999999999999;
+  z-index: 999999999;
 }
 
 .navbar-default .navbar-nav > li {
   margin-left: 1px;
 }
-.navbar-default .navbar-nav > li > a {
+.dropdown .dropdown-menu > li > a{
+  padding: 20px 15px;
+  font-size: 15px;
+  line-height: 16px;
+  color: #E0B2B2;
+}
+.navbar-default .navbar-nav > li > a{
   padding: 30px 25px;
   font-size: 17px;
   line-height: 18px;
@@ -75,7 +81,15 @@ a:focus {
 .navbar-default .navbar-nav > li:hover > a,
 .navbar-default .navbar-nav > li:focus > a,
 .navbar-default .navbar-nav > li:hover > a:focus,
-.navbar-default .navbar-nav > li:focus > a:focus {
+.navbar-default .navbar-nav > li:focus > a:focus,
+.dropdown .dropdown-menu > li:hover > a,
+.dropdown .dropdown-menu > li:focus > a,
+.dropdown .dropdown-menu > li:hover > a:focus,
+.dropdown .dropdown-menu > li:focus > a:focus {
+  -webkit-transition: 100ms;
+  -moz-transition: 100ms;
+  -o-transition: 100ms;
+  transition: 100ms;  
   background-color: #E0B2B2;
   color: #fff;
 }

@@ -26,13 +26,14 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="dLabel"><i class="fa fa-arrow-down"></i>{{bip.name}}</a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="{{ path('admin_edit_dane', {'bip':bip.id}) }}">Edytuj dane</a></li>
+                            <li><a href="{{ path('admin_users_list', {'bip':bip.id}) }}">Lista użytkowników</a></li>
                         </ul>
                     </li>   
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-arrow-down"></i>Zarządzaj treścią</a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('admin_view_art', {'bip':bip.id}) }}">Artykuły</a></li>
-                            <li><a href="{{ path('admin_add_menu', {'bip':bip.id}) }}">Menu</a></li>
+                            <li><a href="{{ path('admin_view_art', {'bip':bip.id}) }}">Przegląd artykułów</a></li>
+                            <li><a href="{{ path('admin_add_menu', {'bip':bip.id}) }}">Wygląd menu</a></li>
                         </ul>
                     </li>
                     <li>
