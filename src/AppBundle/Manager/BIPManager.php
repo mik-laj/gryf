@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use AppBundle\Exception\BIPNotFoundException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class BIPManager
@@ -16,11 +17,14 @@ class BIPManager
 
     private $em;
 
-    public function __construct($router, EntityManager $entityManager)
+    private $user;
+
+    public function __construct($router, EntityManager $entityManager, TokenStorage $token)
     {
         $this->router = $router;
         $this->homepage = 'homepage';
         $this->em = $entityManager;
+
     }
 
     public function getCurrentBIP(){
@@ -46,10 +50,10 @@ class BIPManager
         $em = $this->em;
         $bip_admins = $em->getRepository('UserBundle:User')->findByBip($bip);
 
-        if(!in_array($user_trying, $bip_admins)) {
-            return false;
+        if(in_array($user_trying, $bip_admins)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public function setCurrentBIP($currentBIP){
