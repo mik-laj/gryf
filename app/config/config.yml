@@ -77,3 +77,6 @@ fos_user:
     registration:
             form:
                 type: AppBundle\Form\Type\UserType
+knp_paginator:
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template

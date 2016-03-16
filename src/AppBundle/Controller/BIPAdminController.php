@@ -396,7 +396,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $users = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            2
+            10
         );
         return $this->render('user/view_users.html.twig', array(
             'bip'=>$bip,

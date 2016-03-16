@@ -24,8 +24,8 @@
                 {% endfor %}
                 <table class="table table-hover table-stripepd table-condensed">
                     <tr>
-                        <th width="30%">{{ knp_pagination_sortable(users, 'email', 'u.email') }}</th>
-                        <th width="30%">{{ knp_pagination_sortable(users, 'login', 'u.username') }}</th>
+                        <th width="30%" {% if users.isSorted('u.email') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(users, 'email', 'u.email') }}</th>
+                        <th width="30%" {% if users.isSorted('u.username') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(users, 'login', 'u.username') }}</th>
                         <th class="text-center" width="20%">Edytuj</th>
                         <th class="text-center" width="20%">Usuń</th>
                     </tr>
