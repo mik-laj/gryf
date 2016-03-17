@@ -1,9 +1,9 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
 {% endblock %}
-<div id="header" role="banner">
+<header id="header" role="banner">
         <div id="navbar" class="navbar navbar-default">
-            {# <div class="navbar-header"> #}
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -13,18 +13,17 @@
                 <div class="navbar-brand" style="margin-top:-1em">
                 		<a class="navbar-brand" href="{{ path('bip', {'bip':bip.id}) }}">
                 			<div class="navbar-brand-name">
-								<img style="max-width: 60px;margin-top:-0.4em;"
-                				src="{{ asset('img/bip.png') }}" classs="img-responsible"/>	
+								<img src="{{ asset('img/bip.png') }}" class="img-responsive img-head">	
                 				Biuletyn Informacji Publicznej
                 			</div>
                 		</a>
                 </div>
-            {# </div> #}
+            </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="dLabel"><i class="fa fa-arrow-down"></i>{{bip.name}}</a>
-                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-arrow-down"></i>{{bip.name}}</a>
+                        <ul class="dropdown-menu">
                             <li><a href="{{ path('admin_edit_dane', {'bip':bip.id}) }}">Edytuj dane</a></li>
                             <li><a href="{{ path('admin_users_list', {'bip':bip.id}) }}">Lista użytkowników</a></li>
                         </ul>
@@ -41,7 +40,7 @@
                 </ul>
             </div>
         </div>
-</div>
+</header>
 {% block javascript %}
 
 {% endblock %}

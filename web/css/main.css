@@ -11,7 +11,7 @@ body, .index-container {
 
 .panel-heading, .panel-default, .panel{
 	border: 0px;
-	background-color: none;
+	background-color: white;
 }
 
 /*.list-group > .list-group-item > a:hover{

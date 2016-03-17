@@ -5,16 +5,23 @@ a {
   -o-transition: 100ms;
   transition: 100ms;  
 }
-.navbar-brand-name > {
+.navbar-brand-name {
   display: inline-block;
   float: left;
   margin:0;
+  margin-top: -3rem;
   padding:30px 25px;
+  font-size: 2.5vh;
+  font-weight: 400;
+  width: 20em;
 }
-.navbar-brand-name > img {
+.img-head{
   display: inline-block;
   float: left;
-  margin-right: 1.2em
+  margin-right: 1.2em;
+  height: 3.5em;
+  width: auto;
+  margin-top:-0.4em;
 }
 a:hover,
 a:focus {
@@ -55,9 +62,6 @@ a:focus {
   margin-left: 20px;
   width: 200px;
   height: 78px;
-}
-.dropdown{
-  z-index: 999999999;
 }
 
 .navbar-default .navbar-nav > li {
