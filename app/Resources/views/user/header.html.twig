@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="navbar-brand" style="margin-top:-1em">
-                		<a class="navbar-brand" href="{{ path('bip', {'bip':bip.id}) }}">
+                		<a class="navbar-brand" href="{{ path('bip') }}">
                 			<div class="navbar-brand-name">
 								<img src="{{ asset('img/bip.png') }}" class="img-responsive img-head fa-spin">	
                 				<span>Biuletyn Informacji Publicznej</span>
@@ -24,15 +24,15 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-arrow-down"></i>{{bip.name}}</a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('admin_edit_dane', {'bip':bip.id}) }}">Edytuj dane</a></li>
-                            <li><a href="{{ path('admin_users_list', {'bip':bip.id}) }}">Lista użytkowników</a></li>
+                            <li><a href="{{ path('admin_edit_dane') }}">Edytuj dane</a></li>
+                            <li><a href="{{ path('admin_users_list') }}">Lista użytkowników</a></li>
                         </ul>
                     </li>   
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-arrow-down"></i>Zarządzaj treścią</a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ path('admin_view_art', {'bip':bip.id}) }}">Przegląd artykułów</a></li>
-                            <li><a href="{{ path('admin_add_menu', {'bip':bip.id}) }}">Wygląd menu</a></li>
+                            <li><a href="{{ path('admin_view_art') }}">Przegląd artykułów</a></li>
+                            <li><a href="{{ path('admin_add_menu') }}">Wygląd menu</a></li>
                         </ul>
                     </li>
                     <li>

@@ -2,10 +2,10 @@
 <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
 {% endblock %}
 <header id="header" role="banner">
-        <div id="navbar" class="navbar navbar-default">
-            <div class="navbar-header">
+        <div id="navbar" class="navbar navbar-default row">
+            <div class="navbar-header col-xs-4 navbar-left">
                 <div class="navbar-brand" style="margin-top:-1em">
-                        <a class="navbar-brand" href="{{ path('bip', {'bip':bip.id}) }}">
+                        <a class="navbar-brand" href="{{ path('bip') }}">
                             <div class="navbar-brand-name">
                                 <img src="{{ asset('img/bip.png') }}" class="img-responsive img-head">  
                                 Biuletyn Informacji Publicznej
@@ -13,11 +13,14 @@
                         </a>
                 </div>
             </div>
-            <div class="collapse navbar-collapse">
+            <div class="col-xs-4 text-center">
+                TU BEDZIE LOGO XD
+            </div>
+            <div class="collapse navbar-collapse col-xs-4 navbar-right">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="#">{{bip.name}}</a></li>
                     {% if is_granted('ROLE_BIPMOD') %}
-                    <li><a href="{{ path('admin_view_profile', {'bip':bip.id}) }}">Admin Panel</a></li>
+                    <li><a href="{{ path('admin_view_profile') }}">Admin Panel</a></li>
                     {% endif %}
                 </ul>
             </div>

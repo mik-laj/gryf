@@ -24,7 +24,7 @@
                                         <div class="panel-body">
                                             <ul class="list-group">
                                             {% for sec in sections %}
-                                                <a class="list-group-item" href="{{ path('admin_view_article', {'bip':bip.id, 'art':sec.id}) }}">{{ sec.title }}</a>
+                                                <a class="list-group-item" href="{{ path('admin_view_article', 'art':sec.id}) }}">{{ sec.title }}</a>
                                             {% endfor %}
                                             </ul>
                                         </div>

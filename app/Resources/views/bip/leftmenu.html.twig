@@ -14,7 +14,7 @@
                     <li role="presentation" class="disabled"><a>{{pos.name}}</a></li>
                 {% elseif pos.articles|length == 1 %}
                     {% for art in pos.articles %}
-                    <li role="presentation" class="po"><a href="{{ path('art_view', {"art":art.id, "bip":pos.bip.id}) }}">{{pos.name}}</a></li>  
+                    <li role="presentation" class="po"><a href="{{ path('art_view', {"art":art.id}) }}">{{pos.name}}</a></li>  
                     {% endfor %}
 
                 {% elseif pos.articles|length > 1 %}
@@ -29,7 +29,7 @@
                                 <ul class="list-group nav nav-stacked nav-pills">
                                 {% for art in pos.articles %}
                                     <li class="list-group-item">
-                                        <a href="{{ path('art_view', {"art":art.id, "bip":pos.bip.id}) }}">{{art.title}}</a>
+                                        <a href="{{ path('art_view', {"art":art.id}) }}">{{art.title}}</a>
                                     </li>
                                 {% endfor %}
                                 </ul>
