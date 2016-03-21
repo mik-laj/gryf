@@ -3,26 +3,32 @@
 {% endblock %}
 <header id="header" role="banner">
         <div id="navbar" class="navbar navbar-default row">
-            <div class="navbar-header col-xs-4 navbar-left">
+            <div class="navbar-header col-md-4">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <div class="navbar-brand" style="margin-top:-1em">
                         <a class="navbar-brand" href="{{ path('bip') }}">
                             <div class="navbar-brand-name">
-                                <img src="{{ asset('img/bip.png') }}" class="img-responsive img-head">  
-                                Biuletyn Informacji Publicznej
+                                <img src="{{ asset('img/bip.png') }}" class="img-responsive img-head fa-spin">  
+                                <span>Biuletyn Informacji Publicznej</span>
                             </div>
                         </a>
                 </div>
             </div>
-            <div class="col-xs-4 text-center">
+            <div class="col-md-4 text-center">
                 <img class="logo" src="{{ asset( bip.path ) }}"/>
             </div>
-            <div class="collapse navbar-collapse col-xs-4 navbar-right">
+            <div class="collapse navbar-collapse col-md-4 navbar-right">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="#">{{bip.name}}</a></li>
                     {% if is_granted('ROLE_BIPMOD') %}
                     <li><a href="{{ path('admin_view_profile') }}">Admin Panel</a></li>
                     {% else %}
-                    <li><a href="{{ path('fos_user_security_login') }}">( ͡° ͜ʖ ͡°)</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-sign-in"></i></a></li>
                     {% endif %}
                 </ul>
             </div>

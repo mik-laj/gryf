@@ -5,6 +5,9 @@ a {
   -o-transition: 100ms;
   transition: 100ms;  
 }
+.navbar-brand{
+  width: 40vw;
+}
 .navbar-brand-name {
   display: inline-block;
   float: left;
