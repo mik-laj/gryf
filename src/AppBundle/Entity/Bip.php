@@ -115,10 +115,30 @@ class Bip
     /**
      * Get logo
      *
-     * @return string 
+     * @return string
      */
     public function getLogo()
     {
         return $this->logo;
     }
+//    /**
+//     * Sets file.
+//     *
+//     * @param UploadedFile $logo
+//     */
+//    public function setLogo(UploadedFile $logo = null)
+//    {
+//        $this->logo = $logo;
+//    }
+//
+//    /**
+//     * Get file.
+//     *
+//     * @return UploadedFile
+//     */
+//    public function getLogo()
+//    {
+//        return $this->logo;
+//    }
+
 }
