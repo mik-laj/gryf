@@ -35,7 +35,7 @@ class Bip
     protected $name;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(maxSize="6000000")
      */
     protected $logo;
 
