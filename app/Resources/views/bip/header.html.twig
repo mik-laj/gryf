@@ -21,6 +21,8 @@
                     <li class="active"><a href="#">{{bip.name}}</a></li>
                     {% if is_granted('ROLE_BIPMOD') %}
                     <li><a href="{{ path('admin_view_profile') }}">Admin Panel</a></li>
+                    {% else %}
+                    <li><a href="{{ path('fos_user_security_login') }}">( ͡° ͜ʖ ͡°)</a></li>
                     {% endif %}
                 </ul>
             </div>
