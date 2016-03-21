@@ -5,10 +5,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="bips")
+ * @ORM\HasLifecycleCallbacks
  */
 class Bip
 {
@@ -34,13 +38,44 @@ class Bip
      */
     protected $name;
 
+
     /**
      * @Assert\File(maxSize="6000000")
      */
-    protected $logo;
+    public $file;
 
-    public function __construct()
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    private $temp;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
+
+    public function getAbsolutePath()
     {
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/documents';
     }
 
     /**
@@ -99,26 +134,25 @@ class Bip
         return $this->name;
     }
 
-    /**
-     * Set logo
-     *
-     * @param string $logo
-     * @return Bip
-     */
-    public function setLogo($logo)
+    public function upload()
     {
-        $this->logo = $logo;
+        // zmienna file może być pusta jeśli pole nie jest wymagane
+        if (null === $this->file) {
+            return;
+        }
 
-        return $this;
+        // używamy oryginalnej nazwy pliku ale nie powinieneś tego robić
+        // aby zabezpieczyć się przed ewentualnymi problemami w bezpieczeństwie
+
+        // metoda move jako atrybuty przyjmuje ścieżkę docelową gdzie trafi przenoszony plik
+        // oraz ścieżkę z której ma przenieś plik
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+
+        // ustaw zmienną patch ścieżką do zapisanego pliku
+        $this->setPath($this->file->getClientOriginalName());
+
+        // wyczyść zmienną file ponieważ już jej nie potrzebujemy
+        $this->file = null;
     }
 
-    /**
-     * Get logo
-     *
-     * @return string 
-     */
-    public function getLogo()
-    {
-        return $this->logo;
-    }
 }

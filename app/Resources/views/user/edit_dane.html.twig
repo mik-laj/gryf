@@ -20,17 +20,23 @@
                             {% endfor %}
                             <div class="row">
                                 {{ form_start(form, { 'attr': {'novalidate': 'novalidate'}}) }}
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                       <div class="{% if(form_errors(form.name)) %} has-error {% endif %}">
                                         {{ form_widget(form.name, { 'attr': {'placeholder': 'nazwa BiPu', 'class':'form-control'} }) }}
                                         {{ form_errors(form.name) }}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
+                                    {{ form_widget(form.file) }}
+                                </div>
+                                <div class="col-md-2">
                                     {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}
                                     {{ form_widget(form._token) }}
                                 </div>
                                 {{ form_end(form) }}
+                            </div>
+                            <div>
+                            <img src="{{ asset( bip.path ) }}" />
                             </div>
                         </div>
                     </div>

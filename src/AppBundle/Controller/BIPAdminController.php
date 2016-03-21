@@ -348,11 +348,13 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
         $form = $this->createFormBuilder($bip_dane)
             ->add('name')
+            ->add('file')
             ->add('save', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
         if($form->isValid()){
+            $bip_dane->upload();
             $this->addFlash('notice', "Pomyślnie zaktualizowano dane.");
             $em->flush();
         }
@@ -521,11 +523,18 @@ class BIPAdminController extends Controller implements AuthenticatedController
     /**
      * @Route("/admin/logo/manage/", name="admin_manage_logo")
      */
-    public function adminManageLogoAction()
+    public function adminManageLogoAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
+
+        $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
+        $form = $this->createFormBuilder($bip_dane)
+            ->add('name')
+            ->add('logo')
+            ->add('save', SubmitType::class)
+            ->getForm();
 
         return $this->render("/user/manage_logo.html.twig", array(
             'bip'=>$bip,
