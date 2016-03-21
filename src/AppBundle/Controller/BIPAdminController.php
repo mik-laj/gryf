@@ -506,7 +506,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
     /**
      * @Route("/admin/user/remove/{user}/", name="admin_user_remove")
      */
-    public function masterRemoveUserAction(Request $request, $user)
+    public function adminRemoveUserAction(Request $request, $user)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository("UserBundle:User")->find($user);
@@ -516,5 +516,19 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $this->addFlash('notice', "Pomyślnie usunięto użytkownika: ".$username.".");
 
         return $this->redirectToRoute('admin_users_list');
+    }
+
+    /**
+     * @Route("/admin/logo/manage/", name="admin_manage_logo")
+     */
+    public function adminManageLogoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+
+        return $this->render("/user/manage_logo.html.twig", array(
+            'bip'=>$bip,
+        ));
     }
 }
