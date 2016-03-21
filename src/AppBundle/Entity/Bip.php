@@ -81,7 +81,7 @@ class Bip
         return $this->path;
     }
 
-    
+
 
     public function getAbsolutePath()
     {
@@ -173,10 +173,10 @@ class Bip
 
         // metoda move jako atrybuty przyjmuje ścieżkę docelową gdzie trafi przenoszony plik
         // oraz ścieżkę z której ma przenieś plik
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
-
+        $ext1 = $this->file->move($this->getUploadRootDir(), $this->id.'.'.$this->file->guessExtension());
+        $ext = $ext1->guessExtension();
         // ustaw zmienną patch ścieżką do zapisanego pliku
-        $this->setPath('/uploads/'.$this->file->getClientOriginalName());
+        $this->setPath('/uploads/'.$this->id.'.'.$ext);
 
         // wyczyść zmienną file ponieważ już jej nie potrzebujemy
         $this->file = null;
