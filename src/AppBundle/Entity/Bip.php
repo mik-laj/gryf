@@ -57,6 +57,7 @@ class Bip
     public $path;
 
 
+
     /**
      * Set path
      *
@@ -79,6 +80,8 @@ class Bip
     {
         return $this->path;
     }
+
+    
 
     public function getAbsolutePath()
     {
