@@ -214,6 +214,8 @@ class BIPModController extends Controller
         $art = $em->getRepository("AppBundle:Article")->find($art);
         $article = new Article();
         $article->setSection($art);
+        $article->setCreated(new \DateTime(date('Y-m-d H:i:s')));
+        $article->setAuthor($this->getUser());
         $form = $this->createFormBuilder($article)
             ->add('title')
             ->add('content', TextareaType::class)
