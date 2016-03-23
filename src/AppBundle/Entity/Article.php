@@ -190,7 +190,7 @@ class Article
      * @param \AppBundle\Entity\User $author
      * @return Article
      */
-    public function setAuthor(\AppBundle\Entity\User $author = null)
+    public function setAuthor($author)
     {
         $this->author = $author;
 

@@ -127,7 +127,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
 
         $article = new Article();
         $article->setCreated(new \DateTime(date('Y-m-d H:i:s')));
-        $article->setAuthor($this->getUser()->getId());
+        $article->setAuthor($this->getUser());
         $form = $this->createFormBuilder($article)
             ->add('title')
             ->add('menu', EntityType::class, array(
