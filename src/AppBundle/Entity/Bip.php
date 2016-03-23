@@ -56,6 +56,11 @@ class Bip
      */
     public $path;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $public;
+
 
 
     /**
@@ -185,4 +190,27 @@ class Bip
 
 
 
+
+    /**
+     * Set public
+     *
+     * @param integer $public
+     * @return Bip
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+
+        return $this;
+    }
+
+    /**
+     * Get public
+     *
+     * @return integer 
+     */
+    public function getPublic()
+    {
+        return $this->public;
+    }
 }
