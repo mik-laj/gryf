@@ -46,6 +46,13 @@
                                 </script>
                                 {{ form_end(form) }}
 
+                                {{ form_start(form_file) }}
+                                {{ form_widget(form_file) }}
+                                <input type="submit" />
+                                {{ form_errors(form_file) }}
+                                {{ form_end(form_file) }}
+
+
                             </div>
                         </div>
                     </div>
