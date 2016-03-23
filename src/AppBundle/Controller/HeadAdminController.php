@@ -111,6 +111,8 @@ class HeadAdminController extends Controller
         $form = $this->createFormBuilder($user)
             ->add('username')
             ->add('email')
+            ->add('nazwisko')
+            ->add('imie')
             ->add('save', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);

@@ -408,6 +408,8 @@ class BIPAdminController extends Controller implements AuthenticatedController
 
         $form = $this->createFormBuilder($user)
             ->add('username')
+            ->add('nazwisko')
+            ->add('imie')
             ->add('email')
             ->add('save', SubmitType::class)
             ->getForm();
@@ -443,6 +445,8 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $form = $this->createFormBuilder($user)
             ->add('username')
             ->add('email')
+            ->add('nazwisko')
+            ->add('imie')
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
