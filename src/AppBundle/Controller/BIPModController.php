@@ -34,20 +34,6 @@ class BIPModController extends Controller
             return $e->redirectResponse;
         }
 
-        $file = new File();
-        $form_file = $this->createFormBuilder($file)
-            ->add('name')
-            ->add('file')
-            ->getForm();
-
-        $form_file->handleRequest($request);
-
-        if ($form_file->isValid()) {
-            $file->upload();
-            $em->persist($file);
-            $em->flush();
-        }
-
         $article = new Article();
         $form = $this->createFormBuilder($article)
             ->add('title')
@@ -73,7 +59,6 @@ class BIPModController extends Controller
 
         return $this->render('user/add_article.html.twig', array(
             'form'=>$form->createView(),
-            'form_file'=>$form_file->createView(),
             'bip' => $bip,
         ));
     }
@@ -147,7 +132,10 @@ class BIPModController extends Controller
             $em->flush();
         }
 
-        return $this->render('user/edit_art.html.twig', array(
+
+
+
+        return $this->render('user/edit_art_menu.html.twig', array(
             'bip' => $bip,
             'form' => $form->createView(),
         ));

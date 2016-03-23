@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\File;
 use AppBundle\Entity\Submenu;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -163,9 +164,25 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $em->flush();
         }
 
+        $file = new File();
+        $form_file = $this->createFormBuilder($file)
+            ->add('name')
+            ->add('file')
+            ->getForm();
+
+        $form_file->handleRequest($request);
+
+        if ($form_file->isValid()) {
+            $file->setArticle($article);
+            $file->upload();
+            $em->persist($file);
+            $em->flush();
+        }
+
         return $this->render('user/edit_art_menu.html.twig', array(
             'bip'=>$bip,
             'form'=>$form->createView(),
+            'form_file'=>$form_file->createView(),
         ));
     }
 
