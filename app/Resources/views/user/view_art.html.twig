@@ -34,6 +34,16 @@
                         <div class="panel-footer">
                             {{ article.author }}
                             {{ article.created|date('Y-m-d H:i:s') }}
+                            {% if logs %}
+                                <ul class="list-group">
+                                    <li class="list-group-item"><u>Historia modfikacji</u></li>
+                                    {% for log in logs %}
+                                        <li class="list-group-item">
+                                            {{ log.edited|date('Y-m-d H:i:s') }} - {{ log.editor.username }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

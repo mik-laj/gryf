@@ -4,7 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Bip;
 use AppBundle\Entity\Submenu;
-
+use AppBundle\Entity\Log;
 use AppBundle\Exception\BIPNotFoundException;
 use AppBundle\Exception\BIPNotFoundExceptionInterface;
 use AppBundle\Form\Type\UserType;
@@ -102,11 +102,16 @@ class BIPController extends Controller
         $sections = $qb
             ->innerJoin('a.section', 's')
             ->where('s.id='.$art)->getQuery()->getResult();
-
+        $log = $em->getRepository("AppBundle:Log");
+        $qb = $log->createQueryBuilder('a');
+        $logs = $qb
+            ->innerJoin('a.article', 'i')
+            ->where('i.id='.$art)->getQuery()->getResult();
         return $this->render('bip/article.html.twig', array(
             'bip'=>$bip,
             'article'=>$article,
             'sections'=>$sections,
+            'logs'=>$logs,
         ));
     }
 
