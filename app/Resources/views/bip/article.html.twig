@@ -36,7 +36,7 @@
                             {% endif %}
                         </div>
                         <div class="panel-footer">
-                            {{ article.author }}
+                            {{ article.author.nazwisko }} {{ article.author.imie }}
                             {{ article.created|date('Y-m-d H:i:s') }}
                             {% if logs %}
                                 <ul class="list-group">
@@ -46,7 +46,7 @@
                                         <ul class="list-group">
                                     {% for log in logs %}
                                         <li class="list-group-item">
-                                            {{ log.edited|date('Y-m-d H:i:s') }} - {{ log.editor.username }}
+                                            {{ log.edited|date('Y-m-d H:i:s') }} - {{ log.editor.nazwisko }} {{ log.editor.imie }}
                                         </li>
                                     {% endfor %}
                                         </ul>
