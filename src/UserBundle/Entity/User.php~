@@ -76,4 +76,50 @@ class User extends BaseUser
     {
         return $this->bip;
     }
+
+    /**
+     * Set nazwisko
+     *
+     * @param string $nazwisko
+     * @return User
+     */
+    public function setNazwisko($nazwisko)
+    {
+        $this->nazwisko = $nazwisko;
+
+        return $this;
+    }
+
+    /**
+     * Get nazwisko
+     *
+     * @return string 
+     */
+    public function getNazwisko()
+    {
+        return $this->nazwisko;
+    }
+
+    /**
+     * Set imie
+     *
+     * @param string $imie
+     * @return User
+     */
+    public function setImie($imie)
+    {
+        $this->imie = $imie;
+
+        return $this;
+    }
+
+    /**
+     * Get imie
+     *
+     * @return string 
+     */
+    public function getImie()
+    {
+        return $this->imie;
+    }
 }
