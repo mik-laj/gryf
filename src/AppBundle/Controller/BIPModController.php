@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\File;
+use AppBundle\Entity\Log;
 use AppBundle\Entity\Submenu;
 use AppBundle\Exception\BIPNotFoundException;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -128,6 +129,11 @@ class BIPModController extends Controller
         }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
+        $log = new Log();
+        $log->setArticle($art);
+        $log->setUser($this->getUser());
+        $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
+
         $form = $this->createFormBuilder($article)
             ->add('title')
             ->add('menu', EntityType::class, array(
@@ -143,6 +149,7 @@ class BIPModController extends Controller
             ->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $em->persist($log);
             $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
             $em->flush();
         }
