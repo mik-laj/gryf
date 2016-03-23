@@ -21,11 +21,11 @@
                         <div class="panel-body">
                             {{ article.content|raw }}
                             {% if sections %}
-                                <div class="panel panel-default">
+                                <div class="panel-default">
                                     <div class="panel-heading">
                                         READ MORE
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="panel panel-body">
                                         <ul class="list-group">
                                             {% for sec in sections %}
                                                 <a class="list-group-item" href="{{ path('admin_view_article', {'art':sec.id}) }}">{{ sec.title }}</a>
@@ -34,6 +34,10 @@
                                     </div>
                                 </div>
                             {% endif %}
+                        </div>
+                        <div class="panel-footer">
+                                {{ article.author }}
+                                {{ article.created|date('Y-m-d H:i:s') }}
                         </div>
                     </div>
                 </div>
