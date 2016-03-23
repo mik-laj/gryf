@@ -24,10 +24,10 @@ class Log
     protected $article;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="editor", referencedColumnName="id")
      */
-    protected $user;
+    protected $editor;
 
     /**
      * @ORM\Column(type="datetime")
@@ -73,7 +73,7 @@ class Log
      * @param \AppBundle\Entity\Article $article
      * @return Log
      */
-    public function setArticle(\AppBundle\Entity\Article $article = null)
+    public function setArticle($article)
     {
         $this->article = $article;
 
@@ -91,25 +91,25 @@ class Log
     }
 
     /**
-     * Set user
+     * Set editor
      *
-     * @param \AppBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $editor
      * @return Log
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setEditor($editor)
     {
-        $this->user = $user;
+        $this->editor = $editor;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get editor
      *
-     * @return \AppBundle\Entity\User 
+     * @return \UserBundle\Entity\User
      */
-    public function getUser()
+    public function getEditor()
     {
-        return $this->user;
+        return $this->editor;
     }
 }

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
+use AppBundle\Entity\Log;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use UserBundle\Entity\User;
@@ -226,6 +227,11 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
+        $log = new Log();
+        $log->setArticle($article);
+        $log->setEditor($this->getUser());
+        $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
+
         $form = $this->createFormBuilder($article)
             ->add('title')
             ->add('menu', EntityType::class, array(
@@ -241,6 +247,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->getForm();
         $form->handleRequest($request);
         if($form->isValid()){
+            $em->persist($log);
             $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
             $em->flush();
         }
@@ -265,6 +272,11 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
+        $log = new Log();
+        $log->setArticle($article);
+        $log->setEditor($this->getUser());
+        $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
+
         $form = $this->createFormBuilder($article)
             ->add('title')
             ->add('section', EntityType::class, array(
@@ -281,6 +293,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->getForm();
         $form->handleRequest($request);
         if($form->isValid()){
+            $em->persist($log);
             $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
             $em->flush();
         }

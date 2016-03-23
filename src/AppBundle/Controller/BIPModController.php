@@ -131,7 +131,7 @@ class BIPModController extends Controller
 
         $log = new Log();
         $log->setArticle($art);
-        $log->setUser($this->getUser());
+        $log->setEditor($this->getUser());
         $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
 
         $form = $this->createFormBuilder($article)
