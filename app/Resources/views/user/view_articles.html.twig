@@ -32,7 +32,7 @@
                                 <td class="col-md-12 ho">
                                     <div class="col-xs-3 lista"><a href="{{ path('admin_view_article', { 'art':art.id}) }}">{{ art.title }}</a></div>
                                     <div class="col-xs-5 lista"><a data-toggle="collapse" href="#{{art.title}}">{{ art.menu.name }} <i class="fa fa-level-down"></i></a></div>
-                                    <div class="col-xs-2 lista text-center"><a href="{{ path('admin_edit_art', { 'art':art.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></div>
+                                    <div class="col-xs-2 lista text-center"><a href="{{ path('admin_edit_art_menu', { 'art':art.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></div>
                                     <div class="col-xs-2 lista text-center"><a href="{{ path('admin_remove_art', { 'art':art.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></div>
                                 </td>
                                 </tr>
@@ -45,7 +45,7 @@
                                             <li class="skis1">
                                                 <div class="col-xs-3 "></div>
                                                 <div class="col-xs-5 "><i class=""></i><a href="{{ path('admin_view_article', { 'art':sec.id}) }}"><i class="fa fa-eye"></i>{{sec.title}}</a></div>
-                                                <div class="col-xs-2  lista text-center"><a href="{{ path('admin_edit_art', { 'art':sec.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></div>
+                                                <div class="col-xs-2  lista text-center"><a href="{{ path('admin_edit_art_section', { 'art':sec.id }) }}"><i class="fa fa-pencil fa-fw"></i></a></div>
                                                 <div class="col-xs-2  lista text-center"><a href="{{ path('admin_remove_art', { 'art':sec.id}) }}"> <i class="fa fa-trash-o fa-lg"></i> </a></div>
                                                 </li>
                                         {% endif %}

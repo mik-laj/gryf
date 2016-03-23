@@ -210,9 +210,9 @@ class BIPAdminController extends Controller implements AuthenticatedController
     }
 
     /**
-     * @Route("/admin/edit/{art}/", name="admin_edit_art")
+     * @Route("/admin/edit/{art}/menu/", name="admin_edit_art_menu")
      */
-    public function adminEditArtAction(Request $request, $art)
+    public function adminEditArtMenuAction(Request $request, $art)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
@@ -242,7 +242,47 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $em->flush();
         }
 
-        return $this->render('user/edit_art.html.twig', array(
+        return $this->render('user/edit_art_menu.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/edit/{art}/section/", name="admin_edit_art_section")
+     */
+    public function adminEditArtSectionAction(Request $request, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('section', EntityType::class, array(
+                'class' => 'AppBundle:Article',
+                'choice_label' => 'title',
+                'query_builder' => function (EntityRepository $er) use ($bip){
+                    return $er->createQueryBuilder('a')
+                        ->innerJoin('a.menu', 'm')
+                        ->where("m.bip= ".$bip->getId());
+                },
+            ))
+            ->add('content', TextareaType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
+            $em->flush();
+        }
+
+        return $this->render('user/edit_art_section.html.twig', array(
             'bip'=>$bip,
             'form'=>$form->createView(),
         ));
