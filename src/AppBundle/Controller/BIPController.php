@@ -97,11 +97,16 @@ class BIPController extends Controller
             return $e->redirectResponse;
         }
         $article = $em->getRepository("AppBundle:Article")->find($art);
-
+        $sec = $em->getRepository("AppBundle:Article");
+        $qb = $sec->createQueryBuilder('a');
+        $sections = $qb
+            ->innerJoin('a.section', 's')
+            ->where('s.id='.$art)->getQuery()->getResult();
 
         return $this->render('bip/article.html.twig', array(
             'bip'=>$bip,
             'article'=>$article,
+            'sections'=>$sections,
         ));
     }
 
