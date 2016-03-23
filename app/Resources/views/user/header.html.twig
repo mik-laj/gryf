@@ -3,14 +3,14 @@
 {% endblock %}
 <header id="header" role="banner">
         <div id="navbar" class="navbar navbar-default">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".wiemwszystko">
+            
+                <button type="button" class="navbar-toggle col-xs-1" data-toggle="collapse" data-target=".wiemwszystko">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <div class="navbar-brand" style="margin-top:-1em">
+                <div class="navbar-brand col-xs-3" style="margin-top:-1em">
                 		<a class="navbar-brand" href="{{ path('bip') }}">
                 			<div class="navbar-brand-name">
 								<img src="{{ asset('img/bip.png') }}" class="img-responsive img-head fa-spin">	
@@ -18,10 +18,11 @@
                 			</div>
                 		</a>
                 </div>
-            <div class=" text-center">
+                
+            <div class=" text-center col-xs-4" style="margin-left: 25px">
                 <img class="logo" src="{{ asset( bip.path ) }}"/>
             </div>
-            <div class="collapse navbar-collapse navbar-right wiemwszystko">
+            <div class="collapse navbar-collapse navbar-right wiemwszystko col-xs-4">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-arrow-down"></i>{{bip.name}}</a>
@@ -41,6 +42,6 @@
                         <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"></i></a></li>
                 </ul>
             </div>
-        </div>
+        
     </div>
 </header>

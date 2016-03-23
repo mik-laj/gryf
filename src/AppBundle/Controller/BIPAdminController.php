@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Article;
 use AppBundle\Entity\File;
 use AppBundle\Entity\Submenu;
+use AppBundle\Entity\Log;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use UserBundle\Entity\User;
@@ -112,6 +113,88 @@ class BIPAdminController extends Controller implements AuthenticatedController
         ));
     }
 
+//    /**
+//<<<<<<< HEAD
+//     * @Route("/admin/add/art/", name="admin_add_art")
+//     */
+//    public function adminAddArtAction(Request $request)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $BIPManager = $this->get('bip_manager');
+//        try {
+//            $bip = $BIPManager->getCurrentBIP();
+//            $BIPManager->checkAdmin($bip, $this->getUser());
+//        }catch(BIPNotFoundException $e){
+//            return $e->redirectResponse;
+//        }
+//
+//        $article = new Article();
+//        $article->setCreated(new \DateTime(date('Y-m-d H:i:s')));
+//        $article->setAuthor($this->getUser());
+//        $form = $this->createFormBuilder($article)
+//            ->add('title')
+//            ->add('menu', EntityType::class, array(
+//                'class' => 'AppBundle:Submenu',
+//                'choice_label' => 'name',
+//                'query_builder' => function (EntityRepository $er) use ($bip){
+//                    return $er->createQueryBuilder('s')
+//                        ->where("s.bip= ".$bip->getId());
+//                },
+//            ))
+//            ->add('content', TextareaType::class)
+//            ->add('save', SubmitType::class)
+//            ->getForm();
+//
+//        $form->handleRequest($request);
+//        if($form->isValid()){
+//            $em->persist($article);
+//            $this->addFlash('notice', 'Pomyślnie dodano artykuł do menu.');
+//            $em->flush();
+//
+//        }
+//
+//        return $this->render('user/add_article.html.twig', array(
+//            'form'=>$form->createView(),
+//            'bip' => $bip,
+//        ));
+//    }
+//
+//    /**
+//     * @Route("/admin/view/art/", name="admin_view_art")
+//     */
+//    public function adminViewArtAction()
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $BIPManager = $this->get('bip_manager');
+//        try {
+//            $bip = $BIPManager->getCurrentBIP();
+//            $BIPManager->checkAdmin($bip, $this->getUser());
+//        }catch(BIPNotFoundException $e){
+//            return $e->redirectResponse;
+//        }
+//        $articles = $em->getRepository("AppBundle:Article");
+//        $qb = $articles->createQueryBuilder('a');
+//        $articles1 = $qb
+//                    ->innerJoin('a.menu', 'm')
+//                    ->innerJoin('m.bip', 'b')
+////                    ->innerJoin('a.section', 's')
+////                    ->innerJoin('s.menu','z')
+////                    ->innerJoin('z.bip', 'y')
+//                    ->where('b.id='.$bip->getId())->getQuery()->getResult();
+//        $qb2 = $articles->createQueryBuilder('s');
+//        $sections = $qb2
+//                    ->innerJoin('s.section', 'x')
+//                    ->innerJoin('x.menu', 'y')
+//                    ->innerJoin('y.bip', 'p')
+//                    ->where('p.id='.$bip->getId())->getQuery()->getResult();
+//
+//        return $this->render('user/view_articles.html.twig', array(
+//            'bip' => $bip,
+//            'articles' => $articles1,
+//            'sections' => $sections,
+//        ));
+//    }
+//
     /**
      * @Route("/admin/", name="admin_view_profile")
      */
@@ -145,6 +228,11 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
+        $log = new Log();
+        $log->setArticle($article);
+        $log->setEditor($this->getUser());
+        $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
+
         $form = $this->createFormBuilder($article)
             ->add('title')
             ->add('menu', EntityType::class, array(
@@ -160,6 +248,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->getForm();
         $form->handleRequest($request);
         if($form->isValid()){
+            $em->persist($log);
             $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
             $em->flush();
         }
@@ -200,6 +289,11 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
+        $log = new Log();
+        $log->setArticle($article);
+        $log->setEditor($this->getUser());
+        $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
+
         $form = $this->createFormBuilder($article)
             ->add('title')
             ->add('section', EntityType::class, array(
@@ -216,6 +310,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->getForm();
         $form->handleRequest($request);
         if($form->isValid()){
+            $em->persist($log);
             $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
             $em->flush();
         }
