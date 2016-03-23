@@ -20,7 +20,20 @@
                         </div>
                         <div class="panel-body">
                             {{ article.content|raw }}
-
+                            {% if sections %}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        READ MORE
+                                    </div>
+                                    <div class="panel-body">
+                                        <ul class="list-group">
+                                            {% for sec in sections %}
+                                                <a class="list-group-item" href="{{ path('admin_view_article', {'art':sec.id}) }}">{{ sec.title }}</a>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

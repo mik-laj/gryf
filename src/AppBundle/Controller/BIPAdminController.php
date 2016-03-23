@@ -131,6 +131,86 @@ class BIPAdminController extends Controller implements AuthenticatedController
     }
 
     /**
+     * @Route("/admin/edit/{art}/menu/", name="admin_edit_art_menu")
+     */
+    public function adminEditArtMenuAction(Request $request, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('menu', EntityType::class, array(
+                'class' => 'AppBundle:Submenu',
+                'choice_label' => 'name',
+                'query_builder' => function (EntityRepository $er) use ($bip){
+                    return $er->createQueryBuilder('s')
+                        ->where("s.bip= ".$bip->getId());
+                },
+            ))
+            ->add('content', TextareaType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
+            $em->flush();
+        }
+
+        return $this->render('user/edit_art_menu.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/edit/{art}/section/", name="admin_edit_art_section")
+     */
+    public function adminEditArtSectionAction(Request $request, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('section', EntityType::class, array(
+                'class' => 'AppBundle:Article',
+                'choice_label' => 'title',
+                'query_builder' => function (EntityRepository $er) use ($bip){
+                    return $er->createQueryBuilder('a')
+                        ->innerJoin('a.menu', 'm')
+                        ->where("m.bip= ".$bip->getId());
+                },
+            ))
+            ->add('content', TextareaType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
+            $em->flush();
+        }
+
+        return $this->render('user/edit_art_section.html.twig', array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+
+    /**
      * @Route("/admin/dane/edit/", name="admin_edit_dane")
      */
     public function adminEditDaneAction(Request $request)
