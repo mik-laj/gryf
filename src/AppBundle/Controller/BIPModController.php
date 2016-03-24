@@ -239,7 +239,7 @@ class BIPModController extends Controller
     /**
      * @Route("/admin/dane/static/", name="admin_static_dane")
      */
-    public function adminStaticDaneEdit()
+    public function adminStaticDaneEditAction()
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
@@ -253,4 +253,6 @@ class BIPModController extends Controller
 
         ));
     }
+
+
 }
