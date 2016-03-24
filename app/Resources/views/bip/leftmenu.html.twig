@@ -9,6 +9,10 @@
     </div>
     <div class="panel-body collapse navbar-collapse menu-left">
         <ul class="nav nav-pills nav-stacked">
+            {% for pos in mustbe %}
+                <li role="presentation" class="po"><a href="">{{pos.title}}</a></li>
+            {% endfor %}
+
             {% for pos in submenu %}
                 {% if pos.articles|length == 0 %}
                     <li role="presentation" class="disabled"><a>{{pos.name}}</a></li>
