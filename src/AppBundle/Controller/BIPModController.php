@@ -142,11 +142,12 @@ class BIPModController extends Controller
         }
 
 
-
+        $attachments = $em->getRepository('AppBundle:File')->findByArticle($art);
 
         return $this->render('user/edit_art_menu.html.twig', array(
             'bip' => $bip,
             'form' => $form->createView(),
+            'attachments'=>$attachments,
         ));
     }
 

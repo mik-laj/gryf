@@ -24,7 +24,7 @@ class Article
     protected $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=150000)
      */
     protected $content;
 
