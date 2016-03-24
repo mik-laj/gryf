@@ -235,4 +235,22 @@ class BIPModController extends Controller
             'bip' => $bip,
         ));
     }
+
+    /**
+     * @Route("/admin/dane/static/", name="admin_static_dane")
+     */
+    public function adminStaticDaneEdit()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        } catch (BIPNotFoundException $e) {
+            return $e->redirectResponse;
+        }
+
+        return $this->render('user/edit_static.html.twig', array(
+
+        ));
+    }
 }
