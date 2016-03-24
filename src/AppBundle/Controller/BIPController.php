@@ -54,9 +54,11 @@ class BIPController extends Controller
             return $e->redirectResponse;
         }
 //        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+        $art = $em->getRepository("AppBundle:StaticArt")->findByBip($bip);
 
         return $this->render('bip/index.html.twig', array(
             'bip'=>$bip,
+            'articles'=>$art,
         ));
     }
 

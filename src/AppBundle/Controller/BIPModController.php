@@ -163,7 +163,7 @@ class BIPModController extends Controller
         } catch (BIPNotFoundException $e) {
             return $e->redirectResponse;
         }
-        $article = $em->getRepository("AppBundle:Article")->find($art);
+        $article = $em->getRepository("AppBundle:StaticArt")->find($art);
 
 
         $form = $this->createFormBuilder($article)
