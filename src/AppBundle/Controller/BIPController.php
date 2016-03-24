@@ -54,9 +54,11 @@ class BIPController extends Controller
             return $e->redirectResponse;
         }
 //        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+        $art = $em->getRepository("AppBundle:StaticArt")->findByBip($bip);
 
         return $this->render('bip/index.html.twig', array(
             'bip'=>$bip,
+            'articles'=>$art,
         ));
     }
 
@@ -172,6 +174,30 @@ class BIPController extends Controller
 
         return $this->render('bip/bip_list.html.twig', array(
             'bips'=>$bip,
+        ));
+    }
+
+    /**
+     * @Route("/managament/")
+     */
+    public function BIPManagamentAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+
+        $organy = $em->getRepository("AppBundle:Organ")->findByBip($bip);
+        foreach($organy as $k=>$v){
+            $organy[$k]->setMembers($em->getRepository('AppBundle:Member')->findByOrgan($v));
+        }
+
+        return $this->render('bip/zarzad.html.twig', array(
+            'bip'=>$bip,
+            'organy'=>$organy,
         ));
     }
 }

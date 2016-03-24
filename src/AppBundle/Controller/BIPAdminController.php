@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
 use AppBundle\Entity\File;
+use AppBundle\Entity\Member;
+use AppBundle\Entity\Organ;
 use AppBundle\Entity\Submenu;
 use AppBundle\Entity\Log;
 use AppBundle\Exception\BIPNotFoundException;
@@ -21,6 +23,67 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class BIPAdminController extends Controller implements AuthenticatedController
 {
+
+    /**
+     * @Route("/admin/managament/")
+     */
+    public function managamentAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+
+        $organ = new Organ();
+        $organ->setBip($bip);
+        $form_organ = $this->get('form.factory')->createNamedBuilder('organ', FormType::class, $organ)
+                        ->add('organ')
+                        ->getForm();
+        if($request->request->has('organ')){
+            $form_organ->handleRequest($request);
+        }
+        if($form_organ->isValid()){
+            $em->persist($form_organ);
+            $em->flush();
+        }
+
+        $member = new Member();
+        $form_member = $this->get('form.factory')->createNamedBuilder('member', FormType::class, $member)
+            ->add('firstname')
+            ->add('lastname')
+            ->add('organ', EntityType::class, array(
+                'class' => 'AppBundle:Organ',
+                'query_builder' => function (EntityRepository $er) use($bip) {
+                    return $er->createQueryBuilder('o')
+                        ->where('o.bip='.$bip->getId())
+                        ->orderBy('o.organ', 'ASC');
+                },
+            ))
+            ->getForm();
+
+        if($request->request->has('member')){
+            $form_member->handleRequest($request);
+        }
+        if($form_member->isValid()){
+            $em->persist($form_member);
+            $em->flush();
+        }
+
+        $organy = $em->getRepository("AppBundle:Organ")->findByBip($bip);
+        foreach($organy as $k=>$v){
+            $organy[$k]->setMembers($em->getRepository('AppBundle:Member')->findByOrgan($v));
+        }
+
+        return $this->render('user/zarzad.html.twig', array(
+            'bip'=>$bip,
+            'form_organ'=>$form_organ,
+            'organy'=>$organy,
+        ));
+    }
+
     /**
      * @Route("/admin/add/menu/", name="admin_add_menu")
      */
@@ -367,6 +430,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }catch(BIPNotFoundException $e){
             return $e->redirectResponse;
         }
+        $musthave = $em->getRepository('AppBundle:StaticArt')->findByBip($bip);
         $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
         $form = $this->createFormBuilder($bip_dane)
             ->add('name')
@@ -383,6 +447,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
 
         return $this->render('user/edit_dane.html.twig', array(
             'bip'=>$bip,
+            'musthave'=>$musthave,
             'form'=>$form->createView(),
         ));
     }

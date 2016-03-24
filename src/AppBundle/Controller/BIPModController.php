@@ -152,6 +152,40 @@ class BIPModController extends Controller
     }
 
     /**
+     * @Route("/admin/static/edit/{art}/", name="admin_edit_static_art")
+     */
+    public function adminEditStaticArtAction(Request $request, $art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        } catch (BIPNotFoundException $e) {
+            return $e->redirectResponse;
+        }
+        $article = $em->getRepository("AppBundle:StaticArt")->find($art);
+
+
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('content', TextareaType::class)
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em->persist();
+            $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
+            $em->flush();
+        }
+
+
+        return $this->render('user/edit_static_art.html.twig', array(
+            'bip' => $bip,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
      * @Route("/admin/remove/{art}/", name="admin_remove_art")
      */
     public function adminRemoveArtAction(Request $request, $art)

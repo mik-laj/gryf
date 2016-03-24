@@ -58,6 +58,18 @@
                                         </div>
                                     </div>
                                 {% endif %}
+                            <table class="table table-stripped table-hover">
+                                <tr>
+                                    <th>ART</th>
+                                    <th>EDIT</th>
+                                </tr>
+                                {% for art in musthave %}
+                                    <tr>
+                                        <td><a href="{{ path('static_art_view',{'art':art.id}) }}">{{ art.title }}</a></td>
+                                        <td><a href="{{ path('admin_edit_static_art',{'art':art.id}) }}"><i class="fa fa-pencil"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
                         </div>
                     </div>
                 </div>
