@@ -56,6 +56,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->add('lastname')
             ->add('organ', EntityType::class, array(
                 'class' => 'AppBundle:Organ',
+                'choice_label'=>'organ',
                 'query_builder' => function (EntityRepository $er) use($bip) {
                     return $er->createQueryBuilder('o')
                         ->where('o.bip='.$bip->getId())
