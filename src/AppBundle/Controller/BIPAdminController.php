@@ -25,9 +25,9 @@ class BIPAdminController extends Controller implements AuthenticatedController
 {
 
     /**
-     * @Route("/admin/managament/")
+     * @Route("/admin/management/", name="admin_management")
      */
-    public function managamentAction(Request $request){
+    public function managementAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
         try {
@@ -79,7 +79,8 @@ class BIPAdminController extends Controller implements AuthenticatedController
 
         return $this->render('user/zarzad.html.twig', array(
             'bip'=>$bip,
-            'form_organ'=>$form_organ,
+            'form_organ'=>$form_organ->createView(),
+            'form_member'=>$form_member->createView(),
             'organy'=>$organy,
         ));
     }
