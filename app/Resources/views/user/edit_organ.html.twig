@@ -1,1 +1,37 @@
-{{ form(form) }}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% include "user/header.html.twig" %}
+
+    <div class="container index-container">
+        <div class="index-container">
+            <div class="row">
+                <div class="col-md-3">
+                    {% render(controller('AppBundle:BIP:menu', {'bip':bip.id})) %}
+                </div>
+                <div class="col-md-9">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            Edytuj Organ
+                        </div>
+                        <div class="panel-body">
+                            <div style="padding-left: 20px; padding-right: 20px;">
+                                <div class="row">
+                                    {{ form_start(form) }}
+                                    <div class="form-group">
+                                        {{ form_widget(form.organ, { 'attr': {'placeholder':'Nazwa', 'class':'form-control'} }) }}
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-danger btn-block" />
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
