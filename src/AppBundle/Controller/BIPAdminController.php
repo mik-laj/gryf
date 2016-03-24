@@ -6,6 +6,8 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\File;
 use AppBundle\Entity\Submenu;
 use AppBundle\Entity\Log;
+use AppBundle\Exception\BIPNotFoundException;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use UserBundle\Entity\User;
@@ -228,12 +230,9 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }
         $article = $em->getRepository("AppBundle:Article")->find($art);
 
-        $log = new Log();
-        $log->setArticle($article);
-        $log->setEditor($this->getUser());
-        $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
 
-        $form = $this->createFormBuilder($article)
+
+        $form = $this->get('form.factory')->createNamedBuilder('article', FormType::class, $article)
             ->add('title')
             ->add('menu', EntityType::class, array(
                 'class' => 'AppBundle:Submenu',
@@ -246,20 +245,27 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->add('content', TextareaType::class)
             ->add('save', SubmitType::class)
             ->getForm();
-        $form->handleRequest($request);
+        if($request->request->has('article')) {
+            $form->handleRequest($request);
+        }
         if($form->isValid()){
+            $log = new Log();
+            $log->setArticle($article);
+            $log->setEditor($this->getUser());
+            $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
             $em->persist($log);
             $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
             $em->flush();
         }
 
         $file = new File();
-        $form_file = $this->createFormBuilder($file)
+        $form_file = $this->get('form.factory')->createNamedBuilder('file', FormType::class, $file)
             ->add('name')
             ->add('file')
             ->getForm();
-
-        $form_file->handleRequest($request);
+        if($request->request->has('file')) {
+            $form_file->handleRequest($request);
+        }
 
         if ($form_file->isValid()) {
             $file->setArticle($article);
