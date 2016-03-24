@@ -388,6 +388,31 @@ class BIPAdminController extends Controller implements AuthenticatedController
     }
 
     /**
+     * @Route("admin/dane/public/", name="admin_manage_public")
+     */
+    public function adminManagePublicAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $currentStatus= $bip->getPublic();
+
+        if($currentStatus==false){
+            $bip->setPublic(true);
+            $em->flush();
+            $this->addFlash('notice', 'witajci');
+        }
+        else {
+            $bip->setPublic(false);
+            $em->flush();
+            $this->addFlash('notice', 'żegnajci');
+        }
+
+        return $this->redirectToRoute('admin_edit_dane');
+    }
+
+    /**
      * @Route("/admin/", name="admin_index")
      */
     public function adminIndexAction()
