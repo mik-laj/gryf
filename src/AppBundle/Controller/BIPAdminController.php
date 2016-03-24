@@ -112,10 +112,51 @@ class BIPAdminController extends Controller implements AuthenticatedController
                         ->where("s.bip= " . $bip->getId());
                 },
             ))
+            ->add('save', SubmitType::class)
             ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($member);
+            $this->addFlash('notice','pomyślnie zmodyfikowano membera');
+            $em->flush();
+            return $this->redirectToRoute('admin_management');
+        }
 
 
         return $this->render("user/edit_member.html.twig", array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/management/edit/organ/{organ}/", name="admin_management_organ")
+     */
+    public function adminManagementOrganAction(Request $request, $organ)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $organ = $em->getRepository("AppBundle:Organ")->find($organ);
+
+        $form = $this->createFormBuilder($organ)
+            ->add('organ')
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($organ);
+            $em->flush();
+            $this->addFlash('notice', 'pomyslnie zedytowano organ');
+            return $this->redirectToRoute('admin_management');
+        }
+
+        return $this->render("user/edit_organ.html.twig", array(
             'bip'=>$bip,
             'form'=>$form->createView(),
         ));
