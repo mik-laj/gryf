@@ -25,9 +25,9 @@ class BIPAdminController extends Controller implements AuthenticatedController
 {
 
     /**
-     * @Route("/admin/managament/")
+     * @Route("/admin/management/", name="admin_management")
      */
-    public function managamentAction(Request $request){
+    public function managementAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
         try {
