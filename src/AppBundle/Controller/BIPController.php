@@ -133,6 +133,26 @@ class BIPController extends Controller
     }
 
     /**
+     * @Route("/static/{art}/", name="static_art_view")
+     */
+    public function viewStaticArtAction($art)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $article = $em->getRepository("AppBundle:StaticArt")->find($art);
+
+
+        return $this->render('bip/static_article.html.twig', array(
+            'article'=>$article,
+        ));
+    }
+
+    /**
      * @Route("/all/", name="bips_view")
      */
     public function viewBipListAction(Request $request)
