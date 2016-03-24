@@ -22,12 +22,12 @@ class ArtTemplate
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=1000)
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=150000)
      */
     protected $content;
 

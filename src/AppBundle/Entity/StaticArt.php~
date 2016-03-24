@@ -28,12 +28,12 @@ class StaticArt
     protected $bip;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=1000)
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=150000)
      */
     protected $content;
 
@@ -91,5 +91,28 @@ class StaticArt
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set bip
+     *
+     * @param \AppBundle\Entity\Bip $bip
+     * @return StaticArt
+     */
+    public function setBip(\AppBundle\Entity\Bip $bip = null)
+    {
+        $this->bip = $bip;
+
+        return $this;
+    }
+
+    /**
+     * Get bip
+     *
+     * @return \AppBundle\Entity\Bip 
+     */
+    public function getBip()
+    {
+        return $this->bip;
     }
 }
