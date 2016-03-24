@@ -15,9 +15,9 @@
                             Zarząd
                         </div>
                         <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked">
+                            <ul class="list-group panel">
                             {% for org in organy %}
-                                <li><a><h3>{{ org.organ }}</h3></a></li>
+                                <li class="list-group-item"><a><h3>{{ org.organ }}</h3></a></li>
                                 <div id="za{{org.id}}" class="">
                                     <ul class="list-group">
                                         {% for guy in org.members %}
@@ -27,14 +27,20 @@
                                 </div>
                             {% endfor %}
                             </ul>
+                            <div class="col-md-6">
                             Dodaj organ:<br>
                             {{form_start(form_organ)}}
-                                {{form_widget}}
+                                {{form_widget(form_organ)}}
+                                <input type="submit" class="btn btn-danger btn-block">
                             {{form_end(form_organ)}}
+                        </div>
+                        <div class="col-md-6">
                             Dodaj członka:<br>
                             {{form_start(form_member)}}
-                                {{form_widget}}
+                                {{form_widget(form_member)}}
+                                <input type="submit" class="btn btn-danger btn-block">
                             {{form_end(form_member)}}
+                        </div>
                         </div>
                         <div class="panel-footer">
                             
