@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-    {% include "user/header.html.twig" %}
 
+    {% include "bip/header.html.twig" %}
+
+    {#<div class="fos_user_user_show">#}
+    {#<p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>#}
+    {#<p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>#}
+    {#</div>#}
     <div class="container index-container">
         <div class="index-container">
             <div class="row">
@@ -12,13 +16,11 @@
                 <div class="col-md-9">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            Edycja logo
+                            {{ article.title }} {% if app.user %}<a href="{{ path('admin_edit_static_art',{'art':article.id}) }}"><i class="fa fa-pencil"></i></a> {% endif %}
                         </div>
                         <div class="panel-body">
-                            {% for m in app.session.flashbag.get('notice') %}
-                                <div class="alert alert-success">{{ m }}</div>
-                            {% endfor %}
-                            treść here
+                            {{ article.content|raw }}
+
                         </div>
                     </div>
                 </div>

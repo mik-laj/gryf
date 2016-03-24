@@ -104,4 +104,26 @@ body, .index-container {
 {
 	font-size: 1.5em;
 	color: #6D1126;
+	padding: 0.5em;
+	padding-left: 1.3em;
+	border-radius: 5px;
+}
+
+.edit:hover{
+	color: white;
+	background-color: #6D1126;
+
+}
+
+.panel-footer	{
+	background-color: #ffd9d9;
+	height: 4em;
+	overflow: visible;
+}
+
+.foo .list-group-item{
+	background-color: #ffd9d9;
+	width: 100%;
+	border-bottom: 1px solid #6D1126;
+	border-radius: 0px;
 }
