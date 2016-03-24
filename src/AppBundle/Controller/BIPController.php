@@ -14,20 +14,31 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
 
 class BIPController extends Controller
 {
 
     /**
-     * @Route("/bezlog/", name="bezlog")
+     * @Route("/download/{file}", name="file_download")
      */
-    public function bezlogAction(Request $request)
+    public function downloadFileAction(Request $request, $file)
     {
-        $siteManager = $this->get('bip_manager');
-        print $siteManager->getCurrentBIP()->getName();
+        $em = $this->getDoctrine()->getManager();
+        $file_db = $em->getRepository('AppBundle:File')->find($file);
+        $file = fopen($file_db->getWebPath(), 'r');
 
-//        return $this->render('user/show_content.html.twig');
+        $response = new Response();
+        $response->headers->set('Content-type', 'application/octect-stream');
+        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', $file_db->getPath()));
+        $response->headers->set('Content-Length', filesize($file_db->getWebPath()));
+        $response->headers->set('Content-Transfer-Encoding', 'binary');
+        $response->setContent(readfile($file_db->getWebPath()));
+
+        return $response;
+
+//        return $this->redirect("/".$file_db->getWebPath());
     }
 
     /**
@@ -107,11 +118,13 @@ class BIPController extends Controller
         $logs = $qb
             ->innerJoin('a.article', 'i')
             ->where('i.id='.$art)->getQuery()->getResult();
+        $attachments = $em->getRepository('AppBundle:File')->findByArticle($art);
         return $this->render('bip/article.html.twig', array(
             'bip'=>$bip,
             'article'=>$article,
             'sections'=>$sections,
             'logs'=>$logs,
+            'attachments'=>$attachments,
         ));
     }
 
