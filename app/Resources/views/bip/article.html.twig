@@ -20,6 +20,7 @@
                         </div>
                         <div class="panel-body">
                             {{ article.content|raw }}
+
                             {% if sections %}
                                 <div class="panel-default">
                                     <div class="panel panel-body">
@@ -62,6 +63,9 @@
                                         </ul>
                                         </div>
                                     </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_BIPMOD') %}
+                                <a href="{{ path('admin_edit_art_menu', { 'art':article.id }) }}">Edytuj <i class="fa fa-pencil fa-fw"></i></a>
                             {% endif %}
                         </div>
                     </div>
