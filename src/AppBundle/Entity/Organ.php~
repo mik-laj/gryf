@@ -1,0 +1,31 @@
+<?php
+// src/AppBundle/Entity/User.php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="organs")
+ */
+class Organ
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $organ;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Bip")
+     * @ORM\JoinColumn(name="bip", referencedColumnName="id")
+     */
+    protected $bip;
+}

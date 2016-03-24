@@ -91,35 +91,12 @@ class Log
     }
 
     /**
-     * Set user
-     *
-     * @param \AppBundle\Entity\User $user
-     * @return Log
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \AppBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set editor
      *
-     * @param \AppBundle\Entity\User $editor
+     * @param \UserBundle\Entity\User $editor
      * @return Log
      */
-    public function setEditor(\AppBundle\Entity\User $editor = null)
+    public function setEditor($editor)
     {
         $this->editor = $editor;
 
@@ -129,7 +106,7 @@ class Log
     /**
      * Get editor
      *
-     * @return \AppBundle\Entity\User 
+     * @return \UserBundle\Entity\User
      */
     public function getEditor()
     {
