@@ -142,11 +142,12 @@ class BIPModController extends Controller
         }
 
 
-
+        $attachments = $em->getRepository('AppBundle:File')->findByArticle($art);
 
         return $this->render('user/edit_art_menu.html.twig', array(
             'bip' => $bip,
             'form' => $form->createView(),
+            'attachments'=>$attachments,
         ));
     }
 
@@ -239,7 +240,7 @@ class BIPModController extends Controller
     /**
      * @Route("/admin/dane/static/", name="admin_static_dane")
      */
-    public function adminStaticDaneEdit()
+    public function adminStaticDaneEditAction()
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
@@ -253,4 +254,6 @@ class BIPModController extends Controller
 
         ));
     }
+
+
 }

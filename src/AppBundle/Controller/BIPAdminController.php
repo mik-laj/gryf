@@ -274,10 +274,13 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $em->flush();
         }
 
+        $attachments = $em->getRepository('AppBundle:File')->findByArticle($article);
+
         return $this->render('user/edit_art_menu.html.twig', array(
             'bip'=>$bip,
             'form'=>$form->createView(),
             'form_file'=>$form_file->createView(),
+            'attachments'=>$attachments,
         ));
     }
 
@@ -300,7 +303,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $log->setEditor($this->getUser());
         $log->setEdited(new \DateTime(date('Y-m-d H:i:s')));
 
-        $form = $this->createFormBuilder($article)
+        $form = $this->get('form.factory')->createNamedBuilder('article', FormType::class, $article)
             ->add('title')
             ->add('section', EntityType::class, array(
                 'class' => 'AppBundle:Article',
@@ -314,16 +317,39 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->add('content', TextareaType::class)
             ->add('save', SubmitType::class)
             ->getForm();
-        $form->handleRequest($request);
+        if($request->request->has('article')) {
+            $form->handleRequest($request);
+        }
         if($form->isValid()){
             $em->persist($log);
             $this->addFlash('notice', "Pomyślnie zaktualizowano artykuł.");
             $em->flush();
         }
 
+
+        $file = new File();
+        $form_file = $this->get('form.factory')->createNamedBuilder('file', FormType::class, $file)
+            ->add('name')
+            ->add('file')
+            ->getForm();
+        if($request->request->has('file')) {
+            $form_file->handleRequest($request);
+        }
+
+        if ($form_file->isValid()) {
+            $file->setArticle($article);
+            $file->upload();
+            $em->persist($file);
+            $em->flush();
+        }
+
+        $attachments = $em->getRepository('AppBundle:File')->findByArticle($article);
+
         return $this->render('user/edit_art_section.html.twig', array(
             'bip'=>$bip,
             'form'=>$form->createView(),
+            'form_file'=>$form_file->createView(),
+            'attachments'=>$attachments,
         ));
     }
 
@@ -359,6 +385,31 @@ class BIPAdminController extends Controller implements AuthenticatedController
             'bip'=>$bip,
             'form'=>$form->createView(),
         ));
+    }
+
+    /**
+     * @Route("admin/dane/public/", name="admin_manage_public")
+     */
+    public function adminManagePublicAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $bip = $em->getRepository("AppBundle:Bip")->find($bip);
+        $currentStatus= $bip->getPublic();
+
+        if($currentStatus==false){
+            $bip->setPublic(true);
+            $em->flush();
+            $this->addFlash('notice', 'witajci');
+        }
+        else {
+            $bip->setPublic(false);
+            $em->flush();
+            $this->addFlash('notice', 'żegnajci');
+        }
+
+        return $this->redirectToRoute('admin_edit_dane');
     }
 
     /**

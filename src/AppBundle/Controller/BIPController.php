@@ -80,9 +80,11 @@ class BIPController extends Controller
             $submenus[$k]->setArticles($articles);
             $articles = $submenus[$k]->getArticles();
         }
+        $mustbe = $em->getRepository('AppBundle:StaticArt')->findByBip($bip);
 
         return $this->render('bip/leftmenu.html.twig', array(
             'submenu'=>$submenus,
+            'mustbe'=>$mustbe,
         ));
     }
 
@@ -119,6 +121,8 @@ class BIPController extends Controller
             ->innerJoin('a.article', 'i')
             ->where('i.id='.$art)->getQuery()->getResult();
         $attachments = $em->getRepository('AppBundle:File')->findByArticle($art);
+
+
         return $this->render('bip/article.html.twig', array(
             'bip'=>$bip,
             'article'=>$article,

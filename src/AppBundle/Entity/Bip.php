@@ -57,7 +57,7 @@ class Bip
     public $path;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", nullable=false)
      */
     private $public;
 
