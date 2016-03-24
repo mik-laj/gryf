@@ -29,6 +29,8 @@ class Organ
      */
     protected $bip;
 
+    protected $members;
+
     /**
      * Get id
      *
@@ -83,5 +85,14 @@ class Organ
     public function getBip()
     {
         return $this->bip;
+    }
+
+    public function setMembers($members){
+        $this->members = $members;
+        return $this;
+    }
+
+    public function getMembers(){
+        return $this->members;
     }
 }

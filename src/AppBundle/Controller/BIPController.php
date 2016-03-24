@@ -153,4 +153,28 @@ class BIPController extends Controller
             'bips'=>$bip,
         ));
     }
+
+    /**
+     * @Route("/managament/")
+     */
+    public function BIPManagamentAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+
+        $organy = $em->getRepository("AppBundle:Organ")->findByBip($bip);
+        foreach($organy as $k=>$v){
+            $organy[$k]->setMembers($em->getRepository('AppBundle:Member')->findByOrgan($v));
+        }
+
+        return $this->render('bip/zarzad.html.twig', array(
+            'bip'=>$bip,
+            'organy'=>$organy,
+        ));
+    }
 }
