@@ -27,7 +27,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    {{ form_widget(form.file, { 'attr': {'class': 'btn btn-danger btn-block'} }) }}
+                                    {{ form_widget(form.file) }}
                                 </div>
                                 <div class="col-md-2">
                                     {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}
@@ -58,9 +58,6 @@
                                         </div>
                                     </div>
                                 {% endif %}
-                            <div class="col-sm-6 col-sm-offset-3 text-center">
-                                <img class="img img-responsive" src="{{ asset( bip.path ) }}" />
-                            </div>
                         </div>
                     </div>
                 </div>
