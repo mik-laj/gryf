@@ -35,6 +35,22 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <div class="form-group col-md-6">
+                                            {{ form_widget(form.nazwisko, { 'attr': {'placeholder': 'Nazwisko', 'class':'form-control'} }) }}
+                                            {% if form_errors(form.nazwisko) %}
+                                                <div class="alert alert-danger">{{ form_errors(form.nazwisko) }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            {{ form_widget(form.imie, { 'attr': {'placeholder': 'Imie', 'class':'form-control'} }) }}
+                                            {% if form_errors(form.imie) %}
+                                                <div class="alert alert-danger">{{ form_errors(form.imie) }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div class="form-group col-md-6">
                                             {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'hasło', 'class':'form-control'} }) }}
                                             {% if form_errors(form.plainPassword.first) %}
                                                 <div class="alert alert-danger">{{ form_errors(form.plainPassword.first) }}</div>

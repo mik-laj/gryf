@@ -11,9 +11,12 @@ class UserType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $biptype = new BIPType();
-        $builder->add('bip', $biptype, array(
-            'data_class'=>'AppBundle\Entity\Bip'
-        ));
+        $builder
+            ->add('bip', $biptype, array(
+            'data_class'=>'AppBundle\Entity\Bip'))
+            ->add('nazwisko')
+            ->add('imie')
+            ;
     }
 
     public function getParent()

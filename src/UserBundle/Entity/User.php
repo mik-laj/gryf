@@ -5,6 +5,7 @@ namespace UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -24,6 +25,28 @@ class User extends BaseUser
      * @ORM\JoinColumn(name="bip", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $bip;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Length(
+     *      min = "3",
+     *      max = "40",
+     *      minMessage = "Nazwisko musi mieć conajmniej 3 znaki.",
+     *      maxMessage = "Nazwisko może mieć conajwyżej 40 znaków."
+     *)
+     */
+    protected $nazwisko;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Length(
+     *      min = "3",
+     *      max = "40",
+     *      minMessage = "Imie musi mieć conajmniej 3 znaki.",
+     *      maxMessage = "Imie może mieć conajwyżej 40 znaków."
+     *)
+     */
+    protected $imie;
 
     public function __construct()
     {
@@ -52,5 +75,51 @@ class User extends BaseUser
     public function getBip()
     {
         return $this->bip;
+    }
+
+    /**
+     * Set nazwisko
+     *
+     * @param string $nazwisko
+     * @return User
+     */
+    public function setNazwisko($nazwisko)
+    {
+        $this->nazwisko = $nazwisko;
+
+        return $this;
+    }
+
+    /**
+     * Get nazwisko
+     *
+     * @return string 
+     */
+    public function getNazwisko()
+    {
+        return $this->nazwisko;
+    }
+
+    /**
+     * Set imie
+     *
+     * @param string $imie
+     * @return User
+     */
+    public function setImie($imie)
+    {
+        $this->imie = $imie;
+
+        return $this;
+    }
+
+    /**
+     * Get imie
+     *
+     * @return string 
+     */
+    public function getImie()
+    {
+        return $this->imie;
     }
 }

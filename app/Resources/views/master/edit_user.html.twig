@@ -11,8 +11,22 @@
                 {% for m in app.session.flashbag.get('notice') %}
                     <div class="alert alert-success">{{ m }}</div>
                 {% endfor %}
+                {{ form_start(form) }}
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <div class="{% if(form_errors(form.nazwisko)) %} has-error {% endif %}">
+                            {{ form_widget(form.nazwisko, { 'attr': {'placeholder': 'Nazwisko', 'class':'form-control'} }) }}
+                            {{ form_errors(form.nazwisko) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="{% if(form_errors(form.imie)) %} has-error {% endif %}">
+                            {{ form_widget(form.imie, { 'attr': {'placeholder': 'Imie', 'class':'form-control'} }) }}
+                            {{ form_errors(form.imie) }}
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
-                    {{ form_start(form) }}
                     <div class="col-md-5">
                             <div class="{% if(form_errors(form.username)) %} has-error {% endif %}">
                                 {{ form_widget(form.username, { 'attr': {'placeholder': 'nazwa BiPu', 'class':'form-control'} }) }}
@@ -29,8 +43,8 @@
                         {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}
                         {{ form_widget(form._token) }}
                     </div>
-                    {{ form_end(form) }}
                 </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
