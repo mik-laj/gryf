@@ -79,7 +79,8 @@ class BIPAdminController extends Controller implements AuthenticatedController
 
         return $this->render('user/zarzad.html.twig', array(
             'bip'=>$bip,
-            'form_organ'=>$form_organ,
+            'form_organ'=>$form_organ->createView(),
+            'form_member'=>$form_member->createView(),
             'organy'=>$organy,
         ));
     }
