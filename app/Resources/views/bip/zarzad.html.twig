@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-    {% include "user/header.html.twig" %}
+    {% include "bip/header.html.twig" %}
 
 <div class="container index-container">
     <div class="index-container">
@@ -27,14 +27,6 @@
                                 </div>
                             {% endfor %}
                             </ul>
-                            Dodaj organ:<br>
-                            {{form_start(form_organ)}}
-                                {{form_widget}}
-                            {{form_end(form_organ)}}
-                            Dodaj członka:<br>
-                            {{form_start(form_member)}}
-                                {{form_widget}}
-                            {{form_end(form_member)}}
                         </div>
                         <div class="panel-footer">
                             
