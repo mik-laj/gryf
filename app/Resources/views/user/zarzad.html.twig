@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    {% include "bip/header.html.twig" %}
+
+<div class="container index-container">
+    <div class="index-container">
+        <div class="row">
+            <div class="col-md-3">
+               {% render(controller('AppBundle:BIP:menu', {'bip':bip.id})) %}
+            </div>
+                <div class="col-md-9">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            Zarząd
+                        </div>
+                        <div class="panel-body">
+                            <ul class="nav nav-pills nav-stacked">
+                            {% for org in organy %}
+                                <li><a href="#{{org.organ}}" data-toggle="collapse"><h3>{{ org.organ }}</h3></a></li>
+                                <div id="{{org.organ}}" class="collapse panel-collapse">
+                                    <ul class="list-group">
+                                        {% for guy in org %}
+                                            
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="panel-footer">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
