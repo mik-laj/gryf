@@ -148,6 +148,7 @@ class BIPController extends Controller
 
 
         return $this->render('bip/static_article.html.twig', array(
+            'bip'=>$bip,
             'article'=>$article,
         ));
     }
