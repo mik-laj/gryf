@@ -99,3 +99,9 @@ body, .index-container {
 	max-height:78px;
 	width:auto;
 }
+
+.edit
+{
+	font-size: 1.5em;
+	color: #6D1126;
+}
