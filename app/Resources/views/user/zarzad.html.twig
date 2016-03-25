@@ -15,6 +15,9 @@
                             Zarząd
                         </div>
                         <div class="panel-body">
+                            {% for m in app.session.flashbag.get('notice') %}
+                                <div class="alert alert-success">{{ m }}</div>
+                            {% endfor %}
                             <ul class="list-group panel">
                             {% for org in organy %}
                                 <li class="list-group-item"><a><h3>{{ org.organ }}</h3></a></li>
