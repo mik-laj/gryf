@@ -47,7 +47,7 @@ class Bip
      *     maxHeight = 200
      * )
      */
-    protected $file;
+    public $file;
 
     /**
      * Sets file.
