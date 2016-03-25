@@ -60,7 +60,7 @@ class BIPController extends Controller
             ->innerJoin('a.menu', 'm')
             ->innerJoin('m.bip', 'b')
             ->where('b.id='.$bip->getId())
-            ->andWhere('a.static=1')
+            ->andWhere('m.static=1')
             ->getQuery()->getResult();
         $article = $articles1[0];
 
