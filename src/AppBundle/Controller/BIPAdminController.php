@@ -295,6 +295,14 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }
         $menu = $em->getRepository('AppBundle:Submenu')->find($menu);
         $arts = $em->getRepository('AppBundle:Article')->findByMenu($menu);
+        if($menu->getStatic()==1)
+        {
+            $this->addFlash('notice', 'to jest static, tego nie usuniesz');
+            return $this->redirectToRoute('admin_add_menu', array(
+                'bip'=>$bip->getId(),
+            ));
+
+        }
         if($arts){
             $this->addFlash('notice', 'Najpierw usuń artukuły!');
             return $this->redirectToRoute('admin_add_menu', array(
@@ -309,7 +317,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
                 'bip'=>$bip->getId(),
             ));
         }
-        
+
     }
 
 //    /**
