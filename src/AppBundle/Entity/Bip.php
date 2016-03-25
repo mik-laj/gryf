@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @UniqueEntity(fields="url", message="URL is already in use")
+ * @UniqueEntity(fields={"url"}, message="URL is already in use", groups={"Registration"})
  * @ORM\Table(name="bips")
  */
 class Bip
