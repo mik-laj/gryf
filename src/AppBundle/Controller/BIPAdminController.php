@@ -112,7 +112,6 @@ class BIPAdminController extends Controller implements AuthenticatedController
                         ->where("s.bip= " . $bip->getId());
                 },
             ))
-            ->add('save', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
         if($form->isValid()){

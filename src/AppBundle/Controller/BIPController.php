@@ -54,31 +54,37 @@ class BIPController extends Controller
             return $e->redirectResponse;
         }
 
-        $article = $em->getRepository("AppBundle:Article")->find($art);
+        $articles = $em->getRepository("AppBundle:Article");
+        $qb = $articles->createQueryBuilder('a');
+        $articles1 = $qb
+            ->innerJoin('a.menu', 'm')
+            ->innerJoin('m.bip', 'b')
+            ->where('b.id='.$bip->getId())
+            ->andWhere('a.static=1')
+            ->getQuery()->getResult();
+        $article = $articles1[0];
+
+
+//        $article = $em->getRepository("AppBundle:Article")->find($art);
+
         $sec = $em->getRepository("AppBundle:Article");
         $qb = $sec->createQueryBuilder('a');
         $sections = $qb
             ->innerJoin('a.section', 's')
-            ->where('s.id='.$art)->getQuery()->getResult();
+            ->where('s.id='.$article->getId())->getQuery()->getResult();
         $log = $em->getRepository("AppBundle:Log");
         $qb = $log->createQueryBuilder('a');
         $logs = $qb
             ->innerJoin('a.article', 'i')
-            ->where('i.id='.$art)->getQuery()->getResult();
-        $attachments = $em->getRepository('AppBundle:File')->findByArticle($art);
-
-
-        return $this->render('bip/article.html.twig', array(
+            ->where('i.id='.$article->getId())->getQuery()->getResult();
+        $attachments = $em->getRepository('AppBundle:File')->findByArticle($article->getId());
+        return $this->render('bip/index.html.twig', array(
             'bip'=>$bip,
             'article'=>$article,
             'sections'=>$sections,
             'logs'=>$logs,
             'attachments'=>$attachments,
         ));
-
-//        return $this->render('bip/index.html.twig', array(
-//            'bip'=>$bip,
-//        ));
     }
 
     /**
