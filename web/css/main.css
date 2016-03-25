@@ -140,3 +140,15 @@ body, .index-container {
 .k .list-group-item:hover i{
 	color: #6D1126;
 }
+
+.kk > .list-group-item i{
+	padding: 4px;
+	padding-left:6px;
+	padding-right:6px;
+	border-radius: 8px;
+}
+
+.kk > .list-group-item i:hover{
+	background-color: #6D1126;
+	color: white;
+}
