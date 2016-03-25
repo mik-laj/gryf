@@ -1,7 +1,9 @@
 <?php
 namespace UserBundle\Controller;
 
+use AppBundle\Entity\Article;
 use AppBundle\Entity\StaticArt;
+use AppBundle\Entity\Submenu;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
@@ -48,17 +50,31 @@ class RegistrationController extends BaseController
             $em = $this->getDoctrine()->getManager();
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+            $user->setRoles(array('ROLE_BIPADMIN'));
 
             $userManager->updateUser($user);
             $szablony = $em->getRepository("AppBundle:ArtTemplate")->findAll();
 
+            $pos = 0;
             foreach($szablony as $szablon) {
-                $static = new StaticArt();
-                $static->setBip($user->getBip());
-                $static->setContent($szablon->getContent());
-                $static->setTitle($szablon->getTitle());
-                $em->persist($static);
+                $menu = new Submenu();
+                $menu->setBip($user->getBip());
+                $menu->setName($szablon->getTitle());
+                $menu->setPosition($pos);
+                $em->persist($menu);
+
+                $art = new Article();
+                $art->setContent($szablon->getContent());
+                $art->setTitle($szablon->getTitle());
+                $art->setMenu($menu);
+                $art->setAuthor($user);
+                $art->setStatic(1);
+                $art->setCreated(new \DateTime());
+
+                $em->persist($art);
                 $em->flush();
+
+                $pos++;
             }
 
             if (null === $response = $event->getResponse()) {
