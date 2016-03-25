@@ -69,7 +69,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $form_member->handleRequest($request);
         }
         if($form_member->isValid()){
-            $em->persist($form_member);
+            $em->persist($member);
             $em->flush();
         }
 
@@ -160,6 +160,26 @@ class BIPAdminController extends Controller implements AuthenticatedController
             'bip'=>$bip,
             'form'=>$form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/admin/management/remove/member/{member}/", name="admin_management_member_remove")
+     */
+    public function adminManagementMemberRemoveAction($member)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $member = $em->getRepository("AppBundle:Member")->find($member);
+        $em->remove($member);
+        $this->addFlash('notice', 'Usunięto: '.$member->getLastname().' '.$member->getFirstname());
+        $em->flush();
+        return $this->redirectToRoute('admin_management');
     }
 
     /**
