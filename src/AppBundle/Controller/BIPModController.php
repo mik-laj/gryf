@@ -45,7 +45,8 @@ class BIPModController extends Controller
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) use ($bip){
                     return $er->createQueryBuilder('s')
-                        ->where("s.bip= ".$bip->getId());
+                        ->where("s.bip= ".$bip->getId())
+                        ->andWhere("s.static=0");
                 },
             ))
             ->add('content', TextareaType::class)
