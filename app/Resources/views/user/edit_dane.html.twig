@@ -28,6 +28,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     {{ form_widget(form.file) }}
+                                    {{ form_errors(form.file) }}
                                 </div>
                                 <div class="col-md-2">
                                     {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger btn-block'} } ) }}

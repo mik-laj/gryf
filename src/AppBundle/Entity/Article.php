@@ -53,16 +53,16 @@ class Article
      */
     protected $author;
 
-    /**
-     * @ORM\COlumn(type="integer")
-     */
-    protected $static;
+//    /**
+//     * @ORM\COlumn(type="integer")
+//     */
+//    protected $static;
 
     public function __construct()
     {
 //        parent::__construct();
         // your own logic
-        $this->static = 0;
+//        $this->static = 0;
     }
 
     /**
