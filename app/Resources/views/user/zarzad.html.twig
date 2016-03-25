@@ -28,18 +28,22 @@
                             {% endfor %}
                             </ul>
                             <div class="col-md-6">
-                            Dodaj organ:<br>
+                            <h2><a data-toggle="collapse" href="#organ"><i class="fa fa-plus-square"></i> Dodaj organ:</a></h2>
+                            <div id="organ" class="collapse">
                             {{form_start(form_organ)}}
                                 {{form_widget(form_organ)}}
                                 <input type="submit" class="btn btn-danger btn-block">
                             {{form_end(form_organ)}}
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            Dodaj członka:<br>
+                            <h2><a data-toggle="collapse" href="#member"><i class="fa fa-plus-square"></i> Dodaj członka:</a></h2>
+                            <div id="member" class="collapse">
                             {{form_start(form_member)}}
                                 {{form_widget(form_member)}}
                                 <input type="submit" class="btn btn-danger btn-block">
                             {{form_end(form_member)}}
+                            </div>
                         </div>
                         </div>
                         <div class="panel-footer">

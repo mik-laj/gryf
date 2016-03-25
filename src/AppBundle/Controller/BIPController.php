@@ -178,7 +178,7 @@ class BIPController extends Controller
     }
 
     /**
-     * @Route("/managament/")
+     * @Route("/management/", name="management")
      */
     public function BIPManagamentAction(Request $request){
         $em = $this->getDoctrine()->getManager();
