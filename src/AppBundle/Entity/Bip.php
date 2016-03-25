@@ -6,13 +6,16 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="bips")
- * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *     fields={"url"},
+ *     message="Your E-Mail adress has already been registered"
+ * )
  */
 class Bip
 {
@@ -23,7 +26,7 @@ class Bip
      */
     protected $id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     protected $url;
 
@@ -40,9 +43,14 @@ class Bip
 
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\Image(
+     *     minWidth = 80,
+     *     maxWidth = 200,
+     *     minHeight = 80,
+     *     maxHeight = 200
+     * )
      */
-    public $file;
+    protected $file;
 
     /**
      * Sets file.
@@ -54,7 +62,7 @@ class Bip
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $path;
+    protected $path;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
