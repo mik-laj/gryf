@@ -28,7 +28,7 @@
                     <li role="presentation" class="disabled"><a><i class="fa fa-times"></i>{{pos.name}}</a></li>
                 {% elseif pos.articles|length == 1 %}
                     {% for art in pos.articles %}
-                        {% if art.static == 0 %}
+                        {% if pos.static == 0 %}
                         <li role="presentation" class="po"><a href="{{ path('art_view', {"art":art.id}) }}"><i class="fa fa-chevron-right"></i>{{pos.name}}</a></li> 
                         {% endif %}
                     {% endfor %}
@@ -44,7 +44,7 @@
                             <div id="{{pos.id}}" class="panel-collapse collapse nav">
                                 <ul class="list-group nav nav-stacked nav-pills">
                                 {% for art in pos.articles %}
-                                    {% if art.static == 0 %}
+                                    {% if pos.static == 0 %}
                                     <li class="list-group-item">
                                         <a href="{{ path('art_view', {"art":art.id}) }}"><i class="fa fa-angle-right"></i>{{art.title}}</a>
                                     </li>
