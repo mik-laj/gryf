@@ -87,6 +87,129 @@ class BIPAdminController extends Controller implements AuthenticatedController
     }
 
     /**
+     * @Route("/admin/management/edit/member/{member}/", name="admin_management_member")
+     */
+    public function adminManagementMemberAction(Request $request, $member)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+
+        $member = $em->getRepository("AppBundle:Member")->find($member);
+        $form = $this->createFormBuilder($member)
+            ->add('firstname')
+            ->add('lastname')
+            ->add('organ', EntityType::class, array(
+                'class' => 'AppBundle:Organ',
+                'choice_label' => 'organ',
+                'query_builder' => function (EntityRepository $er) use ($bip) {
+                    return $er->createQueryBuilder('s')
+                        ->where("s.bip= " . $bip->getId());
+                },
+            ))
+            ->add('save', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($member);
+            $this->addFlash('notice','pomyślnie zmodyfikowano membera');
+            $em->flush();
+            return $this->redirectToRoute('admin_management');
+        }
+
+
+        return $this->render("user/edit_member.html.twig", array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/management/edit/organ/{organ}/", name="admin_management_organ")
+     */
+    public function adminManagementOrganAction(Request $request, $organ)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $organ = $em->getRepository("AppBundle:Organ")->find($organ);
+
+        $form = $this->createFormBuilder($organ)
+            ->add('organ')
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $em->persist($organ);
+            $em->flush();
+            $this->addFlash('notice', 'pomyslnie zedytowano organ');
+            return $this->redirectToRoute('admin_management');
+        }
+
+        return $this->render("user/edit_organ.html.twig", array(
+            'bip'=>$bip,
+            'form'=>$form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/admin/management/remove/member/{member}/", name="admin_management_member_remove")
+     */
+    public function adminManagementMemberRemoveAction($member)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $member = $em->getRepository("AppBundle:Member")->find($member);
+        $em->remove($member);
+        $this->addFlash('notice', 'Usunięto: '.$member->getLastname().' '.$member->getFirstname());
+        $em->flush();
+        return $this->redirectToRoute('admin_management');
+    }
+
+    /**
+     * @Route("/admin/management/remove/organ/{organ}/", name="admin_management_organ_remove")
+     */
+    public function adminManagementOrganRemoveAction($organ)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $organ = $em->getRepository("AppBundle:Organ")->find($organ);
+        $members = $em->getRepository("AppBundle:Member")->findByOrgan($organ);
+        if($members){
+            $this->addFlash('notice','Organ nie może zawierać członków ( ͡° ͜ʖ ͡°)');
+            return $this->redirectToRoute('admin_management');
+        }
+        else{
+            $em->remove($organ);
+            $em->flush();
+            $this->addFlash('notice','Usunięto organ '.$organ->getOrgan());
+            return $this->redirectToRoute('admin_management');
+        }
+    }
+
+    /**
      * @Route("/admin/add/menu/", name="admin_add_menu")
      */
     public function  BIPMenuAction(Request $request)

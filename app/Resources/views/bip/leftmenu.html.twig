@@ -12,6 +12,11 @@
             {% for pos in mustbe %}
                 <li role="presentation" class="po"><a href="{{ path('static_art_view', {"art":pos.id}) }}">{{pos.title}}</a></li>
             {% endfor %}
+            {% if app.user %}
+                <li role="presentation" class="po"><a href="{{ path('admin_management') }}"><i class="fa fa-users"></i>Zarząd</a></li>
+            {% else %}
+                <li role="presentation" class="po"><a href="{{ path('management') }}"><i class="fa fa-users"></i>Zarząd</a></li>
+            {% endif %}
 
             {% for pos in submenu %}
                 {% if pos.articles|length == 0 %}
@@ -42,6 +47,7 @@
                     </li> <!-- item groups -->
                 {% endif %}
             {% endfor %}
+            {# <li class="list-group-item"><a href="{{ path('admin_managment') }}"></a></li> #}
         </ul>
     </div>
 </div>
