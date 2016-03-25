@@ -157,4 +157,27 @@ class Submenu
     {
         return $this->position;
     }
+
+    /**
+     * Set static
+     *
+     * @param integer $static
+     * @return Submenu
+     */
+    public function setStatic($static)
+    {
+        $this->static = $static;
+
+        return $this;
+    }
+
+    /**
+     * Get static
+     *
+     * @return integer 
+     */
+    public function getStatic()
+    {
+        return $this->static;
+    }
 }

@@ -12,7 +12,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="bips")
- * @UniqueEntity("url", message="form.error.name.unique")
+ * @UniqueEntity(
+ *     fields={"url"},
+ *     message="Your E-Mail adress has already been registered"
+ * )
  */
 class Bip
 {

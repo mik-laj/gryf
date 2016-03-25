@@ -236,26 +236,26 @@ class Article
         return $this->created;
     }
 
-    /**
-     * Set static
-     *
-     * @param integer $static
-     * @return Article
-     */
-    public function setStatic($static)
-    {
-        $this->static = $static;
-
-        return $this;
-    }
-
-    /**
-     * Get static
-     *
-     * @return integer 
-     */
-    public function getStatic()
-    {
-        return $this->static;
-    }
+//    /**
+//     * Set static
+//     *
+//     * @param integer $static
+//     * @return Article
+//     */
+//    public function setStatic($static)
+//    {
+//        $this->static = $static;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get static
+//     *
+//     * @return integer
+//     */
+//    public function getStatic()
+//    {
+//        return $this->static;
+//    }
 }

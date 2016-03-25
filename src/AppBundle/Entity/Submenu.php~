@@ -35,10 +35,16 @@ class Submenu
 
     protected $articles;
 
+    /**
+     * @ORM\COlumn(type="integer")
+     */
+    protected $static;
+
     public function __construct()
     {
 
         // your own logic
+        $this->static = 0;
     }
 
 
