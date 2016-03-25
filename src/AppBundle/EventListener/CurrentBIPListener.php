@@ -33,7 +33,6 @@ class CurrentBIPListener
 
         $currentHost = $request->getHttpHost();
         $sub = str_replace('.'.$this->baseHost, '', $currentHost);
-        print $sub;
 
         if($sub==$currentHost){
             $this->BIPManager->setCurrentBIP(null);
