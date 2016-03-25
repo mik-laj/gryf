@@ -555,7 +555,6 @@ class BIPAdminController extends Controller implements AuthenticatedController
         }catch(BIPNotFoundException $e){
             return $e->redirectResponse;
         }
-        $musthave = $em->getRepository('AppBundle:StaticArt')->findByBip($bip);
         $bip_dane = $em->getRepository("AppBundle:Bip")->find($bip);
         $form = $this->createFormBuilder($bip_dane)
             ->add('name')
@@ -572,7 +571,6 @@ class BIPAdminController extends Controller implements AuthenticatedController
 
         return $this->render('user/edit_dane.html.twig', array(
             'bip'=>$bip,
-            'musthave'=>$musthave,
             'form'=>$form->createView(),
         ));
     }

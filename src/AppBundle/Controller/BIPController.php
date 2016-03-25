@@ -53,11 +53,31 @@ class BIPController extends Controller
         }catch(BIPNotFoundException $e){
             return $e->redirectResponse;
         }
-//        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
+        $article = $em->getRepository("AppBundle:Article")->find($art);
+        $sec = $em->getRepository("AppBundle:Article");
+        $qb = $sec->createQueryBuilder('a');
+        $sections = $qb
+            ->innerJoin('a.section', 's')
+            ->where('s.id='.$art)->getQuery()->getResult();
+        $log = $em->getRepository("AppBundle:Log");
+        $qb = $log->createQueryBuilder('a');
+        $logs = $qb
+            ->innerJoin('a.article', 'i')
+            ->where('i.id='.$art)->getQuery()->getResult();
+        $attachments = $em->getRepository('AppBundle:File')->findByArticle($art);
 
-        return $this->render('bip/index.html.twig', array(
+
+        return $this->render('bip/article.html.twig', array(
             'bip'=>$bip,
+            'article'=>$article,
+            'sections'=>$sections,
+            'logs'=>$logs,
+            'attachments'=>$attachments,
         ));
+
+//        return $this->render('bip/index.html.twig', array(
+//            'bip'=>$bip,
+//        ));
     }
 
     /**
