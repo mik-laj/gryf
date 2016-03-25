@@ -11,11 +11,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
+ * @UniqueEntity(fields="url", message="URL is already in use")
  * @ORM\Table(name="bips")
- * @UniqueEntity(
- *     fields={"url"},
- *     message="Your E-Mail adress has already been registered"
- * )
  */
 class Bip
 {
@@ -26,7 +23,7 @@ class Bip
      */
     protected $id;
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(name="url", type="string", unique=true)
      */
     protected $url;
 
