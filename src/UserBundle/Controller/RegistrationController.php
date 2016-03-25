@@ -61,6 +61,7 @@ class RegistrationController extends BaseController
                 $menu->setBip($user->getBip());
                 $menu->setName($szablon->getTitle());
                 $menu->setPosition($pos);
+                $menu->setStatic(1);
                 $em->persist($menu);
 
                 $art = new Article();
@@ -68,7 +69,6 @@ class RegistrationController extends BaseController
                 $art->setTitle($szablon->getTitle());
                 $art->setMenu($menu);
                 $art->setAuthor($user);
-                $art->setStatic(1);
                 $art->setCreated(new \DateTime());
 
                 $em->persist($art);
