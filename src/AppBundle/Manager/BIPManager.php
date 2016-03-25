@@ -19,13 +19,38 @@ class BIPManager
 
     private $user;
 
-    public function __construct($router, EntityManager $entityManager, TokenStorage $token)
+    private $host;
+
+    public function __construct($router, EntityManager $entityManager, TokenStorage $token, $host)
     {
         $this->router = $router;
         $this->homepage = 'homepage';
         $this->em = $entityManager;
+        $this->host = $host;
 
     }
+
+    public function getBIPUrl($bip=null){
+        if($bip==!null) {
+            $bip = $this->em->getRepository("AppBundle:Bip")->find($bip);
+            $url = $bip->getUrl() . "." . $this->host;
+        }else{
+            $url = $this->getCurrentBIP()->getUrl().".".$this->host;
+        }
+
+        return $url;
+    }
+
+    public function redirectToBIP($bip, $route, $parameters=null){
+        $bip = $this->em->getRepository("AppBundle:Bip")->find($bip);
+        $url = "http://".$this->getBIPUrl($bip);
+        $url .= $this->router->generate($route);
+
+        $redirect = new RedirectResponse($url);
+
+        return $redirect;
+    }
+
 
     public function getCurrentBIP(){
         if($this->currentBIP==null){
