@@ -18,6 +18,7 @@ services:
             - "@router"
             - "@doctrine.orm.entity_manager"
             - "@security.token_storage"
+            - "%base_host%"
 
     current_site_listener:
         class: AppBundle\EventListener\CurrentBIPListener

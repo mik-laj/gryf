@@ -53,6 +53,7 @@ class BIPController extends Controller
         }catch(BIPNotFoundException $e){
             return $e->redirectResponse;
         }
+
         $article = $em->getRepository("AppBundle:Article")->find($art);
         $sec = $em->getRepository("AppBundle:Article");
         $qb = $sec->createQueryBuilder('a');
