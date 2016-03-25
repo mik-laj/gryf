@@ -46,7 +46,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $form_organ->handleRequest($request);
         }
         if($form_organ->isValid()){
-            $em->persist($form_organ);
+            $em->persist($organ);
             $em->flush();
         }
 
@@ -69,7 +69,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $form_member->handleRequest($request);
         }
         if($form_member->isValid()){
-            $em->persist($form_member);
+            $em->persist($member);
             $em->flush();
         }
 

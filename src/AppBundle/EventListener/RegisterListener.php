@@ -36,7 +36,7 @@ class RegisterListener implements EventSubscriberInterface
     {
         $user = $event->getForm()->getData();
 
-        print $user->getId();
+        print $user->getBip()->getId();
         die();
 
 //        $this->em->flush();
