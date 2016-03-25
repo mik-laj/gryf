@@ -127,3 +127,16 @@ body, .index-container {
 	border-bottom: 1px solid #6D1126;
 	border-radius: 0px;
 }
+
+.k .list-group-item{
+	box-shadow: 0px 1px 1px 0px;
+	font-size: 1.5em;
+}
+
+.k .list-group-item:hover{
+	background-color: #ffd9d9;
+}
+
+.k .list-group-item:hover i{
+	color: #6D1126;
+}
