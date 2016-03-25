@@ -13,7 +13,7 @@
             {% for pos in submenu %}
                 <ul class="list-group nav nav-stacked nav-pills">
                 {% for art in pos.articles %}
-                    {% if art.static == 1 %}
+                    {% if pos.static == 1 %}
                         <li class="po">
                             <a href="{{ path('art_view', {"art":art.id}) }}"><i class="fa fa-play"></i>{{pos.name}}</a>
                         </li>
