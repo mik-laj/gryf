@@ -17,7 +17,18 @@
             {% else %}
                 <li role="presentation" class="po"><a href="{{ path('management') }}"><i class="fa fa-users"></i>Zarząd</a></li>
             {% endif %}
-
+            
+            {% for pos in submenu %}
+                <ul class="list-group nav nav-stacked nav-pills">
+                {% for art in pos.articles %}
+                    {% if art.static == 1 %}
+                        <li class="po">
+                            <a href="{{ path('art_view', {"art":art.id}) }}"><i class="fa fa-play"></i>{{pos.name}}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            
             {% for pos in submenu %}
                 {% if pos.articles|length == 0 %}
                     <li role="presentation" class="disabled"><a>{{pos.name}}</a></li>
