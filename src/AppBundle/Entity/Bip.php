@@ -62,6 +62,11 @@ class Bip
     private $public;
 
 
+    public function __construct()
+    {
+        $this->public = 0;
+    }
+
 
     /**
      * Set path

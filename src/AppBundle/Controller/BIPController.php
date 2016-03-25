@@ -54,11 +54,9 @@ class BIPController extends Controller
             return $e->redirectResponse;
         }
 //        $bip = $em->getRepository('AppBundle:Bip')->find($bip);
-        $art = $em->getRepository("AppBundle:StaticArt")->findByBip($bip);
 
         return $this->render('bip/index.html.twig', array(
             'bip'=>$bip,
-            'articles'=>$art,
         ));
     }
 
@@ -82,11 +80,11 @@ class BIPController extends Controller
             $submenus[$k]->setArticles($articles);
             $articles = $submenus[$k]->getArticles();
         }
-        $mustbe = $em->getRepository('AppBundle:StaticArt')->findByBip($bip);
+//        $mustbe = $em->getRepository('AppBundle:Article')->findByBip($bip);
 
         return $this->render('bip/leftmenu.html.twig', array(
             'submenu'=>$submenus,
-            'mustbe'=>$mustbe,
+//            'mustbe'=>$mustbe,
         ));
     }
 
@@ -131,27 +129,6 @@ class BIPController extends Controller
             'sections'=>$sections,
             'logs'=>$logs,
             'attachments'=>$attachments,
-        ));
-    }
-
-    /**
-     * @Route("/static/{art}/", name="static_art_view")
-     */
-    public function viewStaticArtAction($art)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $BIPManager = $this->get('bip_manager');
-        try {
-            $bip = $BIPManager->getCurrentBIP();
-        }catch(BIPNotFoundException $e){
-            return $e->redirectResponse;
-        }
-        $article = $em->getRepository("AppBundle:StaticArt")->find($art);
-
-
-        return $this->render('bip/static_article.html.twig', array(
-            'bip'=>$bip,
-            'article'=>$article,
         ));
     }
 

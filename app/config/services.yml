@@ -31,3 +31,13 @@ services:
                 name: kernel.event_listener
                 method: onKernelRequest
                 event: kernel.request
+#
+#    register_listener:
+#        class: AppBundle\EventListener\RegisterListener
+#        arguments:
+#            - "@doctrine.orm.entity_manager"
+#        tags:
+#            -
+#                name: kernel.event_listener
+#                method: onRegistrationConfirmed
+#                event:  fos_user.registration.success

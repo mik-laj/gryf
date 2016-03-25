@@ -53,10 +53,16 @@ class Article
      */
     protected $author;
 
+    /**
+     * @ORM\COlumn(type="integer")
+     */
+    protected $static;
+
     public function __construct()
     {
 //        parent::__construct();
         // your own logic
+        $this->static = 0;
     }
 
     /**
@@ -228,5 +234,28 @@ class Article
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Set static
+     *
+     * @param integer $static
+     * @return Article
+     */
+    public function setStatic($static)
+    {
+        $this->static = $static;
+
+        return $this;
+    }
+
+    /**
+     * Get static
+     *
+     * @return integer 
+     */
+    public function getStatic()
+    {
+        return $this->static;
     }
 }

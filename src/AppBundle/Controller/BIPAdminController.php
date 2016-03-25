@@ -46,7 +46,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $form_organ->handleRequest($request);
         }
         if($form_organ->isValid()){
-            $em->persist($form_organ);
+            $em->persist($organ);
             $em->flush();
         }
 
@@ -180,6 +180,33 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $this->addFlash('notice', 'Usunięto: '.$member->getLastname().' '.$member->getFirstname());
         $em->flush();
         return $this->redirectToRoute('admin_management');
+    }
+
+    /**
+     * @Route("/admin/management/remove/organ/{organ}/", name="admin_management_organ_remove")
+     */
+    public function adminManagementOrganRemoveAction($organ)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        try {
+            $bip = $BIPManager->getCurrentBIP();
+            $BIPManager->checkAdmin($bip, $this->getUser());
+        }catch(BIPNotFoundException $e){
+            return $e->redirectResponse;
+        }
+        $organ = $em->getRepository("AppBundle:Organ")->find($organ);
+        $members = $em->getRepository("AppBundle:Member")->findByOrgan($organ);
+        if($members){
+            $this->addFlash('notice','Organ nie może zawierać członków ( ͡° ͜ʖ ͡°)');
+            return $this->redirectToRoute('admin_management');
+        }
+        else{
+            $em->remove($organ);
+            $em->flush();
+            $this->addFlash('notice','Usunięto organ '.$organ->getOrgan());
+            return $this->redirectToRoute('admin_management');
+        }
     }
 
     /**
