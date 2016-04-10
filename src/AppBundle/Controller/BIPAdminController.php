@@ -299,14 +299,14 @@ class BIPAdminController extends Controller implements AuthenticatedController
         {
             $this->addFlash('notice', 'to jest static, tego nie usuniesz');
             return $this->redirectToRoute('admin_add_menu', array(
-                'bip'=>$bip->getId(),
+//                'bip'=>$bip->getId(),
             ));
 
         }
         if($arts){
             $this->addFlash('notice', 'Najpierw usuń artukuły!');
             return $this->redirectToRoute('admin_add_menu', array(
-                'bip'=>$bip->getId(),
+//                'bip'=>$bip->getId(),
             ));
         }
         else {
@@ -314,7 +314,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $em->remove($menu);
             $em->flush();
             return $this->redirectToRoute('admin_add_menu', array(
-                'bip'=>$bip->getId(),
+//                'bip'=>$bip->getId(),
             ));
         }
 
