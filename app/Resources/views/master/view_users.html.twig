@@ -30,17 +30,25 @@
                             <td width="15%">{{ user.nazwisko }}</td>
                             <td width="15%">{{ user.imie }}</td>
                             <td width="8%" class="text-center">
-                                {% for role  in user.roles %}
-                                    {% if role=="ROLE_USER" %}
-                                        <i class="fa fa-user"></i>
-                                    {% endif %}
-                                    {% if role=="ROLE_BIPADMIN" %}
-                                        <i class="fa fa-user-plus"></i>
-                                    {% endif %}
-                                    {% if role=="ROLE_SUPER_ADMIN" %}
-                                        <i class="fa fa-user-secret"></i>
-                                    {% endif %}
-                                {% endfor %}
+                                {#{% for role  in user.roles %}#}
+                                    {#{% if role=="ROLE_USER" %}#}
+                                        {#<i class="fa fa-user"></i>#}
+                                    {#{% endif %}#}
+                                    {#{% if role=="ROLE_BIPADMIN" %}#}
+                                        {#<i class="fa fa-user-plus"></i>#}
+                                    {#{% endif %}#}
+                                    {#{% if role=="ROLE_SUPER_ADMIN" %}#}
+                                        {#<i class="fa fa-user-secret"></i>#}
+                                    {#{% endif %}#}
+                                {#{% endfor %}#}
+                                {% if "ROLE_SUPER_ADMIN" in user.roles %}
+                                    <i class="fa fa-user-secret"></i>
+                                {% endif %}
+                                {% if "ROLE_BIPADMIN" in user.roles %}
+                                    <i class="fa fa-user-plus"></i>
+                                {% else %}
+                                    <i class="fa fa-user"></i>
+                                {% endif %}
                             </td>
                             <td class="text-center" width="2%"><a href="{{ path('master_edit_user', {'user':user.id}) }}"><i class="fa fa-pencil"></i></a></td>
                             <td class="text-center" width="2%"><a href="{{ path('master_remove_user', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
