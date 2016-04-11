@@ -49,3 +49,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_BIPADMIN }
         - { path: ^/mod/, role: ROLE_BIPMOD }
+        - { path: ^/master/, role: ROLE_SUPER_ADMIN }
