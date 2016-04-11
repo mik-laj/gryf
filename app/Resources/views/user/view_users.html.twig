@@ -28,8 +28,9 @@
                         <th width="20%" {% if users.isSorted('u.username') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(users, 'login', 'u.username') }}</th>
                         <th width="20%" {% if users.isSorted('u.nazwisko') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(users, 'nazwisko', 'u.nazwisko') }}</th>
                         <th width="20%" {% if users.isSorted('u.imie') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(users, 'imie', 'u.imie') }}</th>
-                        <th class="text-center" width="10%">Edytuj</th>
-                        <th class="text-center" width="10%">Usuń</th>
+                        <th width="10%">Role</th>
+                        <th class="text-center" width="5%">Edytuj</th>
+                        <th class="text-center" width="5%">Usuń</th>
                     </tr>
                     {% for user in users %}
                         <tr>
@@ -37,8 +38,9 @@
                             <td width="20%">{{ user.username }}</td>
                             <td width="20%">{{ user.nazwisko }}</td>
                             <td width="20%">{{ user.imie }}</td>
-                            <td class="text-center" width="10%"><a href="{{ path('admin_user_edit', {'user':user.id}) }}"><i class="fa fa-pencil"></i></a></td>
-                            <td class="text-center" width="10%"><a href="{{ path('admin_user_remove', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
+                            <td width="10%">{% for role in user.roles %}{{ role }}<br>{% endfor %}</td>
+                            <td class="text-center" width="5%"><a href="{{ path('admin_user_edit', {'user':user.id}) }}"><i class="fa fa-pencil"></i></a></td>
+                            <td class="text-center" width="5%"><a href="{{ path('admin_user_remove', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
                         </tr>
                     {% endfor %}
                 </table>

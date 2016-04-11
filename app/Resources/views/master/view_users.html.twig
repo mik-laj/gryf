@@ -18,8 +18,9 @@
                         <th width="15%">{{ knp_pagination_sortable(users, 'login', 'user.username') }}</th>
                         <th width="15%">{{ knp_pagination_sortable(users, 'nazwisko', 'user.nazwisko') }}</th>
                         <th width="15%">{{ knp_pagination_sortable(users, 'imie', 'user.imie') }}</th>
-                        <th class="text-center" width="5%">Edytuj</th>
-                        <th class="text-center" width="5%">Usuń</th>
+                        <th class="text-center" width="4%">Role</th>
+                        <th class="text-center" width="3%">Edytuj</th>
+                        <th class="text-center" width="3%">Usuń</th>
                     </tr>
                     {% for user in users %}
                         <tr>
@@ -28,8 +29,9 @@
                             <td width="15%">{{ user.username }}</td>
                             <td width="15%">{{ user.nazwisko }}</td>
                             <td width="15%">{{ user.imie }}</td>
-                            <td class="text-center" width="5%"><a href="{{ path('master_edit_user', {'user':user.id}) }}"><i class="fa fa-pencil"></i></a></td>
-                            <td class="text-center" width="5%"><a href="{{ path('master_remove_user', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
+                            <td width="4%">{% for role  in user.roles %}{{ role }}<br>{% endfor %}</td>
+                            <td class="text-center" width="3%"><a href="{{ path('master_edit_user', {'user':user.id}) }}"><i class="fa fa-pencil"></i></a></td>
+                            <td class="text-center" width="3%"><a href="{{ path('master_remove_user', {'user':user.id}) }}"><i class="fa fa-remove"></i></a></td>
                         </tr>
                     {% endfor %}
                 </table>
