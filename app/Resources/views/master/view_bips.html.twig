@@ -11,17 +11,19 @@
                 {% for m in app.session.flashbag.get('notice') %}
                     <div class="alert alert-success">{{ m }}</div>
                 {% endfor %}
-                <table class="table table-hover table-stripepd table-condensed">
+                <table class="table table-hover table-stripped table-condensed">
                     <tr>
                         <th width="50%" {% if bips.isSorted('bip.name') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(bips, 'Nazwa', 'bip.name') }}</th>
-                        <th width="30%" {% if bips.isSorted('bip.url') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
+                        <th width="20%" {% if bips.isSorted('bip.url') %} class="sorted" {% endif %}>{{ knp_pagination_sortable(bips, 'URL', 'bip.url') }}</th>
+                        <th width="10%" class="text-center {% if bips.isSorted('bip.public') %} sorted {% endif %}">{{ knp_pagination_sortable(bips, 'Public', 'bip.public') }}
                         <th class="text-center" width="10%">Edytuj</th>
                         <th class="text-center" width="10%">Usuń</th>
                     </tr>
                     {% for bip in bips %}
                         <tr>
                             <td width="50%">{{ bip.name }}</td>
-                            <td width="30%">{{ bip.url }}</td>
+                            <td width="20%">{{ bip.url }}</td>
+                            <td width="10%" class="text-center">{%  if bip.public == 1 %}<i class="fa fa-plus"></i>{%  else %}<i class="fa fa-minus"></i>{% endif %}</td>
                             <td class="text-center" width="10%"><a href="{{ path('master_edit_bip', {'bip':bip.id}) }}"><i class="fa fa-pencil"></i></a></td>
                             <td class="text-center" width="10%"><a href="{{ path('master_remove_bip', {'bip':bip.id}) }}"><i class="fa fa-remove"></i></a></td>
                         </tr>

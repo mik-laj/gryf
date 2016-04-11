@@ -167,7 +167,9 @@ class BIPController extends Controller
         $em = $this->getDoctrine()->getManager();
         $bip = $em->getRepository("AppBundle:Bip");
         $qb = $bip->createQueryBuilder('bip');
-        $query = $qb->getQuery();
+        $query = $qb
+            ->where('bip.public = 1')
+            ->getQuery();
 
         $paginator = $this->get('knp_paginator');
         $bip = $paginator->paginate(
