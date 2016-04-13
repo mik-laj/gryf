@@ -673,7 +673,7 @@ class BIPAdminController extends Controller implements AuthenticatedController
             ->add('nazwisko')
             ->add('imie')
             ->add('email')
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, array('label'=>'Aktualizuj'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -685,8 +685,62 @@ class BIPAdminController extends Controller implements AuthenticatedController
 
         return $this->render('user/edit_user.html.twig', array(
            'bip'=>$bip,
+            'user'=>$user,
             'form'=>$form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/admin/user/password/{user}/", name="admin_user_password_change")
+     */
+    public function adminUserPasswordChangeAction($user, Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $user=$em->getRepository("UserBundle:User")->find($user);
+
+        $form = $this->createFormBuilder($user)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Nowe Hasło'),
+                'second_options' => array('label' => 'Powtórz Hasło'),
+            ))
+            ->add('save', SubmitType::class, array('label'=>'Zapisz'))
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zmieniono hasło użytkownika ".$user->getNazwisko()." ".$user->getImie());
+            $em->flush();
+            return $this->redirectToRoute('admin_users_list');
+        }
+
+        return $this->render('user/edit_user_password.html.twig', array(
+            'user'=>$user,
+            'form'=>$form->createView(),
+            'bip'=>$bip,
+        ));
+    }
+
+    /**
+     * @Route("/admin/user/role/{user}/", name="admin_user_role")
+     */
+    public function adminUserRoleAction($user)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $user=$em->getRepository("UserBundle:User")->find($user);
+        if($user->getRoles("ROLE_BIPADMIN"))
+        {
+            $this->addFlash('notice','ADMIN, działa');
+        }
+        else
+        {
+            $this->addFlash('notice','Moderator, działa');
+        }
+        return $this->redirectToRoute('admin_users_list');
     }
 
     /**
