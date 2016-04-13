@@ -732,13 +732,20 @@ class BIPAdminController extends Controller implements AuthenticatedController
         $BIPManager = $this->get('bip_manager');
         $bip = $BIPManager->getCurrentBIP();
         $user=$em->getRepository("UserBundle:User")->find($user);
-        if($user->getRoles("ROLE_BIPADMIN"))
+        $role = $user->getRoles();
+        if(in_array("ROLE_BIPADMIN",$role))
         {
-            $this->addFlash('notice','ADMIN, działa');
+            $user->removeRole("ROLE_BIPADMIN");
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('notice','Zmieniono na moderatora');
         }
         else
         {
-            $this->addFlash('notice','Moderator, działa');
+            $user->addRole('ROLE_BIPADMIN');
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('notice','Zmieniono na Admina');
         }
         return $this->redirectToRoute('admin_users_list');
     }
