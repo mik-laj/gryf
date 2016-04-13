@@ -738,14 +738,14 @@ class BIPAdminController extends Controller implements AuthenticatedController
             $user->removeRole("ROLE_BIPADMIN");
             $em->persist($user);
             $em->flush();
-            $this->addFlash('notice','Zmieniono na moderatora');
+            $this->addFlash('notice','Zdegradowano '.$user->getImie().' '.$user->getNazwisko().' na Moderatora');
         }
         else
         {
             $user->addRole('ROLE_BIPADMIN');
             $em->persist($user);
             $em->flush();
-            $this->addFlash('notice','Zmieniono na Admina');
+            $this->addFlash('notice','Awansowano '.$user->getImie().' '.$user->getNazwisko().' na Admina');
         }
         return $this->redirectToRoute('admin_users_list');
     }
