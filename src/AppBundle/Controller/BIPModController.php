@@ -70,7 +70,7 @@ class BIPModController extends Controller
     /**
      * @Route("/admin/view/art/", name="admin_view_art")
      */
-    public function adminViewArtAction()
+    public function adminViewArtAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $BIPManager = $this->get('bip_manager');
@@ -82,6 +82,7 @@ class BIPModController extends Controller
         }
         $articles = $em->getRepository("AppBundle:Article");
         $qb = $articles->createQueryBuilder('a');
+        //$paginator = $this->get('knp_paginator');
         $articles1 = $qb
             ->innerJoin('a.menu', 'm')
             ->innerJoin('m.bip', 'b')
@@ -89,6 +90,25 @@ class BIPModController extends Controller
 //                    ->innerJoin('s.menu','z')
 //                    ->innerJoin('z.bip', 'y')
             ->where('b.id='.$bip->getId())->getQuery()->getResult();
+
+        $qb1 = $articles->createQueryBuilder('arts');
+        $query1 = $qb1
+            ->innerJoin('arts.menu', 'm')
+            ->innerJoin('m.bip', 'b')
+//                    ->innerJoin('a.section', 's')
+//                    ->innerJoin('s.menu','z')
+//                    ->innerJoin('z.bip', 'y')
+            ->where('b.id='.$bip->getId())
+            ->getQuery();
+//            ->getResult();
+
+        $paginator = $this->get('knp_paginator');
+        $arts = $paginator->paginate(
+            $query1,
+            $request->query->getInt('page', 1),
+            10
+        );
+
         $qb2 = $articles->createQueryBuilder('s');
         $sections = $qb2
             ->innerJoin('s.section', 'x')
@@ -99,6 +119,7 @@ class BIPModController extends Controller
         return $this->render('user/view_articles.html.twig', array(
             'bip' => $bip,
             'articles' => $articles1,
+            'arts'=>$arts,
             'sections' => $sections,
         ));
     }
