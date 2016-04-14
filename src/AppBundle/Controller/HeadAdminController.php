@@ -6,6 +6,9 @@ use AppBundle\Entity\Article;
 use AppBundle\Entity\Submenu;
 use UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -127,6 +130,65 @@ class HeadAdminController extends Controller
             'user'=>$user,
             'form'=>$form->createView(),
         ));
+    }
+    /**
+     * @Route("/master/user/password/{user}/", name="master_user_password_change")
+     */
+    public function adminUserPasswordChangeAction($user, Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $user=$em->getRepository("UserBundle:User")->find($user);
+
+        $form = $this->createFormBuilder($user)
+            ->add('plainPassword', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options'  => array('label' => 'Nowe Hasło'),
+                'second_options' => array('label' => 'Powtórz Hasło'),
+            ))
+            ->add('save', SubmitType::class, array('label'=>'Zapisz'))
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isValid()){
+            $this->addFlash('notice', "Pomyślnie zmieniono hasło użytkownika ".$user->getNazwisko()." ".$user->getImie());
+            $em->flush();
+            return $this->redirectToRoute('master_user_list');
+        }
+
+        return $this->render('master/edit_user_password.html.twig', array(
+            'user'=>$user,
+            'form'=>$form->createView(),
+            'bip'=>$bip,
+        ));
+    }
+
+    /**
+     * @Route("/master/user/role/{user}/", name="master_user_role")
+     */
+    public function adminUserRoleAction($user)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $BIPManager = $this->get('bip_manager');
+        $bip = $BIPManager->getCurrentBIP();
+        $user=$em->getRepository("UserBundle:User")->find($user);
+        $role = $user->getRoles();
+        if(in_array("ROLE_BIPADMIN",$role))
+        {
+            $user->removeRole("ROLE_BIPADMIN");
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('notice','Zdegradowano '.$user->getImie().' '.$user->getNazwisko().' na Moderatora');
+        }
+        else
+        {
+            $user->addRole('ROLE_BIPADMIN');
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('notice','Awansowano '.$user->getImie().' '.$user->getNazwisko().' na Admina');
+        }
+        return $this->redirectToRoute('master_user_list');
     }
 
     /**
