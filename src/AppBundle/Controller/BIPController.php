@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
 
-class BIPController extends Controller
+class BIPController extends Controller implements BeforeUserController
 {
 
     /**

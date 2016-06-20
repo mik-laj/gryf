@@ -21,7 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class BIPAdminController extends Controller implements AuthenticatedController
+class BIPAdminController extends Controller
 {
 
     /**

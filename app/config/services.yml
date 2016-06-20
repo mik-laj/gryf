@@ -32,6 +32,13 @@ services:
                 name: kernel.event_listener
                 method: onKernelRequest
                 event: kernel.request
+
+    before_user_listener:
+        class: AppBundle\EventListener\BeforeUserListener
+        arguments: ['@bip_manager', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
 #
 #    register_listener:
 #        class: AppBundle\EventListener\RegisterListener

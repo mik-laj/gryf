@@ -26,4 +26,15 @@ class DefaultController extends Controller
         }
         return $this->redirectToRoute('bip');
     }
+
+    /**
+     * @Route("/redirect", name="redirect_helper")
+     */
+    public function redirectHelperAction(Request $request)
+    {
+        $BIPManager = $this->get('bip_manager');
+
+        $em = $this->getDoctrine()->getManager();
+        return $BIPManager->redirectToBIP($this->getUser()->getBip(), 'admin_view_profile');
+    }
 }

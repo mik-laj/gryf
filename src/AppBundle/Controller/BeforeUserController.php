@@ -1,6 +1,6 @@
 <?php
 namespace AppBundle\Controller;
 
-interface AuthenticatedController
+interface BeforeUserController
 {
 }

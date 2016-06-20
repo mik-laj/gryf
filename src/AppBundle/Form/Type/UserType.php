@@ -13,7 +13,8 @@ class UserType extends AbstractType{
         $biptype = new BIPType();
         $builder
             ->add('bip', $biptype, array(
-            'data_class'=>'AppBundle\Entity\Bip'))
+            'data_class'=>'AppBundle\Entity\Bip',
+            'cascade_validation' => true))
             ->add('nazwisko')
             ->add('imie')
             ;
@@ -35,5 +36,10 @@ class UserType extends AbstractType{
     public function getName()
     {
         return $this->getBlockPrefix();
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array('cascade_validation' => true));
     }
 }

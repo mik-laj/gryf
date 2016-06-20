@@ -21,6 +21,10 @@
                                 </div>
                             {% endfor %}
                         {% endfor %}
+
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.message|trans }}</div>
+                        {% endif %}
                         <form action="{{ path("fos_user_security_check") }}" method="post">
                             <div class='form'>
                                 <div class="row">
